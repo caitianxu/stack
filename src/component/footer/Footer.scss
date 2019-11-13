@@ -1,0 +1,108 @@
+.com-footer {
+  background-color: #803228;
+  .content {
+    width: 1360px;
+    display: flex;
+    margin: 0 auto;
+    padding: 40px 0 20px 0;
+    position: relative;
+    .col-1 {
+      width: 450px;
+      .logo {
+        height: 55px;
+        background: url("./img/header.png") no-repeat 0 center;
+        margin-bottom: 40px;
+      }
+      p {
+        color: #eab27f;
+        margin-bottom: 30px;
+        font-size: 16px;
+        padding-left: 10px;
+      }
+    }
+    .col-2 {
+      margin-left: 100px;
+      color: #eab27f;
+      h3 {
+        font-size: 18px;
+        line-height: 40px;
+        margin-bottom: 10px;
+        color: #eab27f;
+      }
+      p {
+        color: #eab27f;
+        margin-bottom: 18px;
+        font-size: 16px;
+        a {
+          color: #eab27f;
+          &:hover {
+            text-decoration: underline;
+          }
+        }
+      }
+    }
+    .col-3 {
+      margin-left: 100px;
+      color: #eab27f;
+      h3 {
+        font-size: 18px;
+        line-height: 40px;
+        margin-bottom: 10px;
+        color: #eab27f;
+      }
+      p {
+        color: #eab27f;
+        margin-bottom: 18px;
+        font-size: 16px;
+        a {
+          color: #eab27f;
+          &:hover {
+            text-decoration: underline;
+          }
+        }
+      }
+    }
+    .col-4 {
+      color: #eab27f;
+      flex: 1;
+      margin-left: 100px;
+      h3 {
+        font-size: 18px;
+        line-height: 40px;
+        margin-bottom: 10px;
+        text-align: center;
+        color: #eab27f;
+      }
+      p {
+        text-align: center;
+        height: 145px;
+        background: url("./img/code.png") no-repeat center center;
+      }
+    }
+    .friendly-link {
+      position: absolute;
+      background: #fff;
+      border-radius: 5px;
+      color: #333;
+      width: 450px;
+      line-height: 45px;
+      right: 10px;
+      bottom: 60px;
+      padding-left: 30px;
+      transition: all 0.5s;
+      font-size: 16px;
+      &:hover {
+        background-color: #e5e8ea;
+      }
+      span {
+        width: 45px;
+        height: 45px;
+        float: right;
+        margin-right: 10px;
+        text-align: center;
+        font-size: 16px;
+        line-height: 45px;
+      }
+    }
+  }
+}

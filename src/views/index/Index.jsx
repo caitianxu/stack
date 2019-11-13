@@ -1,5 +1,9 @@
 import React, { Component } from "react";
 import { _set_dicts, _get_url_search } from "../../store/Action";
+import Header from "../../component/header/Header";
+import Footer from "../../component/footer/Footer";
+import { Icon } from "antd";
+import "./Index.scss";
 
 class Index extends Component {
   componentDidMount() {
@@ -9,7 +13,46 @@ class Index extends Component {
     });
   }
   render() {
-    return <div>Index</div>;
+    return (
+      <div className="page-index">
+        <Header />
+
+        <div className="page-main">
+          <div className="index-content">
+            <div className="index-form">
+              <h1>会员登录</h1>
+              <div className="form-row">
+                <label className="icon">
+                  <Icon type="user" />
+                </label>
+                <input type="text" placeholder="请输入用户名" />
+              </div>
+              <div className="form-row">
+                <label className="icon">
+                  <Icon type="lock" />
+                </label>
+                <input type="text" placeholder="请输入密码" />
+              </div>
+              <div className="ip-row">
+                <span className="ip-action">IP一键登录</span>
+              </div>
+              <div className="form-action"></div>
+              <div className="link-row">
+                <a href="/a1" className="a1">没有账号? 去注册</a>
+                <a href="/a2" className="a2">忘记密码?</a>
+              </div>
+              <h3>第三方账号登录</h3>
+              <div className="other-login">
+                <div className="weixin"></div>
+                <div className="weibo"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <Footer />
+      </div>
+    );
   }
 }
 

@@ -1,0 +1,62 @@
+.com-header {
+  background-color: #803228;
+  min-width: 1680px;
+  .content {
+    width: 1680px;
+    height: 95px;
+    display: flex;
+    margin: 0 auto;
+    overflow: hidden;
+    .logo {
+      width: 450px;
+      height: 55px;
+      cursor: pointer;
+      background: url('./img/header.png') no-repeat 0 center;
+      margin: 20px;
+    }
+    .menu {
+      display: flex;
+      font-size: 18px;
+      li {
+        height: 95px;
+      }
+      a {
+        color: #eab27f;
+        line-height: 55px;
+        margin: 20px 15px;
+        display: block;
+        position: relative;
+        white-space: nowrap;
+        overflow: hidden;
+        &:hover::after,
+        &.active {
+          content: " ";
+          position: absolute;
+          width: 30px;
+          height: 2px;
+          background: #eab27f;
+          bottom: 5px;
+          left: 50%;
+          margin-left: -15px;
+          border-radius: 2px;
+        }
+      }
+    }
+    .actions {
+      flex: 1;
+      text-align: right;
+      line-height: 95px;
+      font-size: 16px;
+      color: #eab27f;
+      white-space: nowrap;
+      overflow: hidden;
+      a {
+        color: #eab27f;
+        margin: 0 10px;
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+    }
+  }
+}

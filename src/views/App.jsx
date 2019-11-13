@@ -1,10 +1,29 @@
 import React, { Component } from "react";
 import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
 import asyncComponent from "../script/asyncComponent";
+import store from "../store/store";
 
 const Index = asyncComponent(() => import("./index/Index"));
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      base: store.getState()
+    };
+    store.subscribe(this.storeChange);
+  }
+  //更新store
+  storeChange = () => {
+    this.setState({
+      base: store.getState()
+    });
+  };
+  componentWillUnmount() {
+    this.setState = () => {
+      return;
+    };
+  }
   render() {
     const path = {
       pathname: "/index",

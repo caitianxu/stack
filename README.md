@@ -9,3 +9,12 @@
 ### axios 数据请求
 ### core-js 兼容JS
 ### babel-plugin-import 动态加载组件
+
+### 初始化
+npm install
+
+### 本地运行
+npm start
+
+### 编译打包
+npm run build

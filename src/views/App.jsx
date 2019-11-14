@@ -2,8 +2,12 @@ import React, { Component } from "react";
 import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
 import asyncComponent from "../script/asyncComponent";
 import store from "../store/store";
+import { _get_url_search } from "../store/Action";
+import HTTP from "../script/service";
 
 const Index = asyncComponent(() => import("./index/Index"));
+const Login = asyncComponent(() => import("./login/Login"));
+const Regist = asyncComponent(() => import("./regist/Regist"));
 
 class App extends Component {
   constructor(props) {
@@ -19,6 +23,15 @@ class App extends Component {
       base: store.getState()
     });
   };
+  componentDidMount() {
+    _get_url_search(res => {
+      //_set_dicts();
+      HTTP._get_dicts_data().then(res => {
+        console.log(res)
+        alert('数据加载成功')
+      })
+    });
+  }
   componentWillUnmount() {
     this.setState = () => {
       return;
@@ -33,12 +46,15 @@ class App extends Component {
       <div className="app-fix">
         <BrowserRouter>
           <Switch>
-            {/* 主页 */}
             <Redirect exact from="/" to={path} />
+            {/* 主页 */}
             <Route path="/index" component={Index} />
-            <Route path="/:local" component={Index} />
             {/* 登录 */}
+            <Route path="/login" component={Login} />
             {/* 注册 */}
+            <Route path="/regist" component={Regist} />
+
+            <Route path="/:local" component={Index} />
           </Switch>
         </BrowserRouter>
       </div>

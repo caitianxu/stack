@@ -11,7 +11,13 @@
 ### babel-plugin-import 动态加载组件
 ### fetch-jsonp jsop请求组件
 
-## 初始化
+## 1、环境准备  
+nodeJs安装、git安装
+
+## 2、项目拉取
+git clone https://github.com/caitianxu/stack.git
+
+### 3、初始化
 npm install
 
 ## 本地运行

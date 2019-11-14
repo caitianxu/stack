@@ -3,7 +3,6 @@ import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
 import asyncComponent from "../script/asyncComponent";
 import store from "../store/store";
 import { _get_url_search } from "../store/Action";
-import HTTP from "../script/service";
 
 const Index = asyncComponent(() => import("./index/Index"));
 const Login = asyncComponent(() => import("./login/Login"));
@@ -24,13 +23,7 @@ class App extends Component {
     });
   };
   componentDidMount() {
-    _get_url_search(res => {
-      //_set_dicts();
-      HTTP._get_dicts_data().then(res => {
-        console.log(res)
-        alert('数据加载成功')
-      })
-    });
+    _get_url_search(res => {});
   }
   componentWillUnmount() {
     this.setState = () => {

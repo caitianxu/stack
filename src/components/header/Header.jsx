@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 import "./Header.scss";
 
 class Header extends Component {
@@ -6,33 +7,36 @@ class Header extends Component {
     return (
       <div className="com-header">
         <div className="content">
-          <a href="/index" className="logo">&nbsp;</a>
+          <Link to="/index" className="logo">
+            &nbsp;
+          </Link>
           <ul className="menu">
             <li>
-              <a href="/index">首页Home</a>
+              <Link to="/index">首页Home</Link>
             </li>
             <li>
-              <a href="/index">论文Paper</a>
+              <Link to="/index">论文Paper</Link>
             </li>
             <li>
-              <a href="/index">图书Book</a>
+              <Link to="/index">图书Book</Link>
             </li>
             <li>
-              <a href="/index">政策Policy</a>
+              <Link to="/index">政策Policy</Link>
             </li>
             <li>
-              <a href="/index">专家Expert</a>
+              <Link to="/index">专家Expert</Link>
             </li>
             <li>
-              <a href="/index">机构Mechanism</a>
+              <Link to="/index">机构Mechanism</Link>
             </li>
             <li>
-              <a href="/index">专题Special Topic</a>
+              <Link to="/index">专题Special Topic</Link>
             </li>
           </ul>
 
           <div className="actions">
-            <a href="/login">登录 Login</a>/<a href="/register">注册 Register</a>
+            <Link to="/login">登录 Login</Link>/
+            <Link to="/regist">注册 Register</Link>
           </div>
         </div>
       </div>

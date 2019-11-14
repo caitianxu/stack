@@ -13,8 +13,6 @@ export const _set_dicts = function() {
         };
         store.dispatch(action);
         resolve(res.data);
-      } else if (window.location.href.indexOf("stick") == -1) {
-        window.location.href = `/stick${window.location.search}`;
       }
     });
   });

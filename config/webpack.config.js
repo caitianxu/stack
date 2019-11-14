@@ -160,11 +160,11 @@ module.exports = function (webpackEnv) {
         require.resolve('react-dev-utils/webpackHotDevClient'),
         paths.appIndexJs,
       ].filter(Boolean),
-      stick: [
-        isEnvDevelopment &&
-        require.resolve('react-dev-utils/webpackHotDevClient'),
-        paths.stickJs,
-      ].filter(Boolean)
+      // stick: [
+      //   isEnvDevelopment &&
+      //   require.resolve('react-dev-utils/webpackHotDevClient'),
+      //   paths.stickJs,
+      // ].filter(Boolean)
     },
     output: {
       // The build folder.
@@ -544,33 +544,33 @@ module.exports = function (webpackEnv) {
         )
       ),
 
-      new HtmlWebpackPlugin(
-        Object.assign(
-          {},
-          {
-            inject: true,
-            chunks: ["stick"],
-            template: paths.stickHtml,
-            filename: 'stick.html'
-          },
-          isEnvProduction
-            ? {
-              minify: {
-                removeComments: true,
-                collapseWhitespace: true,
-                removeRedundantAttributes: true,
-                useShortDoctype: true,
-                removeEmptyAttributes: true,
-                removeStyleLinkTypeAttributes: true,
-                keepClosingSlash: true,
-                minifyJS: true,
-                minifyCSS: true,
-                minifyURLs: true,
-              },
-            }
-            : undefined
-        )
-      ),
+      // new HtmlWebpackPlugin(
+      //   Object.assign(
+      //     {},
+      //     {
+      //       inject: true,
+      //       chunks: ["stick"],
+      //       template: paths.stickHtml,
+      //       filename: 'stick.html'
+      //     },
+      //     isEnvProduction
+      //       ? {
+      //         minify: {
+      //           removeComments: true,
+      //           collapseWhitespace: true,
+      //           removeRedundantAttributes: true,
+      //           useShortDoctype: true,
+      //           removeEmptyAttributes: true,
+      //           removeStyleLinkTypeAttributes: true,
+      //           keepClosingSlash: true,
+      //           minifyJS: true,
+      //           minifyCSS: true,
+      //           minifyURLs: true,
+      //         },
+      //       }
+      //       : undefined
+      //   )
+      // ),
 
       // Inlines the webpack runtime script. This script is too small to warrant
       // a network request.

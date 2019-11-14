@@ -1,7 +1,149 @@
 .index-content {
-  height: 700px;
   position: relative;
-  width: 1680px;
+  width: 1920px;
   margin: 0 auto;
-  padding: 100px 0;
+  height: 1080px;
+  overflow: hidden;
+  .plans {
+    width: 100%;
+    -webkit-transition-timing-function: "ease-out";
+    transition-timing-function: "ease-out";
+    .plan {
+      width: 1680px;
+      margin: 0 auto;
+      overflow: hidden;
+      display: flex;
+      &.red2 {
+        background: #f63;
+      }
+      &.red3 {
+        background: #ef3;
+      }
+      &.red4 {
+        background: #356;
+      }
+      .plan-left {
+        flex: 1;
+        height: 100%;
+        overflow: hidden;
+      }
+      .plan-right {
+        width: 130px;
+        height: 100%;
+        overflow: hidden;
+      }
+    }
+  }
+  .right-menus {
+    display: flex;
+    flex-direction: column;
+    .title {
+      text-align: center;
+      padding: 30px 0;
+      color: #803228;
+      .anticon {
+        margin-right: 10px;
+      }
+      .t1 {
+        font-size: 18px;
+      }
+      p {
+        font-size: 16px;
+      }
+    }
+    .tab {
+      text-align: center;
+      font-size: 20px;
+      line-height: 40px;
+      margin-bottom: 32px;
+      cursor: pointer;
+      position: relative;
+      color: #1a1a1a;
+      &:hover,
+      &.active {
+        color: #803228;
+      }
+      &:hover::after,
+      &.active::after {
+        content: " ";
+        position: absolute;
+        width: 20px;
+        height: 2px;
+        background: #803228;
+        bottom: 0;
+        left: 50%;
+        margin-left: -10px;
+      }
+    }
+  }
+  .plan-1 {
+    position: relative;
+    .banner {
+      float: left;
+      width: 100%;
+      img {
+        width: 100%;
+      }
+    }
+    .classly {
+      width: 1550px;
+      height: 250px;
+      display: flex;
+      .classly-link {
+        width: 220px;
+        .cover {
+          width: 220px;
+          height: 150px;
+          position: relative;
+          &.expert {
+            background: url("./img/expert.png") no-repeat center center;
+          }
+          &.jigou {
+            background: url("./img/jigou.png") no-repeat center center;
+          }
+          &.lunwen {
+            background: url("./img/lunwen.png") no-repeat center center;
+          }
+          &.special {
+            background: url("./img/special.png") no-repeat center center;
+          }
+          &.tushu {
+            background: url("./img/tushu.png") no-repeat center center;
+          }
+          &.zhengce {
+            background: url("./img/zhengce.png") no-repeat center center;
+          }
+          &:hover::after, &.active::after {
+            content: " ";
+            width: 220px;
+            height: 150px;
+            top: 0;
+            left: 0;
+            position: absolute;
+            background: url("./img/tab-bg.png") no-repeat center center;
+          }
+        }
+        p {
+          font-size: 20px;
+          color: #803228;
+          text-align: center;
+          margin: 0;
+        }
+      }
+    }
+    .special-icon {
+      position: absolute;
+      width: 130px;
+      height: 190px;
+      cursor: pointer;
+      top: 585px;
+      right: 70px;
+      a {
+        display: block;
+        width: 130px;
+        height: 190px;
+        background: url('./img/special-icon.png') no-repeat center center;
+      }
+    }
+  }
 }

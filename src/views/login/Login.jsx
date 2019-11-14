@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Header from "../../components/header/Header";
 import Footer from "../../components/footer/Footer";
+import { Link } from "react-router-dom";
 import { Icon } from "antd";
 import "./Login.scss"
 
@@ -30,12 +31,12 @@ class Login extends Component {
               </div>
               <div className="form-action"></div>
               <div className="link-row">
-                <a href="/a1" className="a1">
+                <Link to="/regist" className="a1">
                   没有账号? 去注册
-                </a>
-                <a href="/a2" className="a2">
+                </Link>
+                <Link to="/a2" className="a2">
                   忘记密码?
-                </a>
+                </Link>
               </div>
               <h3>第三方账号登录</h3>
               <div className="other-login">

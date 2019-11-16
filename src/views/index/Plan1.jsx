@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import Menus from "./Menus";
+import TopSearch from "./TopSearch";
 
 class Plan1 extends Component {
   constructor(props) {
@@ -15,11 +16,12 @@ class Plan1 extends Component {
     });
   };
   render() {
-    const { height, index, changeIndex } = this.props;
+    const { height, menuIndex, changeIndex } = this.props;
     const { type } = this.state;
     return (
-      <div className="plan" style={{ height: `${height}px` }}>
-        <div className="plan-left plan-1">
+      <div className="plan plan-1" style={{ height: `${height}px` }}>
+        <div className="plan-left">
+          <TopSearch />
           <div className="banner">
             <img alt="" src="/assets/img/bann1.png" />
           </div>
@@ -119,7 +121,7 @@ class Plan1 extends Component {
             <Link to="/index" />
           </span>
         </div>
-        <Menus index={index} changeIndex={changeIndex} />
+        <Menus menuIndex={menuIndex} changeIndex={changeIndex} />
       </div>
     );
   }

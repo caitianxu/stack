@@ -14,7 +14,7 @@ class Index extends Component {
     this.state = {
       width: 1920,
       height: 980,
-      index: 0
+      menuIndex: 0
     };
   }
   componentDidMount() {
@@ -27,31 +27,31 @@ class Index extends Component {
     e = e || window.event;
     if (e.wheelDelta) {
       if (e.wheelDelta > 0) {
-        let index = this.state.index - 1;
-        if (index < 0) {
-          index = 0;
+        let menuIndex = this.state.menuIndex - 1;
+        if (menuIndex < 0) {
+          menuIndex = 0;
         }
-        this.changeIndex(index);
+        this.changeIndex(menuIndex);
       }
       if (e.wheelDelta < 0) {
-        let index = this.state.index + 1;
-        if (index > 6) {
-          index = 6;
+        let menuIndex = this.state.menuIndex + 1;
+        if (menuIndex > 6) {
+          menuIndex = 6;
         }
-        this.changeIndex(index);
+        this.changeIndex(menuIndex);
       }
     } else if (e.detail) {
       if (e.detail > 0) {
-        let index = this.state.index - 1;
-        if (index < 0) {
-          index = 0;
+        let menuIndex = this.state.menuIndex - 1;
+        if (menuIndex < 0) {
+          menuIndex = 0;
         }
-        this.changeIndex(index);
+        this.changeIndex(menuIndex);
       }
       if (e.detail < 0) {
-        let index = this.state.index + 1;
-        if (index > 6) {
-          index = 6;
+        let menuIndex = this.state.menuIndex + 1;
+        if (menuIndex > 6) {
+          menuIndex = 6;
         }
       }
     }
@@ -68,25 +68,26 @@ class Index extends Component {
     );
   };
   changeMove = move => {
-    const { height, index } = this.state;
+    const { height, menuIndex } = this.state;
     if (this.plansElement) {
       if (move) {
         this.plansElement.style.transitionDuration = "0.5s";
       } else {
         this.plansElement.style.transitionDuration = "0s";
       }
-      this.plansElement.style.transform = `translateY(-${index * height}px)`;
+      this.plansElement.style.transform = `translateY(-${menuIndex *
+        (height + 50)}px)`;
     }
     setTimeout(() => {
       this.loading = false;
     }, 1000);
   };
-  changeIndex = index => {
+  changeIndex = menuIndex => {
     if (this.loading) return;
     this.loading = true;
     this.setState(
       {
-        index: index
+        menuIndex: menuIndex
       },
       () => {
         this.changeMove(true);
@@ -94,7 +95,7 @@ class Index extends Component {
     );
   };
   render() {
-    const { width, height, index } = this.state;
+    const { width, height, menuIndex } = this.state;
     return (
       <div className="page-main">
         <div
@@ -104,37 +105,37 @@ class Index extends Component {
           <div className="plans" ref={el => (this.plansElement = el)}>
             <Plan1
               height={height}
-              index={index}
+              menuIndex={menuIndex}
               changeIndex={this.changeIndex}
             />
             <Plan2
               height={height}
-              index={index}
+              menuIndex={menuIndex}
               changeIndex={this.changeIndex}
             />
             <Plan3
               height={height}
-              index={index}
+              menuIndex={menuIndex}
               changeIndex={this.changeIndex}
             />
             <Plan4
               height={height}
-              index={index}
+              menuIndex={menuIndex}
               changeIndex={this.changeIndex}
             />
             <Plan5
               height={height}
-              index={index}
+              menuIndex={menuIndex}
               changeIndex={this.changeIndex}
             />
             <Plan6
               height={height}
-              index={index}
+              menuIndex={menuIndex}
               changeIndex={this.changeIndex}
             />
             <Plan7
               height={height}
-              index={index}
+              menuIndex={menuIndex}
               changeIndex={this.changeIndex}
             />
           </div>

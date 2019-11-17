@@ -24,3 +24,13 @@ export const _get_url_search = callback => {
   if (search && search !== "") params = qs.parse(search);
   callback && callback(params);
 };
+//首页分类层显示
+export const _set_classly_visible = function(visible) {
+  const action = {
+    type: "set_classly_visible",
+    data: {
+      classly_visible: visible
+    }
+  };
+  store.dispatch(action);
+};

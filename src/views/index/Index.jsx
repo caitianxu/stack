@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import store from "../../store/store";
 import Plan1 from "./Plan1";
 import Plan2 from "./Plan2";
 import Plan3 from "./Plan3";
@@ -7,15 +8,30 @@ import Plan5 from "./Plan5";
 import Plan6 from "./Plan6";
 import Plan7 from "./Plan7";
 import Plan8 from "./Plan8";
+import Classly from "../../components/classly/Classly";
 import "./Index.scss";
 
 class Index extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      base: store.getState(),
       width: 1920,
       height: 980,
       menuIndex: 0
+    };
+    store.subscribe(this.storeChange);
+  }
+  //更新store
+  storeChange = () => {
+    this.setState({
+      base: store.getState()
+    });
+  };
+  //销毁
+  componentWillUnmount() {
+    this.setState = () => {
+      return;
     };
   }
   componentDidMount() {
@@ -85,6 +101,7 @@ class Index extends Component {
   };
   changeIndex = menuIndex => {
     if (this.loading) return;
+    if (this.state.base.classly_visible) return;
     this.loading = true;
     this.setState(
       {
@@ -96,7 +113,8 @@ class Index extends Component {
     );
   };
   render() {
-    const { width, height, menuIndex } = this.state;
+    const { width, height, menuIndex, base } = this.state;
+    console.log("base", base);
     return (
       <div className="page-main">
         <div
@@ -105,47 +123,56 @@ class Index extends Component {
         >
           <div className="plans" ref={el => (this.plansElement = el)}>
             <Plan1
+              base={base}
               height={height}
               menuIndex={menuIndex}
               changeIndex={this.changeIndex}
             />
             <Plan2
+              base={base}
               height={height}
               menuIndex={menuIndex}
               changeIndex={this.changeIndex}
             />
             <Plan3
+              base={base}
               height={height}
               menuIndex={menuIndex}
               changeIndex={this.changeIndex}
             />
             <Plan4
+              base={base}
               height={height}
               menuIndex={menuIndex}
               changeIndex={this.changeIndex}
             />
             <Plan5
+              base={base}
               height={height}
               menuIndex={menuIndex}
               changeIndex={this.changeIndex}
             />
             <Plan6
+              base={base}
               height={height}
               menuIndex={menuIndex}
               changeIndex={this.changeIndex}
             />
             <Plan7
+              base={base}
               height={height}
               menuIndex={menuIndex}
               changeIndex={this.changeIndex}
             />
             <Plan8
+              base={base}
               height={height}
               menuIndex={menuIndex}
               changeIndex={this.changeIndex}
             />
           </div>
         </div>
+        <Classly ref={el => (this.classlyElement = el)} base={base} />
       </div>
     );
   }

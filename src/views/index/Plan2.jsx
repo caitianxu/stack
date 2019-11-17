@@ -222,7 +222,7 @@ class Plan2 extends Component {
     this.titleScrollElement.style.transform = `translateX(${this.scrollLeft}px)`;
   };
   render() {
-    const { height, menuIndex, changeIndex } = this.props;
+    const { height, menuIndex, changeIndex, base } = this.props;
     const { titleIndex, data, dataList } = this.state;
     return (
       <div className="plan plan-2" style={{ height: `${height}px` }}>
@@ -305,7 +305,7 @@ class Plan2 extends Component {
               ) : null}
             </div>
           </div>
-          <Menus menuIndex={menuIndex} changeIndex={changeIndex} />
+          <Menus menuIndex={menuIndex} changeIndex={changeIndex} base={base} />
         </div>
       </div>
     );

@@ -16,7 +16,7 @@ class Plan1 extends Component {
     });
   };
   render() {
-    const { height, menuIndex, changeIndex } = this.props;
+    const { height, menuIndex, changeIndex, base } = this.props;
     const { type } = this.state;
     return (
       <div className="plan plan-1" style={{ height: `${height}px` }}>
@@ -121,7 +121,7 @@ class Plan1 extends Component {
             <Link to="/index" />
           </span>
         </div>
-        <Menus menuIndex={menuIndex} changeIndex={changeIndex} />
+        <Menus menuIndex={menuIndex} changeIndex={changeIndex} base={base} />
       </div>
     );
   }

@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Icon } from "antd";
+import { _set_classly_visible } from "../../store/Action";
 
 class Menus extends Component {
   changeIndex = menuIndex => {
@@ -9,7 +10,7 @@ class Menus extends Component {
     const { menuIndex } = this.props;
     return (
       <div className="plan-right right-menus">
-        <span className="title">
+        <span className="title" onClick={_set_classly_visible.bind(this, true)}>
           <div className="t1">
             <Icon type="align-left" />
             分类

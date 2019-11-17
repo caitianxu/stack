@@ -8,7 +8,7 @@ class Plan5 extends Component {
     this.state = {};
   }
   render() {
-    const { height, menuIndex, changeIndex } = this.props;
+    const { height, menuIndex, changeIndex, base } = this.props;
     return (
       <div className="plan plan-5" style={{ height: `${height}px` }}>
         <div className="plan-bg">
@@ -77,7 +77,7 @@ class Plan5 extends Component {
               </div>
             </div>
           </div>
-          <Menus menuIndex={menuIndex} changeIndex={changeIndex} />
+          <Menus menuIndex={menuIndex} changeIndex={changeIndex} base={base} />
         </div>
       </div>
     );

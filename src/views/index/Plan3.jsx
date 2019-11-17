@@ -68,7 +68,7 @@ class Plan3 extends Component {
     });
   };
   render() {
-    const { height, menuIndex, changeIndex } = this.props;
+    const { height, menuIndex, changeIndex, base } = this.props;
     const { swIndex, swData, scrollIndex } = this.state;
     return (
       <div className="plan plan-3" style={{ height: `${height}px` }}>
@@ -148,7 +148,7 @@ class Plan3 extends Component {
               </div>
             </div>
           </div>
-          <Menus menuIndex={menuIndex} changeIndex={changeIndex} />
+          <Menus menuIndex={menuIndex} changeIndex={changeIndex} base={base} />
         </div>
       </div>
     );

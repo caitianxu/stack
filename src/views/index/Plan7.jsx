@@ -49,25 +49,28 @@ class Plan7 extends Component {
       });
     /* eslint-disable */
 
-    
     /* eslint-disable */
     fetch("/assets/json/london.json")
       .then(response => response.json())
       .then(data => {
         this.chart2 = new G2.Chart({
-          container: 'chart2',
+          container: "chart2",
           forceFit: true,
           width: 625,
-          height: 500,
+          height: 500
         });
         this.chart2.source(data);
-        this.chart2.interval().position('time*value').color('type',['#c23531', '#61a0a8', '#91c7ae', '#f19e81']).opacity(1);
+        this.chart2
+          .interval()
+          .position("time*value")
+          .color("type", ["#c23531", "#61a0a8", "#91c7ae", "#f19e81"])
+          .opacity(1);
         this.chart2.render();
-      })
+      });
     /* eslint-disable */
   }
   render() {
-    const { height, menuIndex, changeIndex } = this.props;
+    const { height, menuIndex, changeIndex, base } = this.props;
     return (
       <div className="plan plan-7" style={{ height: `${height}px` }}>
         <div className="plan-bg">
@@ -94,7 +97,7 @@ class Plan7 extends Component {
               </div>
             </div>
           </div>
-          <Menus menuIndex={menuIndex} changeIndex={changeIndex} />
+          <Menus menuIndex={menuIndex} changeIndex={changeIndex} base={base} />
         </div>
       </div>
     );

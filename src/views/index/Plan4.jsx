@@ -9,7 +9,7 @@ class Plan4 extends Component {
     this.state = {};
   }
   render() {
-    const { height, menuIndex, changeIndex } = this.props;
+    const { height, menuIndex, changeIndex, base } = this.props;
     return (
       <div className="plan plan-4" style={{ height: `${height}px` }}>
         <div className="plan-bg">
@@ -75,14 +75,20 @@ class Plan4 extends Component {
                   </div>
                 </div>
                 <div className="cm2">
-                  <div className="book"><img alt="" src="/assets/img/book.png"/></div>
-                  <div className="book"><img alt="" src="/assets/img/book.png"/></div>
-                  <div className="book"><img alt="" src="/assets/img/book.png"/></div>
+                  <div className="book">
+                    <img alt="" src="/assets/img/book.png" />
+                  </div>
+                  <div className="book">
+                    <img alt="" src="/assets/img/book.png" />
+                  </div>
+                  <div className="book">
+                    <img alt="" src="/assets/img/book.png" />
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-          <Menus menuIndex={menuIndex} changeIndex={changeIndex} />
+          <Menus menuIndex={menuIndex} changeIndex={changeIndex} base={base} />
         </div>
       </div>
     );

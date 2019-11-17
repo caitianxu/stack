@@ -6,6 +6,7 @@ import Plan4 from "./Plan4";
 import Plan5 from "./Plan5";
 import Plan6 from "./Plan6";
 import Plan7 from "./Plan7";
+import Plan8 from "./Plan8";
 import "./Index.scss";
 
 class Index extends Component {
@@ -35,8 +36,8 @@ class Index extends Component {
       }
       if (e.wheelDelta < 0) {
         let menuIndex = this.state.menuIndex + 1;
-        if (menuIndex > 6) {
-          menuIndex = 6;
+        if (menuIndex > 7) {
+          menuIndex = 7;
         }
         this.changeIndex(menuIndex);
       }
@@ -50,8 +51,8 @@ class Index extends Component {
       }
       if (e.detail < 0) {
         let menuIndex = this.state.menuIndex + 1;
-        if (menuIndex > 6) {
-          menuIndex = 6;
+        if (menuIndex > 7) {
+          menuIndex = 7;
         }
       }
     }
@@ -134,6 +135,11 @@ class Index extends Component {
               changeIndex={this.changeIndex}
             />
             <Plan7
+              height={height}
+              menuIndex={menuIndex}
+              changeIndex={this.changeIndex}
+            />
+            <Plan8
               height={height}
               menuIndex={menuIndex}
               changeIndex={this.changeIndex}

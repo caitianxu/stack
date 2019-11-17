@@ -10,7 +10,9 @@ const HTTP = {
   },
   //获取经纬度
   _get_point_data: () => {
-    return fetchJsonp("https://api.map.baidu.com/location/ip?ak=G0T3IZDatGXYGTaGiUHY2tXUZNQpcDxP&coor=bd09ll").then(function (response) {
+    return fetchJsonp(
+      "https://api.map.baidu.com/location/ip?ak=G0T3IZDatGXYGTaGiUHY2tXUZNQpcDxP&coor=bd09ll"
+    ).then(function(response) {
       return response.json();
     });
   }

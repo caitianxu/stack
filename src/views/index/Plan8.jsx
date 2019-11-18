@@ -6,7 +6,7 @@ class Plan8 extends Component {
     const { height } = this.props;
     return (
       <div className="plan plan-8" style={{ height: `${height}px` }}>
-        <div className="plan-bg">
+        <div className="main-page-parent">
           <div className="plan-content">
             <Footer />
           </div>

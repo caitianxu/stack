@@ -226,7 +226,7 @@ class Plan2 extends Component {
     const { titleIndex, data, dataList } = this.state;
     return (
       <div className="plan plan-2" style={{ height: `${height}px` }}>
-        <div className="plan-bg">
+        <div className="main-page-parent">
           <div className="plan-left">
             <TopSearch />
             <div className="row-scroll">

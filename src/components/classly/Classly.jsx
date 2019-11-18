@@ -140,7 +140,7 @@ class Classly extends Component {
     this.setState({
       childVisible: true
     });
-  }
+  };
   hideChildModal = () => {
     this.setState({
       childVisible: false
@@ -171,7 +171,11 @@ class Classly extends Component {
                           >
                             {item.list.map((view, col) => {
                               return (
-                                <div key={`col-${col}`} className="view" onClick={this.shoeChildModal}>
+                                <div
+                                  key={`col-${col}`}
+                                  className="view"
+                                  onClick={this.shoeChildModal}
+                                >
                                   <div className="style-border">
                                     <i className="style-1"></i>
                                     <i className="style-2"></i>
@@ -253,121 +257,73 @@ class Classly extends Component {
                   <div className="my-scroll-line">
                     <div className="child-classly-items">
                       <div className="classly-mini-item">
-                        婚姻家庭法 <label>883</label>
+                        <label>婚姻家庭法</label>883
                       </div>
                       <div className="classly-mini-item">
-                        自然资源与环境保护法 <label>10439</label>
+                        <label>自然资源与环境保护法</label>10439
                       </div>
                       <div className="classly-mini-item">
-                        婚姻家庭法 <label>883</label>
+                        <label>婚姻家庭法</label>883
                       </div>
                       <div className="classly-mini-item">
-                        自然资源与环境保护法 <label>10439</label>
+                        <label>自然资源与环境保护法</label>10439
                       </div>
                       <div className="classly-mini-item">
-                        婚姻家庭法 <label>883</label>
+                        <label>婚姻家庭法</label>883
                       </div>
                       <div className="classly-mini-item">
-                        自然资源与环境保护法 <label>10439</label>
+                        <label>自然资源与环境保护法</label>10439
                       </div>
                       <div className="classly-mini-item">
-                        婚姻家庭法 <label>883</label>
+                        <label>婚姻家庭法</label>883
                       </div>
                       <div className="classly-mini-item">
-                        自然资源与环境保护法 <label>10439</label>
+                        <label>自然资源与环境保护法</label>10439
                       </div>
                       <div className="classly-mini-item">
-                        婚姻家庭法 <label>883</label>
+                        <label>婚姻家庭法</label>883
                       </div>
                       <div className="classly-mini-item">
-                        自然资源与环境保护法 <label>10439</label>
+                        <label>自然资源与环境保护法</label>10439
                       </div>
                       <div className="classly-mini-item">
-                        婚姻家庭法 <label>883</label>
+                        <label>婚姻家庭法</label>883
                       </div>
                       <div className="classly-mini-item">
-                        自然资源与环境保护法 <label>10439</label>
+                        <label>自然资源与环境保护法</label>10439
                       </div>
                       <div className="classly-mini-item">
-                        婚姻家庭法 <label>883</label>
+                        <label>婚姻家庭法</label>883
                       </div>
                       <div className="classly-mini-item">
-                        自然资源与环境保护法 <label>10439</label>
+                        <label>自然资源与环境保护法</label>10439
                       </div>
                       <div className="classly-mini-item">
-                        婚姻家庭法 <label>883</label>
+                        <label>婚姻家庭法</label>883
                       </div>
                       <div className="classly-mini-item">
-                        自然资源与环境保护法 <label>10439</label>
+                        <label>自然资源与环境保护法</label>10439
                       </div>
                       <div className="classly-mini-item">
-                        婚姻家庭法 <label>883</label>
+                        <label>婚姻家庭法</label>883
                       </div>
                       <div className="classly-mini-item">
-                        自然资源与环境保护法 <label>10439</label>
+                        <label>自然资源与环境保护法</label>10439
                       </div>
                       <div className="classly-mini-item">
-                        婚姻家庭法 <label>883</label>
+                        <label>自然资源与环境保护法</label>10439
                       </div>
                       <div className="classly-mini-item">
-                        自然资源与环境保护法 <label>10439</label>
+                        <label>婚姻家庭法</label>883
                       </div>
                       <div className="classly-mini-item">
-                        婚姻家庭法 <label>883</label>
+                        <label>自然资源与环境保护法</label>10439
                       </div>
                       <div className="classly-mini-item">
-                        自然资源与环境保护法 <label>10439</label>
+                        <label>婚姻家庭法</label>883
                       </div>
                       <div className="classly-mini-item">
-                        婚姻家庭法 <label>883</label>
-                      </div>
-                      <div className="classly-mini-item">
-                        自然资源与环境保护法 <label>10439</label>
-                      </div>
-                      <div className="classly-mini-item">
-                        婚姻家庭法 <label>883</label>
-                      </div>
-                      <div className="classly-mini-item">
-                        自然资源与环境保护法 <label>10439</label>
-                      </div>
-                      <div className="classly-mini-item">
-                        婚姻家庭法 <label>883</label>
-                      </div>
-                      <div className="classly-mini-item">
-                        自然资源与环境保护法 <label>10439</label>
-                      </div>
-                      <div className="classly-mini-item">
-                        自然资源与环境保护法 <label>10439</label>
-                      </div>
-                      <div className="classly-mini-item">
-                        婚姻家庭法 <label>883</label>
-                      </div>
-                      <div className="classly-mini-item">
-                        自然资源与环境保护法 <label>10439</label>
-                      </div>
-                      <div className="classly-mini-item">
-                        婚姻家庭法 <label>883</label>
-                      </div>
-                      <div className="classly-mini-item">
-                        自然资源与环境保护法 <label>10439</label>
-                      </div>
-                      <div className="classly-mini-item">
-                        婚姻家庭法 <label>883</label>
-                      </div>
-                      <div className="classly-mini-item">
-                        自然资源与环境保护法 <label>10439</label>
-                      </div>
-                      <div className="classly-mini-item">
-                        婚姻家庭法 <label>883</label>
-                      </div>
-                      <div className="classly-mini-item">
-                        自然资源与环境保护法 <label>10439</label>
-                      </div>
-                      <div className="classly-mini-item">
-                        婚姻家庭法 <label>883</label>
-                      </div>
-                      <div className="classly-mini-item">
-                        自然资源与环境保护法 <label>10439</label>
+                        <label>自然资源与环境保护法</label>10439
                       </div>
                     </div>
                   </div>

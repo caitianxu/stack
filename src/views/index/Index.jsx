@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import store from "../../store/store";
+import "./Index.scss";
+
 import Plan1 from "./Plan1";
 import Plan2 from "./Plan2";
 import Plan3 from "./Plan3";
@@ -9,9 +11,8 @@ import Plan6 from "./Plan6";
 import Plan7 from "./Plan7";
 import Plan8 from "./Plan8";
 import Classly from "../../components/classly/Classly";
-import "./Index.scss";
 
-class Index extends Component {
+export default class Index extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -30,11 +31,13 @@ class Index extends Component {
   };
   //销毁
   componentWillUnmount() {
+    document.body.className = "";
     this.setState = () => {
       return;
     };
   }
   componentDidMount() {
+    document.body.className = "mainPage";
     this.resize();
     this.loading = false;
     window.addEventListener("resize", this.resize);
@@ -93,7 +96,7 @@ class Index extends Component {
         this.plansElement.style.transitionDuration = "0s";
       }
       this.plansElement.style.transform = `translateY(-${menuIndex *
-        (height + 50)}px)`;
+        height}px)`;
     }
     setTimeout(() => {
       this.loading = false;
@@ -114,13 +117,12 @@ class Index extends Component {
   };
   render() {
     const { width, height, menuIndex, base } = this.state;
-    console.log("base", base);
     return (
-      <div className="page-main">
-        <div
-          className="index-content"
-          style={{ width: `${width}px`, height: `${height}px` }}
-        >
+      <div
+        className="main-page"
+        style={{ width: `${width}px`, height: `${height}px` }}
+      >
+        <div className="main-page-content" style={{ height: `${height}px` }}>
           <div className="plans" ref={el => (this.plansElement = el)}>
             <Plan1
               base={base}
@@ -171,11 +173,9 @@ class Index extends Component {
               changeIndex={this.changeIndex}
             />
           </div>
+          <Classly ref={el => (this.classlyElement = el)} base={base} />
         </div>
-        <Classly ref={el => (this.classlyElement = el)} base={base} />
       </div>
     );
   }
 }
-
-export default Index;

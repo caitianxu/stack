@@ -10,22 +10,18 @@ body {
   font-size: 14px;
   line-height: 1.5;
   background-color: transparent;
-  background: #f2eae9;
+  background: url("./img/main-bg.jpg");
   height: auto !important;
-  min-height: 100%;
+  width: 100%;
+  font-family: fzqk, Microsoft YaHei, Helvetica, Arial, sans-serif !important;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
 }
 
 ::selection {
   background: #7e3328;
   color: #eab27f;
-}
-
-html,
-body,
-button {
-  font-family: fzqk, Microsoft YaHei, Helvetica, Arial, sans-serif !important;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
 }
 
 input::-ms-clear,
@@ -196,15 +192,15 @@ textarea {
   /* Non-prefixed version, currently*/
 }
 #root {
+  float: left;
   width: 100%;
-  min-width: 1680px;
   .app-fix {
-    min-width: 1680px;
-    margin: 0 auto;
     position: relative;
-    .page-main {
-      min-width: 1680px;
-      background: url("./img/main-bg.jpg");
+    float: left;
+    width: 100%;
+    .page-main{
+      display: inline-block;
+      width: 100%;
     }
   }
 }

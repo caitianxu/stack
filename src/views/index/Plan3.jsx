@@ -72,7 +72,7 @@ class Plan3 extends Component {
     const { swIndex, swData, scrollIndex } = this.state;
     return (
       <div className="plan plan-3" style={{ height: `${height}px` }}>
-        <div className="plan-bg">
+        <div className="main-page-parent">
           <div className="plan-left">
             <TopSearch />
             <div className="p3-content">
@@ -118,7 +118,7 @@ class Plan3 extends Component {
                   <div
                     className="books"
                     ref={el => (this.booksElement = el)}
-                    style={{ transform: `translateX(${scrollIndex * -220}px)` }}
+                    style={{ transform: `translateX(${scrollIndex * -200}px)` }}
                   >
                     {swData.map((item, index) => {
                       return (

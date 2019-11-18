@@ -12,7 +12,7 @@ class Plan4 extends Component {
     const { height, menuIndex, changeIndex, base } = this.props;
     return (
       <div className="plan plan-4" style={{ height: `${height}px` }}>
-        <div className="plan-bg">
+        <div className="main-page-parent">
           <div className="plan-left">
             <TopSearch />
             <div className="plan-content">

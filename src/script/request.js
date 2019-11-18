@@ -4,7 +4,7 @@ import store from "../store/store";
 
 /********创建实例********/
 const service = axios.create({
-  baseURL: 'https://play.daidaidj.com',
+  baseURL: 'http://rdsweb.abcvote.cn',
   timeout: 10000
 });
 

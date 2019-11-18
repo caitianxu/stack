@@ -1,11 +1,12 @@
 .com-footer {
   background-color: #803228;
+  min-width: 1600px;
   .content {
     width: 1360px;
     display: flex;
-    margin: 0 auto;
-    padding: 40px 0 20px 0;
     position: relative;
+    margin: 0 auto;
+    padding-top: 50px;
     .col-1 {
       width: 450px;
       .logo {

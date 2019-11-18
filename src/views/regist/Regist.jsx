@@ -4,6 +4,7 @@ import Footer from "../../components/footer/Footer";
 import { Link } from "react-router-dom";
 import { Icon } from "antd";
 import "./Regist.scss";
+import HTTP from "../../script/service";
 
 class Regist extends Component {
   constructor(props) {
@@ -21,6 +22,14 @@ class Regist extends Component {
     e.stopPropagation();
     e.preventDefault();
   };
+  //发送验证码
+  sendCode = () => {
+    HTTP._send_phone_code({
+      phone: 18696199399
+    }).then(res => {
+      console.log(res)
+    })
+  }
   render() {
     const { box } = this.state;
     return (
@@ -39,7 +48,7 @@ class Regist extends Component {
               <label className="form-label">验证码：</label>
               <div className="form-control">
                 <input type="text" name="code" className="ip2" />
-                <button className="send-code">点击发送验证码</button>
+                <button className="send-code" onClick={this.sendCode}>点击发送验证码</button>
               </div>
             </div>
             <div className="form-row">

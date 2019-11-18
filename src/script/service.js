@@ -2,6 +2,10 @@ import service from "./request";
 import fetchJsonp from "fetch-jsonp";
 
 const HTTP = {
+  //获取验证码
+  _send_phone_code: param => {
+    return service.post("/api/web/send/code", param);
+  },
   //数据字典
   _get_dicts_data: param => {
     return service.get("/web/api/base/dicts", {

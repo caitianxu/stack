@@ -41,10 +41,15 @@ export default class Index extends Component {
     this.resize();
     this.loading = false;
     window.addEventListener("resize", this.resize);
-    window.addEventListener("mousewheel", this.scrollFunc);
+    if (typeof window.onmousewheel == "object") {
+      window.addEventListener("mousewheel", this.scrollFunc);
+    } else {
+      window.addEventListener("DOMMouseScroll", this.scrollFunc, false);
+    }
   }
   scrollFunc = e => {
     e = e || window.event;
+    console.log(e.detail, e.wheelDelta);
     if (e.wheelDelta) {
       if (e.wheelDelta > 0) {
         let menuIndex = this.state.menuIndex - 1;
@@ -62,17 +67,18 @@ export default class Index extends Component {
       }
     } else if (e.detail) {
       if (e.detail > 0) {
+        let menuIndex = this.state.menuIndex + 1;
+        if (menuIndex > 7) {
+          menuIndex = 7;
+        }
+        this.changeIndex(menuIndex);
+      }
+      if (e.detail < 0) {
         let menuIndex = this.state.menuIndex - 1;
         if (menuIndex < 0) {
           menuIndex = 0;
         }
         this.changeIndex(menuIndex);
-      }
-      if (e.detail < 0) {
-        let menuIndex = this.state.menuIndex + 1;
-        if (menuIndex > 7) {
-          menuIndex = 7;
-        }
       }
     }
   };

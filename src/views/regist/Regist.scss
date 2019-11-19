@@ -49,6 +49,10 @@
           background-color: #eab27f;
           color: #803228;
         }
+        &.disabled{
+          background: #999 !important;
+          color: #fff !important;
+        }
       }
       .ip3 {
         height: 42px;

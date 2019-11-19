@@ -6,11 +6,13 @@ const HTTP = {
   _send_phone_code: param => {
     return service.post("/api/web/send/code", param);
   },
-  //数据字典
-  _get_dicts_data: param => {
-    return service.get("/web/api/base/dicts", {
-      params: param
-    });
+  //注册
+  _web_register: param => {
+    return service.post("/api/web/register", param);
+  },
+  //登录
+  _web_login: param => {
+    return service.post("/api/web/login", param);
   },
   //获取经纬度
   _get_point_data: () => {

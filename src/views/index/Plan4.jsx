@@ -14,7 +14,7 @@ class Plan4 extends Component {
       <div className="plan plan-4" style={{ height: `${height}px` }}>
         <div className="main-page-parent">
           <div className="plan-left">
-            <TopSearch />
+            <TopSearch base={base} />
             <div className="plan-content">
               <div className="content-left">
                 <dl className="content-item">

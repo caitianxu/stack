@@ -49,7 +49,6 @@ export default class Index extends Component {
   }
   scrollFunc = e => {
     e = e || window.event;
-    console.log(e.detail, e.wheelDelta);
     if (e.wheelDelta) {
       if (e.wheelDelta > 0) {
         let menuIndex = this.state.menuIndex - 1;
@@ -179,7 +178,7 @@ export default class Index extends Component {
               changeIndex={this.changeIndex}
             />
           </div>
-          <Classly ref={el => (this.classlyElement = el)} base={base} />
+          <Classly base={base} ref={el => (this.classlyElement = el)} />
         </div>
       </div>
     );

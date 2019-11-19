@@ -22,7 +22,7 @@ class Plan1 extends Component {
       <div className="plan plan-1" style={{ height: `${height}px` }}>
         <div className="main-page-parent">
           <div className="plan-left">
-            <TopSearch />
+            <TopSearch base={base} />
             <div className="banner">
               <img alt="" src="/assets/img/bann1.png" />
             </div>

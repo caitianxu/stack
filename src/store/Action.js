@@ -1,18 +1,23 @@
 import qs from "qs";
 import HTTP from "../script/service";
 import store from "./store";
+import Util from "../script/util";
 
 //获取数据字典
-export const _set_dicts = function() {
-  return new Promise(function(resolve) {
-    HTTP._get_dicts_data().then(res => {
+export const _get_user_info = function(param) {
+  return new Promise(function(resolve, reject) {
+    HTTP._web_login(param).then(res => {
       if (res.code === 0) {
         const action = {
-          type: "set_system_dicts",
+          type: "change_user_info",
           data: { ...res.data }
         };
         store.dispatch(action);
-        resolve(res.data);
+        Util.setCookie("token", res.data.token);
+        resolve(res);
+      } else {
+        Util.delCookie("token");
+        reject(res);
       }
     });
   });

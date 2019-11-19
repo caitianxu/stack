@@ -182,7 +182,7 @@ class Classly extends Component {
                                     <i className="style-3"></i>
                                     <i className="style-4"></i>
                                   </div>
-                                  <div className="view-content">
+                                  <div className={`view-content view-type-${view.id}`}>
                                     <div className="name">
                                       <span>{view.name}</span>
                                     </div>

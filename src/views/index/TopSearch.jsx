@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 
 class TopSearch extends Component {
   render() {
+    const { base } = this.props;
     return (
       <div className="plan-top">
         <span className="logo"></span>
@@ -19,10 +20,16 @@ class TopSearch extends Component {
             高级搜索Advanced
             <Icon type="right" />
           </div>
-          <div className="lr-col">
-            <Link to="/login">登录 Login</Link>/
-            <Link to="/regist">注册 Register</Link>
-          </div>
+          {base && base.userInfo ? (
+            <div className="lr-col">
+              <Link to="/center">你好，{base.userInfo.nick_name}</Link>
+            </div>
+          ) : (
+            <div className="lr-col">
+              <Link to="/login">登录 Login</Link>/
+              <Link to="/regist">注册 Register</Link>
+            </div>
+          )}
         </div>
       </div>
     );

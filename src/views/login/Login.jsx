@@ -2,10 +2,52 @@ import React, { Component } from "react";
 import Header from "../../components/header/Header";
 import Footer from "../../components/footer/Footer";
 import { Link } from "react-router-dom";
-import { Icon } from "antd";
-import "./Login.scss"
+import { Icon, message } from "antd";
+import { _get_user_info } from "../../store/Action";
+import store from "../../store/store";
+import "./Login.scss";
 
 class Login extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      base: store.getState(),
+      account: null,
+      password: null
+    };
+    store.subscribe(this.storeChange);
+  }
+  //更新store
+  storeChange = () => {
+    this.setState({
+      base: store.getState()
+    });
+  };
+  changeFormValue = e => {
+    let ps = {};
+    ps[e.target.name] = e.target.value;
+    this.setState(ps);
+  };
+
+  loginIn = () => {
+    const { account, password } = this.state;
+    if (!account || account.length < 2) {
+      message.error("请输入用户名");
+      return false;
+    }
+    if (!password || password.length < 6) {
+      message.error("请输入密码");
+      return false;
+    }
+    _get_user_info({
+      account: account,
+      passwd: password
+    }).then(res => {
+      this.props.history.push("/index");
+    }).catch(res => {
+      message.error(res.message);
+    });
+  };
   render() {
     return (
       <div>
@@ -18,18 +60,34 @@ class Login extends Component {
                 <label className="icon">
                   <Icon type="user" />
                 </label>
-                <input type="text" placeholder="请输入用户名" />
+                <input
+                  type="text"
+                  name="account"
+                  autoComplete="off"
+                  value={this.state.account || ""}
+                  onChange={this.changeFormValue}
+                  maxLength="18"
+                  placeholder="请输入用户名"
+                />
               </div>
               <div className="form-row">
                 <label className="icon">
                   <Icon type="lock" />
                 </label>
-                <input type="text" placeholder="请输入密码" />
+                <input
+                  type="password"
+                  name="password"
+                  autoComplete="off"
+                  value={this.state.password || ""}
+                  onChange={this.changeFormValue}
+                  maxLength="18"
+                  placeholder="请输入密码"
+                />
               </div>
               <div className="ip-row">
                 <span className="ip-action">IP一键登录</span>
               </div>
-              <div className="form-action"></div>
+              <div className="form-action" onClick={this.loginIn}></div>
               <div className="link-row">
                 <Link to="/regist" className="a1">
                   没有账号? 去注册

@@ -30,6 +30,9 @@ class Regist extends Component {
       console.log(res)
     })
   }
+  componentDidMount(){
+    this.sendCode();
+  }
   render() {
     const { box } = this.state;
     return (

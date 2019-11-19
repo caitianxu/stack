@@ -17,6 +17,11 @@ nodeJs安装、git安装
 ## 2、项目拉取
 git clone https://github.com/caitianxu/stack.git
 
+### 本地还原
+git fetch --all 
+git reset --hard origin/master
+git pull
+
 ### 3、初始化
 npm install
 

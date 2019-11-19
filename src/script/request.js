@@ -1,5 +1,4 @@
 import axios from "axios";
-import qs from "qs";
 import store from "../store/store";
 
 /********创建实例********/
@@ -13,13 +12,8 @@ service.interceptors.request.use(request => {
   const store_state = { ...store.getState() };
   let df_param = {};
   if (request.method === "post") {
-    if (request.data.application === "json") {
-      request.data = { ...request.data, ...df_param };
-      request.headers["Content-Type"] = "application/json; charset=UTF-8";
-    } else {
-      request.data = qs.stringify({ ...request.data, ...df_param });
-      request.headers["Content-Type"] = "application/x-www-form-urlencoded; charset=UTF-8";
-    }
+    request.data = { ...request.data, ...df_param };
+    request.headers["Content-Type"] = "application/json; charset=UTF-8";
   } else {
     request.params = { ...request.params, ...df_param };
     request.headers["Content-Type"] = "application/json; charset=UTF-8";

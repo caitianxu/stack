@@ -16,10 +16,10 @@ class TopSearch extends Component {
             />
             <Icon type="search" />
           </div>
-          <div className="master-search">
+          <Link className="master-search" to="/search">
             高级搜索Advanced
             <Icon type="right" />
-          </div>
+          </Link>
           {base && base.userInfo ? (
             <div className="lr-col">
               <Link to="/center">你好，{base.userInfo.nick_name}</Link>

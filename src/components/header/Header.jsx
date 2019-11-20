@@ -4,6 +4,7 @@ import "./Header.scss";
 
 class Header extends Component {
   render() {
+    const { base } = this.props;
     return (
       <div className="com-header">
         <div className="content">
@@ -33,11 +34,16 @@ class Header extends Component {
               <Link to="/index">专题Special Topic</Link>
             </li>
           </ul>
-
-          <div className="actions">
-            <Link to="/login">登录 Login</Link>/
-            <Link to="/regist">注册 Register</Link>
-          </div>
+          {base && base.userInfo ? (
+            <div className="actions">
+              <Link to="/center">你好，{base.userInfo.nick_name}</Link>
+            </div>
+          ) : (
+            <div className="actions">
+              <Link to="/login">登录 Login</Link>/
+              <Link to="/regist">注册 Register</Link>
+            </div>
+          )}
         </div>
       </div>
     );

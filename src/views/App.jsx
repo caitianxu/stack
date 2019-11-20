@@ -2,12 +2,15 @@ import React, { Component } from "react";
 import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
 import asyncComponent from "../script/asyncComponent";
 import store from "../store/store";
-import { _get_url_search } from "../store/Action";
+import Util from "../script/util";
+import { _set_token, _get_userInfo } from "../store/Action";
 
 const Index = asyncComponent(() => import("./index/Index"));
 const Login = asyncComponent(() => import("./login/Login"));
 const Regist = asyncComponent(() => import("./regist/Regist"));
 const Search = asyncComponent(() => import("./search/Search"));
+const About = asyncComponent(() => import("./about/About"));
+const Description = asyncComponent(() => import("./description/Description"));
 
 class App extends Component {
   constructor(props) {
@@ -24,7 +27,12 @@ class App extends Component {
     });
   };
   componentDidMount() {
-    _get_url_search(res => {});
+    let token = Util.readCookie("token");
+    if (token) {
+      _set_token(token).then(res => {
+        _get_userInfo(res);
+      });
+    }
   }
   componentWillUnmount() {
     this.setState = () => {
@@ -49,6 +57,10 @@ class App extends Component {
             <Route path="/regist" component={Regist} />
             {/* 搜索 */}
             <Route path="/search" component={Search} />
+            {/* 关于我们 */}
+            <Route path="/about" component={About} />
+            {/* 产品介绍 */}
+            <Route path="/description" component={Description} />
 
             <Route path="/:local" component={Index} />
           </Switch>

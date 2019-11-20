@@ -1,0 +1,186 @@
+.description-page {
+  .com-header {
+    background: transparent;
+  }
+  .page-main-1 {
+    background: url("./img/header.jpg") no-repeat center 0;
+    background-color: #f7f7f7;
+
+    .description-content {
+      position: relative;
+      width: 1600px;
+      margin: 0 auto;
+      padding: 385px 0 50px 0;
+      .menus {
+        display: flex;
+        width: 1160px;
+        height: 120px;
+        background: #fff;
+        border-radius: 10px;
+        margin: 0 auto;
+        li {
+          width: 200px;
+          margin: 0 45px;
+          padding: 30px 0;
+          text-align: center;
+          font-family: "Microsoft YaHei";
+          cursor: pointer;
+          h3 {
+            font-size: 22px;
+            margin: 0;
+          }
+          p {
+            margin: 0;
+            font-size: 18px;
+            line-height: 30px;
+          }
+          &:hover,
+          &.active {
+            h3,
+            p {
+              color: #803228;
+            }
+          }
+        }
+      }
+      .remark {
+        width: 1200px;
+        margin: 0 auto;
+        .title {
+          text-align: center;
+          margin: 60px 0;
+          h3,
+          p {
+            margin: 0;
+            font-size: 22px;
+            font-family: "Microsoft YaHei";
+          }
+        }
+        .detail {
+          &.df {
+            display: flex;
+          }
+          p {
+            font-family: "黑体";
+            line-height: 40px;
+            text-indent: 2em;
+            text-align: justify;
+            color: #000;
+            font-size: 15px;
+          }
+          .cll {
+            flex: 1;
+          }
+          .img {
+            width: 1200px;
+            height: 450px;
+            background: url("./img/com.png") no-repeat center bottom;
+          }
+        }
+      }
+    }
+  }
+  .page-main-2 {
+    .resource-content {
+      width: 1300px;
+      margin: 0 auto;
+      .title {
+        padding: 0 50px;
+        text-align: center;
+        margin: 60px 0;
+        h3,
+        p {
+          margin: 0;
+          font-size: 22px;
+          font-family: "Microsoft YaHei";
+        }
+      }
+      .detail {
+        padding: 0 50px;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        .detail-item {
+          width: 350px;
+          height: 290px;
+          margin: 0 25px 50px 25px;
+          position: relative;
+          border: 3px #d3a785 solid;
+          padding: 3px;
+          .detail-content {
+            position: absolute;
+            width: 100%;
+            top: 0;
+            left: 0;
+            z-index: 2;
+            padding: 25px;
+            text-align: center;
+            h3 {
+              line-height: 80px;
+              font-size: 28px;
+              color: #803228;
+            }
+            p {
+              text-align: justify;
+              font-size: 17px;
+              line-height: 30px;
+            }
+          }
+        }
+      }
+    }
+  }
+  .page-main-3 {
+    background: #f7f7f7;
+    .award-content {
+      width: 1300px;
+      margin: 0 auto;
+      .title {
+        padding: 0 50px;
+        text-align: center;
+        margin: 60px 0;
+        h3,
+        p {
+          margin: 0;
+          font-size: 22px;
+          font-family: "Microsoft YaHei";
+        }
+      }
+      .award-items {
+        display: flex;
+        .award-item {
+          width: 530px;
+          margin: 0 60px 50px 60px;
+          .cover {
+            width: 530px;
+            height: 340px;
+            &.c1 {
+              background: url("./img/award-2.jpg") no-repeat center center;
+            }
+            &.c2 {
+              background: url("./img/award-1.jpg") no-repeat center center;
+            }
+          }
+          .p1 {
+            text-align: center;
+            margin: 20px 0 10px 0;
+            font-size: 28px;
+            font-family: "黑体";
+          }
+          .p2 {
+            text-align: center;
+            font-size: 20px;
+            margin: 10px 0 10px 0;
+            font-family: "黑体";
+          }
+          .p3 {
+            text-align: center;
+            font-size: 18px;
+            margin: 10px 0 10px 0;
+            font-family: "黑体";
+          }
+        }
+      }
+    }
+  }
+}

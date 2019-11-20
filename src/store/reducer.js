@@ -6,6 +6,11 @@ const defaultState = {
 };
 
 export default (state = defaultState, action) => {
+  //设置历史token
+  if (action.type === "set_token") {
+    const newState = { ...state, token: action.data };
+    return newState;
+  }
   //设置数据字典内容
   if (action.type === "change_user_info") {
     const newState = { ...state };

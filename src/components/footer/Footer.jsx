@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Icon } from "antd";
+import { Link } from "react-router-dom";
 import "./Footer.scss";
 
 class Footer extends Component {
@@ -15,7 +16,7 @@ class Footer extends Component {
             <p>备案号：京ICP备10054422号-16</p>
           </ul>
           <ul className="col-2">
-            <h3>关于我们About Us</h3>
+            <Link className="h3" to="/about">关于我们 About Us</Link>
             <p>
               <a href="/">中国问题研究文献出版目录及服务平台</a>
             </p>
@@ -36,23 +37,23 @@ class Footer extends Component {
             </p>
           </ul>
           <ul className="col-3">
-            <h3>帮助中心Help center</h3>
+            <h3>帮助中心 Help center</h3>
             <p>
-              <a href="/">联系我们</a>
+              <a href="/description">使用手册</a>
             </p>
             <p>
-              <a href="/">使用手册</a>
+              <a href="/">联系我们</a>
             </p>
             <p>
               <a href="/">意见反馈</a>
             </p>
           </ul>
           <ul className="col-4">
-            <h3>关注我们Follow us</h3>
+            <h3>关注我们 Follow us</h3>
             <p></p>
           </ul>
           <a href="link" className="friendly-link" target="_blank">
-            友情链接 Friendly Link{" "}
+            友情链接 Friendly Link
             <span>
               <Icon type="right" />
             </span>

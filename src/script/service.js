@@ -14,8 +14,13 @@ const HTTP = {
   _web_login: param => {
     return service.post("/api/web/login", param);
   },
+  //获取分类
   _get_web_cat: param => {
     return service.post("/api/web/cat", param);
+  },
+  //获取用户信息
+  _get_member_info: param => {
+    return service.post("/api/web/member/info", param);
   },
   //获取经纬度
   _get_point_data: () => {

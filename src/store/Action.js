@@ -16,7 +16,6 @@ export const _get_user_info = function(param) {
         Util.setCookie("token", res.data.token);
         resolve(res);
       } else {
-        Util.delCookie("token");
         reject(res);
       }
     });
@@ -38,4 +37,41 @@ export const _set_classly_visible = function(visible) {
     }
   };
   store.dispatch(action);
+};
+//设置token
+export const _set_token = function(token) {
+  return new Promise(function(resolve, reject) {
+    const action = {
+      type: "set_token",
+      data: token
+    };
+    store.dispatch(action);
+    resolve(token);
+  });
+};
+//获取用户信息
+export const _get_userInfo = function(token) {
+  return new Promise(function(resolve, reject) {
+    if (!token) {
+      token = store.getState().token;
+    }
+    HTTP._get_member_info().then(res => {
+      if (res.code == 0) {
+        const action = {
+          type: "change_user_info",
+          data: { ...res.data, token: token }
+        };
+        store.dispatch(action);
+        resolve(res.data);
+      } else {
+        const action = {
+          type: "set_token",
+          data: null
+        };
+        store.dispatch(action);
+        Util.delCookie("token");
+        reject(res);
+      }
+    });
+  });
 };

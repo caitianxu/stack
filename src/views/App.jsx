@@ -7,6 +7,7 @@ import { _get_url_search } from "../store/Action";
 const Index = asyncComponent(() => import("./index/Index"));
 const Login = asyncComponent(() => import("./login/Login"));
 const Regist = asyncComponent(() => import("./regist/Regist"));
+const Search = asyncComponent(() => import("./search/Search"));
 
 class App extends Component {
   constructor(props) {
@@ -46,6 +47,8 @@ class App extends Component {
             <Route path="/login" component={Login} />
             {/* 注册 */}
             <Route path="/regist" component={Regist} />
+            {/* 搜索 */}
+            <Route path="/search" component={Search} />
 
             <Route path="/:local" component={Index} />
           </Switch>

@@ -14,11 +14,14 @@ const HTTP = {
   _web_login: param => {
     return service.post("/api/web/login", param);
   },
+  _get_web_cat: param => {
+    return service.post("/api/web/cat", param);
+  },
   //获取经纬度
   _get_point_data: () => {
     return fetchJsonp(
       "https://api.map.baidu.com/location/ip?ak=G0T3IZDatGXYGTaGiUHY2tXUZNQpcDxP&coor=bd09ll"
-    ).then(function(response) {
+    ).then(function (response) {
       return response.json();
     });
   }

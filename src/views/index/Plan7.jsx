@@ -35,7 +35,7 @@ class Plan7 extends Component {
         this.chart1
           .point()
           .position("height*weight")
-          .color("gender")
+          .color("gender",["#c23531", "#61a0a8"])
           .size(4)
           .opacity(0.65)
           .shape("circle")

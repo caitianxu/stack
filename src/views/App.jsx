@@ -11,6 +11,8 @@ const Regist = asyncComponent(() => import("./regist/Regist"));
 const Search = asyncComponent(() => import("./search/Search"));
 const About = asyncComponent(() => import("./about/About"));
 const Description = asyncComponent(() => import("./description/Description"));
+const Help = asyncComponent(() => import("./help/Help"));
+const Cus = asyncComponent(() => import("./cus/Cus"));
 
 class App extends Component {
   constructor(props) {
@@ -60,7 +62,11 @@ class App extends Component {
             {/* 关于我们 */}
             <Route path="/about" component={About} />
             {/* 产品介绍 */}
-            <Route path="/description" component={Description} />
+            <Route path="/des" component={Description} />
+            {/* 帮助中心 */}
+            <Route path="/help" component={Help} />
+            {/* 联系我们 */}
+            <Route path="/cus" component={Cus} />
 
             <Route path="/:local" component={Index} />
           </Switch>

@@ -37,15 +37,15 @@ class Footer extends Component {
             </p>
           </ul>
           <ul className="col-3">
-            <h3>帮助中心 Help center</h3>
+            <Link className="h3" to="/help">帮助中心 Help center</Link>
             <p>
-              <a href="/description">使用手册</a>
+              <a href="/des">使用手册</a>
             </p>
             <p>
-              <a href="/">联系我们</a>
+              <a href="/cus">联系我们</a>
             </p>
             <p>
-              <a href="/">意见反馈</a>
+              <a href="/cus?type=feeback">意见反馈</a>
             </p>
           </ul>
           <ul className="col-4">

@@ -46,16 +46,22 @@ export default class About extends Component {
                 <p>About us</p>
               </li>
               <li>
-                <h3>产品介绍</h3>
-                <p>Product description</p>
+                <Link to="/des">
+                  <h3>产品介绍</h3>
+                  <p>Product description</p>
+                </Link>
               </li>
               <li>
-                <h3>帮助中心</h3>
-                <p>Help</p>
+                <Link to="/help">
+                  <h3>帮助中心</h3>
+                  <p>Help</p>
+                </Link>
               </li>
               <li>
-                <h3>联系我们</h3>
-                <p>Contact us</p>
+                <Link to="/cus">
+                  <h3>联系我们</h3>
+                  <p>Contact us</p>
+                </Link>
               </li>
             </ul>
             <div className="remark">

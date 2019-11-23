@@ -59,6 +59,40 @@
           font-family: "Microsoft YaHei";
         }
       }
+      .content{
+        width: 1200px;
+        display: flex;
+        font-family: 'Microsoft YaHei';
+        .content-left{
+          width: 300px;
+          padding-right: 130px;
+          dl{
+            margin: 0 0 20px 0;
+            font-size: 16px;
+            dt{
+              line-height: 50px;
+              border-bottom: 2px #803228 solid;
+              margin-bottom: 15px;
+              &.active{
+                color: #803228;
+              }
+            }
+            dd{
+              line-height: 22px;
+              cursor: pointer;
+              &:hover, &.active{
+                color: #803228;
+              }
+            }
+          }
+        }
+        .content-right{
+          width: 900px;
+          min-height: 500px;
+          padding: 36px;
+          background: url('../../style/img/main-bg.jpg');
+        }
+      }
     }
   }
 }

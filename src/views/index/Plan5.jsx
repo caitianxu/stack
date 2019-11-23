@@ -13,7 +13,7 @@ class Plan5 extends Component {
       <div className="plan plan-5" style={{ height: `${height}px` }}>
         <div className="main-page-parent">
           <div className="plan-left">
-            <TopSearch base={base} />
+            <TopSearch base={base} url="expert"/>
             <div className="plan-content">
               <div className="content-item">
                 <div className="cover">

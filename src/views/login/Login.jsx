@@ -27,8 +27,13 @@ class Login extends Component {
     let ps = {};
     ps[e.target.name] = e.target.value;
     this.setState(ps);
-  };
-
+  };  
+  //销毁
+  componentWillUnmount() {
+    this.setState = () => {
+      return;
+    };
+  }
   loginIn = () => {
     const { account, password } = this.state;
     if (!account || account.length < 2) {

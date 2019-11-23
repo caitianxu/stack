@@ -11,7 +11,7 @@
       width: 450px;
       height: 55px;
       cursor: pointer;
-      background: url('./img/header.png') no-repeat 0 center;
+      background: url("./img/header.png") no-repeat 0 center;
       margin: 20px;
     }
     .menu {
@@ -29,7 +29,7 @@
         white-space: nowrap;
         overflow: hidden;
         &:hover::after,
-        &.active {
+        &.active::after {
           content: " ";
           position: absolute;
           width: 30px;

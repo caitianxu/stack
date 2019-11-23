@@ -228,7 +228,7 @@ class Plan2 extends Component {
       <div className="plan plan-2" style={{ height: `${height}px` }}>
         <div className="main-page-parent">
           <div className="plan-left">
-            <TopSearch base={base} />
+            <TopSearch base={base} url="paper"/>
             <div className="row-scroll">
               <span className="scroll-left"></span>
               <div className="scroll-plan">

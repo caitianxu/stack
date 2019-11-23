@@ -22,6 +22,14 @@ const HTTP = {
   _get_member_info: param => {
     return service.post("/api/web/member/info", param);
   },
+  //国家列表
+  _get_country_list: param => {
+    return service.post("/api/web/org/country/list", param);
+  },
+  //研究机构
+  _get_org_list: param => {
+    return service.post("/api/web/org/list", param);
+  },
   //获取经纬度
   _get_point_data: () => {
     return fetchJsonp(

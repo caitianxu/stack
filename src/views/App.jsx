@@ -13,6 +13,7 @@ const About = asyncComponent(() => import("./about/About"));
 const Description = asyncComponent(() => import("./description/Description"));
 const Help = asyncComponent(() => import("./help/Help"));
 const Cus = asyncComponent(() => import("./cus/Cus"));
+const Mechanism = asyncComponent(() => import("./mechanism/Mechanism"));
 
 class App extends Component {
   constructor(props) {
@@ -36,6 +37,7 @@ class App extends Component {
       });
     }
   }
+  //销毁
   componentWillUnmount() {
     this.setState = () => {
       return;
@@ -67,6 +69,8 @@ class App extends Component {
             <Route path="/help" component={Help} />
             {/* 联系我们 */}
             <Route path="/cus" component={Cus} />
+            {/* 机构 */}
+            <Route path="/mechanism" component={Mechanism} />
 
             <Route path="/:local" component={Index} />
           </Switch>

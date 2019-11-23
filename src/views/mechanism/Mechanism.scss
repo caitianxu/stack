@@ -1,0 +1,52 @@
+.mechanism-page {
+  background: #f7f7f7;
+  font-family: "Microsoft YaHei";
+  .mechanism-items {
+    padding: 25px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    .mechanism-item {
+      width: 410px;
+      margin-bottom: 35px;
+      display: flex;
+      cursor: pointer;
+      &:hover{
+          background: #f7f7f7;
+      }
+      .cover {
+        width: 130px;
+        height: 100px;
+      }
+      .detail {
+        padding-left: 10px;
+        height: 100px;
+        overflow: hidden;
+        h3 {
+          font-size: 16px;
+          line-height: 22px;
+          margin-bottom: 8px;
+        }
+        dl {
+          display: flex;
+          height: 70px;
+          margin: 0;
+          dt {
+            width: 40px;
+            color: #333;
+            line-height: 22px;
+          }
+          dd {
+            flex: 1;
+            margin: 0;
+            font-size: 12px;
+            line-height: 22px;
+            p {
+              margin-bottom: 8px;
+            }
+          }
+        }
+      }
+    }
+  }
+}

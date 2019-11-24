@@ -192,7 +192,7 @@
         }
       }
       .group-pagination {
-        padding: 0  0 20px 0;
+        padding: 0 0 20px 0;
         display: flex;
         justify-content: center;
         .page {
@@ -229,34 +229,69 @@
     border-radius: 5px;
   }
 }
-.page-papers{
+.page-papers {
   display: flex;
   justify-content: center;
   padding-bottom: 50px;
-  .label, .numbers{
+  &.none {
+    display: none;
+  }
+  .label,
+  .numbers {
     line-height: 32px;
     margin: 0 30px 0 0;
     color: #898989;
     font-size: 14px;
   }
-  .prev,.next{
+  .prev,
+  .next {
     margin: 0 10px;
   }
-  .ant-pagination-item{
+  .ant-pagination-item {
     border: none;
   }
-  .ant-pagination-item-active:focus a, .ant-pagination-item-active:hover a{
+  .ant-pagination-item-active:focus a,
+  .ant-pagination-item-active:hover a {
     color: #803228;
   }
-  .ant-pagination-item:focus a, .ant-pagination-item:hover a{
+  .ant-pagination-item:focus a,
+  .ant-pagination-item:hover a {
     color: #803228;
   }
-  .ant-pagination-item-active a{
+  .ant-pagination-item-active a {
     color: #fff !important;
     background: #803228;
     border-radius: 50%;
   }
   .ant-pagination-item-container .anticon {
     color: #803228;
+  }
+}
+.share-parent {
+  ul {
+    display: flex;
+    margin: 0;
+    li {
+      width: 60px;
+      padding-top: 5px;
+      text-align: center;
+      cursor: pointer;
+      font-size: 12px;
+      &:hover {
+        background: #f7f7f7;
+      }
+      .bsPlatName {
+        padding-top: 10px;
+      }
+    }
+  }
+}
+.share-modal{
+  .weixin-code {
+    width: 200px;
+    height: 200px;
+    border: 1px #ccc solid;
+    padding: 5px;
+    background: url("./img/code.png") no-repeat center center / 190px 190px;
   }
 }

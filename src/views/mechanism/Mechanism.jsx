@@ -6,9 +6,11 @@ import TopSearch from "../../components/topSearch/TopSearch";
 import { _get_url_search } from "../../store/Action";
 import HTTP from "../../script/service";
 import { Pagination } from "antd";
+import Util from "../../script/util";
 import "./Mechanism.scss";
 
 const KeyValue = {
+  keyword: "关键词",
   org_name: "名称",
   field: "研究领域",
   area: "地区",
@@ -27,6 +29,7 @@ class Mechanism extends Component {
       },
       countrys: [], //国家
       searchParam: {
+        keyword: null,
         org_name: null,
         field: null,
         area: null,
@@ -114,6 +117,30 @@ class Mechanism extends Component {
       }
     );
   };
+  //清空筛选条件
+  searchReset = () => {
+    this.setState(
+      {
+        searchParam: {
+          keyword: null,
+          org_name: null,
+          field: null,
+          area: null,
+          country: null,
+          pubdate: null
+        },
+        pageParam: {
+          pageNum: 1,
+          pageSize: 10,
+          pages: 1,
+          total: 0
+        }
+      },
+      () => {
+        this.getPageData();
+      }
+    );
+  };
   //本页数据
   getPageData = () => {
     let { searchParam, pageParam } = this.state;
@@ -122,12 +149,8 @@ class Mechanism extends Component {
       ...pageParam
     }).then(res => {
       if (res.code == 0) {
-        pageParam = {
-          pageNum: 1,
-          pageSize: 10,
-          pages: res.data.pages,
-          total: res.data.total
-        };
+        pageParam.pages = res.data.pages;
+        pageParam.total = res.data.total;
         this.setState({
           pageParam: pageParam,
           pageData: res.data.rows
@@ -137,14 +160,11 @@ class Mechanism extends Component {
   };
   //分页回调
   onPagChange = page => {
+    let { pageParam } = this.state;
+    pageParam.pageNum = page;
     this.setState(
       {
-        pageParam: {
-          pageNum: page,
-          pageSize: 10,
-          pages: 1,
-          total: 0
-        }
+        pageParam: pageParam
       },
       () => {
         this.getPageData();
@@ -173,11 +193,10 @@ class Mechanism extends Component {
         });
       }
     }
-    console.log(pageParam, pageData);
     return (
       <div className="mechanism-page">
         <Header base={base} />
-        <TopSearch base={base} tabIndex={4} searchArray={searchArray} setSearchParam={this.setSearchParam} />
+        <TopSearch base={base} tabIndex={4} searchArray={searchArray} searchReset={this.searchReset} setSearchParam={this.setSearchParam} />
         <div className="second-content">
           <div className="second-left">
             <div className="search-group">
@@ -210,161 +229,30 @@ class Mechanism extends Component {
           </div>
           <div className="second-right">
             <div className="mechanism-items">
-              <div className="mechanism-item">
-                <div className="cover">
-                  <img src="/assets/img/mechanism.png" alt="" />
-                </div>
-                <div className="detail">
-                  <h3>顾立雅中国古文字学中心</h3>
-                  <dl>
-                    <dt>简介</dt>
-                    <dd>
-                      <p>英文名称：Creel Center </p>
-                      <p>研究领域：study of early Chinese textual</p>
-                    </dd>
-                  </dl>
-                </div>
-              </div>
-              <div className="mechanism-item">
-                <div className="cover">
-                  <img src="/assets/img/mechanism.png" alt="" />
-                </div>
-                <div className="detail">
-                  <h3>顾立雅中国古文字学中心</h3>
-                  <dl>
-                    <dt>简介</dt>
-                    <dd>
-                      <p>英文名称：Creel Center for Chinese Paleography</p>
-                      <p>研究领域：study of early Chinese textual</p>
-                    </dd>
-                  </dl>
-                </div>
-              </div>
-              <div className="mechanism-item">
-                <div className="cover">
-                  <img src="/assets/img/mechanism.png" alt="" />
-                </div>
-                <div className="detail">
-                  <h3>顾立雅中国古文字学中心</h3>
-                  <dl>
-                    <dt>简介</dt>
-                    <dd>
-                      <p>英文名称：Creel Center for Chinese Paleography</p>
-                      <p>研究领域：study of early Chinese textual</p>
-                    </dd>
-                  </dl>
-                </div>
-              </div>
-              <div className="mechanism-item">
-                <div className="cover">
-                  <img src="/assets/img/mechanism.png" alt="" />
-                </div>
-                <div className="detail">
-                  <h3>顾立雅中国古文字学中心</h3>
-                  <dl>
-                    <dt>简介</dt>
-                    <dd>
-                      <p>英文名称：Creel Center for Chinese Paleography</p>
-                      <p>研究领域：study of early Chinese textual</p>
-                    </dd>
-                  </dl>
-                </div>
-              </div>
-              <div className="mechanism-item">
-                <div className="cover">
-                  <img src="/assets/img/mechanism.png" alt="" />
-                </div>
-                <div className="detail">
-                  <h3>顾立雅中国古文字学中心</h3>
-                  <dl>
-                    <dt>简介</dt>
-                    <dd>
-                      <p>英文名称：Creel Center for Chinese Paleography</p>
-                      <p>研究领域：study of early Chinese textual</p>
-                    </dd>
-                  </dl>
-                </div>
-              </div>
-              <div className="mechanism-item">
-                <div className="cover">
-                  <img src="/assets/img/mechanism.png" alt="" />
-                </div>
-                <div className="detail">
-                  <h3>顾立雅中国古文字学中心</h3>
-                  <dl>
-                    <dt>简介</dt>
-                    <dd>
-                      <p>英文名称：Creel Center for Chinese Paleography</p>
-                      <p>研究领域：study of early Chinese textual</p>
-                    </dd>
-                  </dl>
-                </div>
-              </div>
-              <div className="mechanism-item">
-                <div className="cover">
-                  <img src="/assets/img/mechanism.png" alt="" />
-                </div>
-                <div className="detail">
-                  <h3>顾立雅中国古文字学中心</h3>
-                  <dl>
-                    <dt>简介</dt>
-                    <dd>
-                      <p>英文名称：Creel Center for Chinese Paleography</p>
-                      <p>研究领域：study of early Chinese textual</p>
-                    </dd>
-                  </dl>
-                </div>
-              </div>
-              <div className="mechanism-item">
-                <div className="cover">
-                  <img src="/assets/img/mechanism.png" alt="" />
-                </div>
-                <div className="detail">
-                  <h3>顾立雅中国古文字学中心</h3>
-                  <dl>
-                    <dt>简介</dt>
-                    <dd>
-                      <p>英文名称：Creel Center for Chinese Paleography</p>
-                      <p>研究领域：study of early Chinese textual</p>
-                    </dd>
-                  </dl>
-                </div>
-              </div>
-              <div className="mechanism-item">
-                <div className="cover">
-                  <img src="/assets/img/mechanism.png" alt="" />
-                </div>
-                <div className="detail">
-                  <h3>顾立雅中国古文字学中心</h3>
-                  <dl>
-                    <dt>简介</dt>
-                    <dd>
-                      <p>英文名称：Creel Center for Chinese Paleography</p>
-                      <p>研究领域：study of early Chinese textual</p>
-                    </dd>
-                  </dl>
-                </div>
-              </div>
-              <div className="mechanism-item">
-                <div className="cover">
-                  <img src="/assets/img/mechanism.png" alt="" />
-                </div>
-                <div className="detail">
-                  <h3>顾立雅中国古文字学中心</h3>
-                  <dl>
-                    <dt>简介</dt>
-                    <dd>
-                      <p>英文名称：Creel Center for Chinese Paleography</p>
-                      <p>研究领域：study of early Chinese textual</p>
-                    </dd>
-                  </dl>
-                </div>
-              </div>
+              {pageData.map((item, index) => {
+                return (
+                  <div className="mechanism-item" key={`me-${index}`}>
+                    <div className="cover">
+                      <img src={Util.transImgUrl(item.cover, "130x110")} alt="" />
+                    </div>
+                    <div className="detail">
+                      <h3>{item.org_name}</h3>
+                      <dl>
+                        <dt>简介</dt>
+                        <dd>
+                          <p>英文名称：{item.en_name} </p>
+                          <p>研究领域：{item.field}</p>
+                        </dd>
+                      </dl>
+                    </div>
+                  </div>
+                );
+              })}
             </div>
-            <div className="page-papers">
-              <span className="label">共61389个结果</span>
+            <div className={pageParam.pages <= 1 ? "page-papers none" : "page-papers"}>
+              <span className="label">共{pageParam.total}个结果</span>
               <span className="pagination">
-                <Pagination defaultCurrent={6} hideOnSinglePage={true} total={500} pageSize={pageParam.pageSize} onChange={this.onPagChange} itemRender={this.itemRender} />
+                <Pagination hideOnSinglePage={true} current={pageParam.pageNum} total={pageParam.total} onChange={this.onPagChange} itemRender={this.itemRender} />
               </span>
             </div>
           </div>

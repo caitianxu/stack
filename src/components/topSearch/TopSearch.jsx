@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { Icon } from "antd";
+import Share from "../share/Share";
 import "./TopSearch.scss";
 
 const urls = ["/search?type=paper", "/search?type=book", "/search?type=policy", "/search?type=mechanism", "/search?type=expert"];
@@ -9,14 +10,22 @@ class TopSearch extends Component {
     super(props);
     this.state = {};
   }
+  keywordSearch = e => {
+    if (e.nativeEvent.keyCode && e.nativeEvent.keyCode != 13) return false;
+    this.props.setSearchParam("keyword", this.searchElement.value);
+  };
+  searchReset = () => {
+    this.searchElement.value = "";
+    this.props.searchReset();
+  };
   render() {
     const { tabIndex, searchArray, setSearchParam } = this.props;
     return (
       <div className="top-search-com">
         <div className="search-header">
           <div className="search-input">
-            <input type="search" placeholder="请输入您要搜索的关键词 Please enter the search content" />
-            <Icon type="search" />
+            <input type="search" ref={el => (this.searchElement = el)} placeholder="请输入您要搜索的关键词 Please enter the search content" onKeyPress={this.keywordSearch} />
+            <Icon type="search" onClick={this.keywordSearch} />
           </div>
           <Link to={urls[tabIndex - 1]} className="link">
             高级搜索Advanced >
@@ -41,17 +50,14 @@ class TopSearch extends Component {
             </dd>
           </dl>
           <div className="search-actions">
-            <span className="action">
+            <span className="action" onClick={this.searchReset}>
               <span className="icon">
                 <Icon type="delete" />
               </span>
               清空
             </span>
             <span className="action">
-              <span className="icon">
-                <Icon type="share-alt" />
-              </span>
-              分享
+              <Share />
             </span>
           </div>
         </div>

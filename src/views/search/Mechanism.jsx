@@ -45,31 +45,30 @@ class Mechanism extends Component {
         <div className="search-row">
           <label className="search-label">名称 Name：</label>
           <div className="search-control">
-            <input type="text" name="org_name" value={org_name || ""} onChange={this.changeFormValue} />
+            <input type="text" autoComplete="off" name="org_name" value={org_name || ""} onChange={this.changeFormValue} />
           </div>
         </div>
         <div className="search-row">
           <label className="search-label">研究领域 Research areas：</label>
           <div className="search-control max">
-            <input type="text" name="field" value={field || ""} onChange={this.changeFormValue} />
+            <input type="text" autoComplete="off" name="field" value={field || ""} onChange={this.changeFormValue} />
           </div>
         </div>
         <div className="search-row">
           <label className="search-label">所在地区 Area：</label>
           <div className="search-control max">
-            <input type="text" name="area" value={area || ""} onChange={this.changeFormValue} />
+            <input type="text" autoComplete="off" name="area" value={area || ""} onChange={this.changeFormValue} />
           </div>
         </div>
         <div className="search-row">
           <label className="search-label">所在国家 Country：</label>
           <div className="search-control max">
-            <input type="text" name="country" value={country || ""} onChange={this.changeFormValue} />
+            <input type="text" autoComplete="off" name="country" value={country || ""} onChange={this.changeFormValue} />
           </div>
         </div>
         <div className="search-row">
           <label className="search-label">成立时间 Established year：</label>
           <div className="search-control min">
-            {/* <input type="text" name="pubdate" /> */}
             <DatePicker onChange={this.onChange} value={pubdate ? moment(pubdate, 'YYYY-MM-DD') : null}  style={{ width: 200 }} showToday={false} placeholder="" />
           </div>
         </div>

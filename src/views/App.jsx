@@ -14,6 +14,7 @@ const Description = asyncComponent(() => import("./description/Description"));
 const Help = asyncComponent(() => import("./help/Help"));
 const Cus = asyncComponent(() => import("./cus/Cus"));
 const Mechanism = asyncComponent(() => import("./mechanism/Mechanism"));
+const Expert = asyncComponent(() => import("./expert/Expert"));
 
 class App extends Component {
   constructor(props) {
@@ -71,6 +72,8 @@ class App extends Component {
             <Route path="/cus" component={Cus} />
             {/* 机构 */}
             <Route path="/mechanism" component={Mechanism} />
+            {/* 专家 */}
+            <Route path="/expert" component={Expert} />
 
             <Route path="/:local" component={Index} />
           </Switch>

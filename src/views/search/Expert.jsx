@@ -41,37 +41,37 @@ class Expert extends Component {
         <div className="search-row">
           <label className="search-label">姓名 Name：</label>
           <div className="search-control">
-            <input type="text" name="name" value={name || ""} onChange={this.changeFormValue} placeholder="姓名/译名/曾用名" />
+            <input type="text" autoComplete="off" name="name" value={name || ""} onChange={this.changeFormValue} placeholder="姓名/译名/曾用名" />
           </div>
         </div>
         <div className="search-row">
           <label className="search-label">单位 Unit：</label>
           <div className="search-control">
-            <input type="text" name="org_name" value={org_name || ""} onChange={this.changeFormValue} placeholder="所在单位/曾供职" />
+            <input type="text" autoComplete="off" name="org_name" value={org_name || ""} onChange={this.changeFormValue} placeholder="所在单位/曾供职" />
           </div>
         </div>
         <div className="search-row">
           <label className="search-label">职位 position：</label>
           <div className="search-control">
-            <input type="text" name="position" value={position || ""} onChange={this.changeFormValue} />
+            <input type="text" autoComplete="off" name="position" value={position || ""} onChange={this.changeFormValue} />
           </div>
         </div>
         <div className="search-row">
           <label className="search-label">研究领域 Research areas：</label>
           <div className="search-control max">
-            <input type="text" name="research" value={research || ""} onChange={this.changeFormValue} />
+            <input type="text" autoComplete="off" name="research" value={research || ""} onChange={this.changeFormValue} />
           </div>
         </div>
         <div className="search-row">
           <label className="search-label">所在地区 Area：</label>
           <div className="search-control max">
-            <input type="text" name="area" value={area || ""} onChange={this.changeFormValue} />
+            <input type="text" autoComplete="off" name="area" value={area || ""} onChange={this.changeFormValue} />
           </div>
         </div>
         <div className="search-row">
           <label className="search-label">所在国家 Country：</label>
           <div className="search-control max">
-            <input type="text" name="country" value={country || ""} onChange={this.changeFormValue} />
+            <input type="text" autoComplete="off" name="country" value={country || ""} onChange={this.changeFormValue} />
           </div>
         </div>
         <div className="search-actions">

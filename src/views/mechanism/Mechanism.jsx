@@ -24,7 +24,7 @@ class Mechanism extends Component {
       base: store.getState(),
       countryParam: {
         pageNum: 1,
-        pageSize: 10,
+        pageSize: 12,
         pages: 1
       },
       countrys: [], //国家

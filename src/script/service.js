@@ -22,13 +22,25 @@ const HTTP = {
   _get_member_info: param => {
     return service.post("/api/web/member/info", param);
   },
-  //国家列表
+  //国家列表（机构）
   _get_country_list: param => {
     return service.post("/api/web/org/country/list", param);
   },
   //研究机构
   _get_org_list: param => {
     return service.post("/api/web/org/list", param);
+  },
+  //所在地列表（专家）
+  _get_expert_country_list: param => {
+    return service.post("/api/web/expert/country/list", param);
+  },
+  //工作单位列表（专家）
+  _get_expert_org_list: param => {
+    return service.post("/api/web/expert/org/list", param);
+  },
+  //专家
+  _get_expert_list: param => {
+    return service.post("/api/web/expert/list", param);
   },
   //获取经纬度
   _get_point_data: () => {

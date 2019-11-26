@@ -10,7 +10,7 @@ import "./Expert.scss";
 import Util from "../../script/util";
 
 const KeyValue = {
-  keyword: "关键词",
+  searchText: "关键词",
   name: "姓名",
   org_name: "所属单位",
   research: "研究领域",
@@ -23,6 +23,12 @@ class Expert extends Component {
     super(props);
     this.state = {
       base: store.getState(),
+      positionParam: {
+        pageNum: 1,
+        pageSize: 6,
+        pages: 1
+      },
+      positions: [], //研究领域
       countryParam: {
         pageNum: 1,
         pageSize: 6,
@@ -36,16 +42,17 @@ class Expert extends Component {
       },
       orgs: [], //机构
       searchParam: {
-        keyword: null,
+        searchText: null,
+        name: null,
         org_name: null,
-        field: null,
+        position: null,
+        research: null,
         area: null,
-        country: null,
-        pubdate: null
+        country: null
       },
       pageParam: {
         pageNum: 1,
-        pageSize: 15,
+        pageSize: 21,
         pages: 1,
         total: 0
       },
@@ -71,6 +78,9 @@ class Expert extends Component {
     this.getCountryList();
     //所属机构
     this.getOrgList();
+    //研究领域
+    this.getPositionList();
+
     _get_url_search(param => {
       this.setState(
         {
@@ -134,6 +144,32 @@ class Expert extends Component {
       }
     );
   };
+  //研究领域
+  getPositionList = () => {
+    let { positionParam } = this.state;
+    HTTP._get_expert_position_list(positionParam).then(res => {
+      if (res.code == 0) {
+        this.setState({
+          positions: res.data.rows,
+          positionParam: { ...positionParam, pages: res.data.pages }
+        });
+      }
+    });
+  };
+  //分页研究领域数据
+  changePositionList = n => {
+    let { pageNum, pages } = this.state.positionParam;
+    if (pageNum + n < 1) return;
+    if (pageNum + n > pages) return;
+    this.setState(
+      {
+        positionParam: { ...this.state.positionParam, pageNum: pageNum + n }
+      },
+      () => {
+        this.getPositionList();
+      }
+    );
+  };
   //设置筛选条件
   setSearchParam = (key, value) => {
     let { searchParam } = this.state;
@@ -143,7 +179,7 @@ class Expert extends Component {
         searchParam: { ...searchParam },
         pageParam: {
           pageNum: 1,
-          pageSize: 10,
+          pageSize: 21,
           pages: 1,
           total: 0
         }
@@ -158,16 +194,17 @@ class Expert extends Component {
     this.setState(
       {
         searchParam: {
-          keyword: null,
+          searchText: null,
+          name: null,
           org_name: null,
-          field: null,
+          position: null,
+          research: null,
           area: null,
-          country: null,
-          pubdate: null
+          country: null
         },
         pageParam: {
           pageNum: 1,
-          pageSize: 10,
+          pageSize: 21,
           pages: 1,
           total: 0
         }
@@ -218,7 +255,7 @@ class Expert extends Component {
     return originalElement;
   };
   render() {
-    const { base, countryParam, countrys, orgParam, orgs, searchParam, pageParam, pageData } = this.state;
+    const { base, countryParam, countrys, orgParam, orgs, searchParam, positions, positionParam, pageParam, pageData } = this.state;
     console.log(pageParam, pageData);
     let searchArray = [];
     for (let i in searchParam) {
@@ -261,7 +298,33 @@ class Expert extends Component {
                 <span className={countryParam.pageNum >= countryParam.pages ? "paper dis" : "paper"} onClick={this.changeCountryList.bind(this, 1)}>
                   下一页
                 </span>
-                <span className="paper">全部</span>
+              </div>
+            </div>
+            {/* 研究领域 */}
+            <div className="search-group">
+              <div className="group-title">
+                <h3>研究领域</h3>
+                <p>research field</p>
+              </div>
+              <ul className="group-content">
+                {positions.map((item, index) => {
+                  return (
+                    <li key={`country-${index}`} onClick={this.setSearchParam.bind(this, "position", item.name)}>
+                      {item.name}
+                    </li>
+                  );
+                })}
+              </ul>
+              <div className="group-pagination">
+                <span className="page">
+                  {positionParam.pageNum}/{positionParam.pages}
+                </span>
+                <span className={positionParam.pageNum == 1 ? "paper dis" : "paper"} onClick={this.changePositionList.bind(this, -1)}>
+                  上一页
+                </span>
+                <span className={positionParam.pageNum >= positionParam.pages ? "paper dis" : "paper"} onClick={this.changePositionList.bind(this, 1)}>
+                  下一页
+                </span>
               </div>
             </div>
             {/* 所属机构 */}
@@ -289,7 +352,6 @@ class Expert extends Component {
                 <span className={orgParam.pageNum >= orgParam.pages ? "paper dis" : "paper"} onClick={this.changeOrgList.bind(this, 1)}>
                   下一页
                 </span>
-                <span className="paper">全部</span>
               </div>
             </div>
           </div>
@@ -324,11 +386,11 @@ class Expert extends Component {
               <span>Z</span>
             </div>
             <div className="expert-items">
-              {pageData.map((item, index) => {
+              {pageData.length > 0 ? pageData.map((item, index) => {
                 return (
                   <div className="expert-item" key={`expert-${index}`}>
                     <div className="cover">
-                      <img alt="" src={Util.transImgUrl(item.cover, '110x130')} />
+                      <img alt="" src={Util.transImgUrl(item.cover, "110x130")} />
                     </div>
                     <div className="detail">
                       <h1>{item.name}</h1>
@@ -338,7 +400,7 @@ class Expert extends Component {
                     </div>
                   </div>
                 );
-              })}
+              }) : <div className="not-data">没有找到相关内容</div>}
             </div>
             <div className={pageParam.pages <= 1 ? "page-papers none" : "page-papers"}>
               <span className="label">共{pageParam.total}个结果</span>

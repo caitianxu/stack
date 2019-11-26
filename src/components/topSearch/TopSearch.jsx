@@ -12,7 +12,7 @@ class TopSearch extends Component {
   }
   keywordSearch = e => {
     if (e.nativeEvent.keyCode && e.nativeEvent.keyCode != 13) return false;
-    this.props.setSearchParam("keyword", this.searchElement.value);
+    this.props.setSearchParam("searchText", this.searchElement.value);
   };
   searchReset = () => {
     this.searchElement.value = "";

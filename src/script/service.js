@@ -2,6 +2,14 @@ import service from "./request";
 import fetchJsonp from "fetch-jsonp";
 
 const HTTP = {
+  //数据字典
+  _get_web_dics: param => {
+    return service.post("/api/web/dics", param);
+  },
+  //语言
+  _get_language: param => {
+    return service.post("/dictype/language", param);
+  },
   //获取验证码
   _send_phone_code: param => {
     return service.post("/api/web/send/code", param);
@@ -38,9 +46,25 @@ const HTTP = {
   _get_expert_org_list: param => {
     return service.post("/api/web/expert/org/list", param);
   },
+  //研究领域列表（专家）
+  _get_expert_position_list: param => {
+    return service.post("/api/web/expert/cat/list", param);
+  },
   //专家
   _get_expert_list: param => {
     return service.post("/api/web/expert/list", param);
+  },
+  //发布机关
+  _get_policies_disagency: param => {
+    return service.post("/api/web/policies/disagency", param);
+  },
+  //公文级别
+  _get_policies_level: param => {
+    return service.post("/api/web/policies/level", param);
+  },
+  //政策列表
+  _get_policies_list: param => {
+    return service.post("/api/web/policies/list", param);
   },
   //获取经纬度
   _get_point_data: () => {

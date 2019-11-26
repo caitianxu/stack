@@ -10,7 +10,7 @@ import Util from "../../script/util";
 import "./Mechanism.scss";
 
 const KeyValue = {
-  keyword: "关键词",
+  searchText: "关键词",
   org_name: "名称",
   field: "研究领域",
   area: "地区",
@@ -29,7 +29,7 @@ class Mechanism extends Component {
       },
       countrys: [], //国家
       searchParam: {
-        keyword: null,
+        searchText: null,
         org_name: null,
         field: null,
         area: null,
@@ -122,7 +122,7 @@ class Mechanism extends Component {
     this.setState(
       {
         searchParam: {
-          keyword: null,
+          searchText: null,
           org_name: null,
           field: null,
           area: null,
@@ -223,31 +223,34 @@ class Mechanism extends Component {
                 <span className={countryParam.pageNum >= countryParam.pages ? "paper dis" : "paper"} onClick={this.changeCountryList.bind(this, 1)}>
                   下一页
                 </span>
-                <span className="paper">全部</span>
               </div>
             </div>
           </div>
           <div className="second-right">
             <div className="mechanism-items">
-              {pageData.map((item, index) => {
-                return (
-                  <div className="mechanism-item" key={`me-${index}`}>
-                    <div className="cover">
-                      <img src={Util.transImgUrl(item.cover, "130x110")} alt="" />
+              {pageData.length > 0 ? (
+                pageData.map((item, index) => {
+                  return (
+                    <div className="mechanism-item" key={`me-${index}`}>
+                      <div className="cover">
+                        <img src={Util.transImgUrl(item.cover, "130x110")} alt="" />
+                      </div>
+                      <div className="detail">
+                        <h3>{item.org_name}</h3>
+                        <dl>
+                          <dt>简介</dt>
+                          <dd>
+                            <p>英文名称：{item.en_name} </p>
+                            <p>研究领域：{item.field}</p>
+                          </dd>
+                        </dl>
+                      </div>
                     </div>
-                    <div className="detail">
-                      <h3>{item.org_name}</h3>
-                      <dl>
-                        <dt>简介</dt>
-                        <dd>
-                          <p>英文名称：{item.en_name} </p>
-                          <p>研究领域：{item.field}</p>
-                        </dd>
-                      </dl>
-                    </div>
-                  </div>
-                );
-              })}
+                  );
+                })
+              ) : (
+                <div className="not-data">没有找到相关内容</div>
+              )}
             </div>
             <div className={pageParam.pages <= 1 ? "page-papers none" : "page-papers"}>
               <span className="label">共{pageParam.total}个结果</span>

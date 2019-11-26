@@ -149,7 +149,7 @@
   width: 1200px;
   margin: 0 auto;
   display: flex;
-  padding-bottom: 40px;
+  padding-bottom: 50px;
   .second-left {
     width: 300px;
     padding-right: 20px;
@@ -158,6 +158,9 @@
       margin-bottom: 20px;
       background: #fff;
       border-radius: 5px;
+      &:last-child{
+        margin-bottom: 0;
+      }
       .group-title {
         background: #803228;
         text-align: center;
@@ -188,6 +191,32 @@
           &:hover,
           &.active {
             color: #803228;
+          }
+        }
+        dl{
+          display: flex;
+          font-size: 16px;
+          line-height: 45px;
+          margin: 0;
+          padding: 0 15px;
+          cursor: pointer;
+          &:hover{
+            background: #f7f7f7;
+          }
+          dt{
+            flex: 1;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+          }
+          dd{
+            margin: 0;
+            width: 70px;
+            text-align: right;
+            color: #8c8c8c;
+            font-family: Arial;
+            overflow: hidden;
+            white-space: nowrap;
           }
         }
       }
@@ -232,7 +261,7 @@
 .page-papers {
   display: flex;
   justify-content: center;
-  padding-bottom: 50px;
+  margin: 20px 0 30px;
   &.none {
     display: none;
   }
@@ -294,4 +323,10 @@
     padding: 5px;
     background: url("./img/code.png") no-repeat center center / 190px 190px;
   }
+}
+.not-data{
+  text-align: center;
+  line-height: 200px;
+  color: #999;
+  flex: 1;
 }

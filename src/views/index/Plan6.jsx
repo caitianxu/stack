@@ -14,7 +14,7 @@ class Plan6 extends Component {
       <div className="plan plan-6" style={{ height: `${height}px` }}>
         <div className="main-page-parent">
           <div className="plan-left">
-            <TopSearch base={base} url="mechanism"/>
+            <TopSearch base={base} url="mechanisms"/>
             <div className="plan-content">
               <div className="ml-list">
                 <div className="ml-item">哈佛大学东亚语言文明系</div>

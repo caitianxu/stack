@@ -7,7 +7,7 @@ class Plan1 extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      type: "paper"
+      type: "papers"
     };
   }
   changeType = type => {

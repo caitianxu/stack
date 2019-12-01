@@ -6,7 +6,7 @@ import TopSearch from "../../components/topSearch/TopSearch";
 import HTTP from "../../script/service";
 import { Pagination } from "antd";
 import { _get_url_search } from "../../store/Action";
-import "./Expert.scss";
+import "./Experts.scss";
 import Util from "../../script/util";
 
 const KeyValue = {
@@ -18,7 +18,7 @@ const KeyValue = {
   country: "所在国家",
   position: "职位"
 };
-class Expert extends Component {
+class Experts extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -256,7 +256,6 @@ class Expert extends Component {
   };
   render() {
     const { base, countryParam, countrys, orgParam, orgs, searchParam, positions, positionParam, pageParam, pageData } = this.state;
-    console.log(pageParam, pageData);
     let searchArray = [];
     for (let i in searchParam) {
       if (searchParam[i]) {
@@ -416,4 +415,4 @@ class Expert extends Component {
   }
 }
 
-export default Expert;
+export default Experts;

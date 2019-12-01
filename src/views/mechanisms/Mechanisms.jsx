@@ -7,7 +7,7 @@ import { _get_url_search } from "../../store/Action";
 import HTTP from "../../script/service";
 import { Pagination } from "antd";
 import Util from "../../script/util";
-import "./Mechanism.scss";
+import "./Mechanisms.scss";
 
 const KeyValue = {
   searchText: "关键词",
@@ -17,7 +17,7 @@ const KeyValue = {
   country: "国家",
   pubdate: "成立日期"
 };
-class Mechanism extends Component {
+class Mechanisms extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -266,4 +266,4 @@ class Mechanism extends Component {
   }
 }
 
-export default Mechanism;
+export default Mechanisms;

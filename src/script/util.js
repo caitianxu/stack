@@ -91,15 +91,15 @@ const Util = {
   },
   //图片地址处理
   transImgUrl: (url, size) => {
-    if (!url || url.trim() === "" || url === "/assets/img/icon-user.png") {
-      return "/assets/img/user.png";
+    if (!url || url.trim() === "" || url === "/assets/img/icon-null.png") {
+      return "/assets/img/null.png";
     } else if (url.indexOf("http") !== -1 || url.indexOf("https") !== -1) {
       return url;
     } else if (url.indexOf("/assets/") !== -1) {
       return url;
     } else {
       // return "http://rds.abcvote.cn" + url;
-      return "/assets/img/mechanism.png";
+      return "/assets/img/null.png";
     }
   }
 };

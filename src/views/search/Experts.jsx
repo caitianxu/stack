@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import qs from "qs";
 import { withRouter } from "react-router-dom";
 
-class Expert extends Component {
+class Experts extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -22,7 +22,7 @@ class Expert extends Component {
   };
   toSearch = () => {
     let param = qs.stringify(this.state);
-    this.props.history.push(`/expert?${param}`);
+    this.props.history.push(`/experts?${param}`);
   };
   toReset = () => {
     this.setState({
@@ -87,4 +87,4 @@ class Expert extends Component {
   }
 }
 
-export default withRouter(Expert);
+export default withRouter(Experts);

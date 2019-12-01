@@ -86,7 +86,7 @@
           margin-bottom: 15px;
           display: flex;
           .name {
-            max-width: 200px;
+            max-width: 201px;
             overflow: hidden;
             text-overflow: ellipsis;
             white-space: nowrap;
@@ -208,6 +208,13 @@
             overflow: hidden;
             white-space: nowrap;
             text-overflow: ellipsis;
+            .plus{
+              font-size: 14px;
+              margin-right: 10px;
+              &:hover{
+                color: #94534b;
+              }
+            }
           }
           dd{
             margin: 0;
@@ -217,6 +224,27 @@
             font-family: Arial;
             overflow: hidden;
             white-space: nowrap;
+          }
+        }
+        .group-child-list{
+          background: #eee;
+          .ant-spin{
+            color: #803228;
+          }
+          .group-child-scroll{
+            height: 200px;
+            overflow-x: hidden;
+            overflow-y: auto;
+          }
+          .not-child-data{
+            text-align: center;
+            line-height: 200px;
+            color: #999;
+          }
+          dl{
+            padding-left: 40px;
+            line-height: 35px;
+            font-size: 14px;
           }
         }
       }

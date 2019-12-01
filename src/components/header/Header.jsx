@@ -29,45 +29,45 @@ class Header extends Component {
             </li>
             <li>
               <NavLink
-                to="/pager"
-                isActive={this.oddEvent.bind(this, "/pager")}
+                to="/pagers"
+                isActive={this.oddEvent.bind(this, "/pagers")}
               >
                 论文Paper
               </NavLink>
             </li>
             <li>
-              <NavLink to="/book" isActive={this.oddEvent.bind(this, "/book")}>
+              <NavLink to="/books" isActive={this.oddEvent.bind(this, "/books")}>
                 图书Book
               </NavLink>
             </li>
             <li>
               <NavLink
-                to="/policy"
-                isActive={this.oddEvent.bind(this, "/policy")}
+                to="/policys"
+                isActive={this.oddEvent.bind(this, "/policys")}
               >
                 政策Policy
               </NavLink>
             </li>
             <li>
               <NavLink
-                to="/expert"
-                isActive={this.oddEvent.bind(this, "/expert")}
+                to="/experts"
+                isActive={this.oddEvent.bind(this, "/experts")}
               >
                 专家Expert
               </NavLink>
             </li>
             <li>
               <NavLink
-                to="/mechanism"
-                isActive={this.oddEvent.bind(this, "/mechanism")}
+                to="/mechanisms"
+                isActive={this.oddEvent.bind(this, "/mechanisms")}
               >
                 机构Mechanism
               </NavLink>
             </li>
             <li>
               <NavLink
-                to="/topic"
-                isActive={this.oddEvent.bind(this, "/topic")}
+                to="/topics"
+                isActive={this.oddEvent.bind(this, "/topics")}
               >
                 专题Special Topic
               </NavLink>

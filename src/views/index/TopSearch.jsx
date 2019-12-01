@@ -6,7 +6,7 @@ class TopSearch extends Component {
   render() {
     let { base, url } = this.props;
     if (!url) {
-      url = "paper";
+      url = "papers";
     }
     return (
       <div className="plan-top">

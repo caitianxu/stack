@@ -74,7 +74,7 @@ class Plan3 extends Component {
       <div className="plan plan-3" style={{ height: `${height}px` }}>
         <div className="main-page-parent">
           <div className="plan-left">
-            <TopSearch base={base} url="paper"/>
+            <TopSearch base={base} url="papers"/>
             <div className="p3-content">
               <div className="p3-list">
                 <div className="con-row-item has-footer">

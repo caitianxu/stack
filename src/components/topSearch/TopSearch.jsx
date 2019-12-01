@@ -4,7 +4,13 @@ import { Icon } from "antd";
 import Share from "../share/Share";
 import "./TopSearch.scss";
 
-const urls = ["/search?type=paper", "/search?type=book", "/search?type=policy", "/search?type=mechanism", "/search?type=expert"];
+const urls = [
+  "/search?type=papers",
+  "/search?type=books",
+  "/search?type=policys",
+  "/search?type=mechanisms",
+  "/search?type=experts"
+];
 class TopSearch extends Component {
   constructor(props) {
     super(props);
@@ -18,13 +24,24 @@ class TopSearch extends Component {
     this.searchElement.value = "";
     this.props.searchReset();
   };
+  setSearchParam = key => {
+    if (key == "searchText") {
+      this.searchElement.value = "";
+    }
+    this.props.setSearchParam(key, null);
+  };
   render() {
-    const { tabIndex, searchArray, setSearchParam } = this.props;
+    const { tabIndex, searchArray } = this.props;
     return (
       <div className="top-search-com">
         <div className="search-header">
           <div className="search-input">
-            <input type="search" ref={el => (this.searchElement = el)} placeholder="请输入您要搜索的关键词 Please enter the search content" onKeyPress={this.keywordSearch} />
+            <input
+              type="search"
+              ref={el => (this.searchElement = el)}
+              placeholder="请输入您要搜索的关键词 Please enter the search content"
+              onKeyPress={this.keywordSearch}
+            />
             <Icon type="search" onClick={this.keywordSearch} />
           </div>
           <Link to={urls[tabIndex - 1]} className="link">
@@ -41,7 +58,10 @@ class TopSearch extends Component {
                     <span className="name">
                       {item.name}：{item.value}
                     </span>
-                    <span className="close" onClick={setSearchParam.bind(this, item.key, null)}>
+                    <span
+                      className="close"
+                      onClick={this.setSearchParam.bind(this, item.key, null)}
+                    >
                       <Icon type="close" />
                     </span>
                   </div>
@@ -62,19 +82,19 @@ class TopSearch extends Component {
           </div>
         </div>
         <div className="search-tabs">
-          <Link className={tabIndex == 1 ? "tab active" : "tab"} to="/paper">
+          <Link className={tabIndex == 1 ? "tab active" : "tab"} to="/papers">
             论文Paper
           </Link>
-          <Link className={tabIndex == 2 ? "tab active" : "tab"} to="/book">
+          <Link className={tabIndex == 2 ? "tab active" : "tab"} to="/books">
             图书Books
           </Link>
-          <Link className={tabIndex == 3 ? "tab active" : "tab"} to="/policy">
+          <Link className={tabIndex == 3 ? "tab active" : "tab"} to="/policys">
             政策Policy
           </Link>
-          <Link className={tabIndex == 4 ? "tab active" : "tab"} to="/mechanism">
+          <Link className={tabIndex == 4 ? "tab active" : "tab"} to="/mechanisms">
             机构Mechanism
           </Link>
-          <Link className={tabIndex == 5 ? "tab active" : "tab"} to="/expert">
+          <Link className={tabIndex == 5 ? "tab active" : "tab"} to="/experts">
             专家Expert
           </Link>
         </div>

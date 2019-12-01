@@ -13,9 +13,10 @@ const About = asyncComponent(() => import("./about/About"));
 const Description = asyncComponent(() => import("./description/Description"));
 const Help = asyncComponent(() => import("./help/Help"));
 const Cus = asyncComponent(() => import("./cus/Cus"));
-const Mechanism = asyncComponent(() => import("./mechanism/Mechanism"));
-const Expert = asyncComponent(() => import("./expert/Expert"));
-const Policy = asyncComponent(() => import("./policy/Policy"));
+const Mechanisms = asyncComponent(() => import("./mechanisms/Mechanisms"));
+const Experts = asyncComponent(() => import("./experts/Experts"));
+const Policys = asyncComponent(() => import("./policys/Policys"));
+const Books = asyncComponent(() => import("./books/Books"));
 
 class App extends Component {
   constructor(props) {
@@ -72,11 +73,13 @@ class App extends Component {
             {/* 联系我们 */}
             <Route path="/cus" component={Cus} />
             {/* 机构 */}
-            <Route path="/mechanism" component={Mechanism} />
+            <Route path="/mechanisms" component={Mechanisms} />
             {/* 专家 */}
-            <Route path="/expert" component={Expert} />
+            <Route path="/experts" component={Experts} />
             {/* 政策 */}
-            <Route path="/policy" component={Policy} />
+            <Route path="/policys" component={Policys} />
+            {/* 图书 */}
+            <Route path="/books" component={Books} />
 
             <Route path="/:local" component={Index} />
           </Switch>

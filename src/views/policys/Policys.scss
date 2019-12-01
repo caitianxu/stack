@@ -1,0 +1,88 @@
+.policys-page {
+  background: #f7f7f7;
+  font-family: "Microsoft YaHei";
+  .table-header{
+    padding: 0 25px 0 25px;
+    .border{
+      display: flex;
+      justify-content: space-between;
+      border-bottom: 1px dashed #ccc;
+      padding: 15px 0;
+    }
+    .action-left{
+      display: flex;
+      line-height: 32px;
+      .ac{
+        margin-left: 10px;
+        cursor: pointer;
+        padding-right: 5px;
+        .anticon{
+          font-size: 15px;
+        }
+        &:hover{
+          color: #803228;
+        }
+      }
+    }
+    .action-right{
+      display: flex;
+      line-height: 32px;
+      .l-text{
+        color: #000;
+        b{
+          padding: 0 2px;
+          font-weight: normal;
+          font-family: Arial;
+        }
+      }
+      .sel-col{
+        margin-left: 15px;
+      }
+    }
+  }
+  .policy-items{
+    padding: 0 25px 20px;
+    .table-item{
+      padding: 15px 0;
+      display: flex;
+      justify-content: space-between;
+      border-bottom: 1px dashed #ccc;
+      .box, .action{
+        font-size: 16px;
+      }
+      .row-con{
+        text-align: left;
+        flex: 1;
+        padding: 0 20px;
+        overflow: hidden;
+        .d1{
+          font-size: 16px;
+          color: #803228;
+          font-weight: bold;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          margin-bottom: 10px;
+          cursor: pointer;
+          &:hover{
+            text-decoration: underline;
+          }
+        }
+        .d2{
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+        }
+      }
+      .action{
+        cursor: pointer;
+        &:hover{
+          color: #803228;
+        }
+        &.follow{
+          color: #803228;
+        }
+      }
+    }
+  }
+}

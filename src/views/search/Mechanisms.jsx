@@ -4,7 +4,7 @@ import moment from "moment";
 import { DatePicker } from "antd";
 import { withRouter } from "react-router-dom";
 
-class Mechanism extends Component {
+class Mechanisms extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -27,7 +27,7 @@ class Mechanism extends Component {
   };
   toSearch = () => {
     let param = qs.stringify(this.state);
-    this.props.history.push(`/mechanism?${param}`);
+    this.props.history.push(`/mechanisms?${param}`);
   };
   toReset = () => {
     this.setState({
@@ -85,4 +85,4 @@ class Mechanism extends Component {
   }
 }
 
-export default withRouter(Mechanism);
+export default withRouter(Mechanisms);

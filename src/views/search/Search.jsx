@@ -5,11 +5,11 @@ import Footer from "../../components/footer/Footer";
 import { _get_url_search } from "../../store/Action";
 import "./Search.scss";
 
-import Mechanism from "./Mechanism";
-import Expert from "./Expert";
-import Policy from "./Policy";
-import Book from "./Book";
-import Paper from "./Paper";
+import Mechanisms from "./Mechanisms";
+import Experts from "./Experts";
+import Policys from "./Policys";
+import Books from "./Books";
+import Papers from "./Papers";
 
 class Search extends Component {
   constructor(props) {
@@ -34,7 +34,7 @@ class Search extends Component {
   }
   componentDidMount() {
     _get_url_search(param => {
-      if (param.type == "paper" || param.type == "book" || param.type == "policy" || param.type == "expert" || param.type == "mechanism") {
+      if (param.type == "papers" || param.type == "books" || param.type == "policys" || param.type == "experts" || param.type == "mechanisms") {
         this.setState({
           index: param.type
         });
@@ -54,29 +54,29 @@ class Search extends Component {
         <Header base={base} />
         <div className="search-content">
           <ul className="menus">
-            <li className={index == "paper" ? "active" : ""} onClick={this.changeTab.bind(this, "paper")}>
+            <li className={index == "papers" ? "active" : ""} onClick={this.changeTab.bind(this, "papers")}>
               论文 Paper
             </li>
-            <li className={index == "book" ? "active" : ""} onClick={this.changeTab.bind(this, "book")}>
+            <li className={index == "books" ? "active" : ""} onClick={this.changeTab.bind(this, "books")}>
               图书 Book
             </li>
-            <li className={index == "policy" ? "active" : ""} onClick={this.changeTab.bind(this, "policy")}>
+            <li className={index == "policys" ? "active" : ""} onClick={this.changeTab.bind(this, "policys")}>
               政策 Policy
             </li>
-            <li className={index == "expert" ? "active" : ""} onClick={this.changeTab.bind(this, "expert")}>
+            <li className={index == "experts" ? "active" : ""} onClick={this.changeTab.bind(this, "experts")}>
               专家 Expert
             </li>
-            <li className={index == "mechanism" ? "active" : ""} onClick={this.changeTab.bind(this, "mechanism")}>
+            <li className={index == "mechanisms" ? "active" : ""} onClick={this.changeTab.bind(this, "mechanisms")}>
               机构 Mechanism
             </li>
           </ul>
         </div>
         <div className="search-parent">
-          {index == "paper" ? <Paper base={base} /> : null}
-          {index == "book" ? <Book base={base} /> : null}
-          {index == "policy" ? <Policy base={base} /> : null}
-          {index == "expert" ? <Expert base={base} /> : null}
-          {index == "mechanism" ? <Mechanism base={base} /> : null}
+          {index == "papers" ? <Papers base={base} /> : null}
+          {index == "books" ? <Books base={base} /> : null}
+          {index == "policys" ? <Policys base={base} /> : null}
+          {index == "experts" ? <Experts base={base} /> : null}
+          {index == "mechanisms" ? <Mechanisms base={base} /> : null}
         </div>
         <Footer />
       </div>

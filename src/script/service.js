@@ -66,6 +66,30 @@ const HTTP = {
   _get_policies_list: param => {
     return service.post("/api/web/policies/list", param);
   },
+  //内容权限（图书）
+  _get_book_full: param => {
+    return service.post("/api/web/book/full/list", param);
+  },
+  //语种（图书）
+  _get_book_language: param => {
+    return service.post("/api/web/book/language/list", param);
+  },
+  //出版日期（图书）
+  _get_book_pubdate: param => {
+    return service.post("/api/web/book/pubdate/list", param);
+  },
+  //专题（图书）
+  _get_book_series: param => {
+    return service.post("/api/web/book/series/list", param);
+  },
+  //分类（图书）
+  _get_book_cats: param => {
+    return service.post("/api/web/book/cat/list", param);
+  },
+  //图书列表
+  _get_book_list: param => {
+    return service.post("/api/web/book/list", param);
+  },
   //获取经纬度
   _get_point_data: () => {
     return fetchJsonp(

@@ -75,7 +75,7 @@ class Plan7 extends Component {
       <div className="plan plan-7" style={{ height: `${height}px` }}>
         <div className="main-page-parent">
           <div className="plan-left">
-            <TopSearch base={base} url="paper"/>
+            <TopSearch base={base} url="papers"/>
             <div className="g2-map">
               <div className="map-col map-left">
                 <div className="title">

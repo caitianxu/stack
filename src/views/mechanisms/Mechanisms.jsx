@@ -181,6 +181,10 @@ class Mechanisms extends Component {
     }
     return originalElement;
   };
+  //进入详情页面
+  openDetail = item => {
+    this.props.history.push("/mechanism?id=" + item.org_id);
+  }
   render() {
     const { base, countryParam, countrys, searchParam, pageParam, pageData } = this.state;
     let searchArray = [];
@@ -194,7 +198,7 @@ class Mechanisms extends Component {
       }
     }
     return (
-      <div className="mechanism-page">
+      <div className="mechanisms-page">
         <Header base={base} />
         <TopSearch base={base} tabIndex={4} searchArray={searchArray} searchReset={this.searchReset} setSearchParam={this.setSearchParam} />
         <div className="second-content">
@@ -231,7 +235,7 @@ class Mechanisms extends Component {
               {pageData.length > 0 ? (
                 pageData.map((item, index) => {
                   return (
-                    <div className="mechanism-item" key={`me-${index}`}>
+                    <div className="mechanism-item" key={`me-${index}`} onClick={this.openDetail.bind(this, item)}>
                       <div className="cover">
                         <img src={Util.transImgUrl(item.cover, "130x110")} alt="" />
                       </div>

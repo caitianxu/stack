@@ -6,6 +6,14 @@ const defaultState = {
 };
 
 export default (state = defaultState, action) => {
+  //注销
+  if (action.type === "clear_user") {
+    const newState = { ...state};
+    newState.userInfo = null;
+    newState.token = null;
+    newState.member_id = null;
+    return newState;
+  }
   //设置历史token
   if (action.type === "set_token") {
     const newState = { ...state, token: action.data };

@@ -350,9 +350,15 @@ class Books extends Component {
       pageData: [...this.state.pageData]
     });
   };
-  //设置关注
+  //设置收藏 取消收藏
   changeFollow = item => {
-    item.follow = !item.follow;
+    item.collect = !item.collect;
+    HTTP._web_member_collect({
+      res_id: item.book_id,
+      type: 3,
+      action_type: item.collect ? 1 : 2,
+      res_title: item.title
+    })
     this.setState({
       pageData: [...this.state.pageData]
     });
@@ -749,7 +755,7 @@ class Books extends Component {
                           </div>
                         </div>
                       </div>
-                      {item.follow ? (
+                      {item.collect ? (
                         <div className="action follow" onClick={this.changeFollow.bind(this, item)}>
                           <Icon type="star" theme="filled" />
                         </div>

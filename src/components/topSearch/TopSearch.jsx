@@ -91,11 +91,11 @@ class TopSearch extends Component {
           <Link className={tabIndex == 3 ? "tab active" : "tab"} to="/policys">
             政策Policy
           </Link>
-          <Link className={tabIndex == 4 ? "tab active" : "tab"} to="/mechanisms">
-            机构Mechanism
-          </Link>
           <Link className={tabIndex == 5 ? "tab active" : "tab"} to="/experts">
             专家Expert
+          </Link>
+          <Link className={tabIndex == 4 ? "tab active" : "tab"} to="/mechanisms">
+            机构Mechanism
           </Link>
         </div>
       </div>

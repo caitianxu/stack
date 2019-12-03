@@ -1,6 +1,7 @@
 .com-header {
   background-color: #803228;
   min-width: 1600px;
+  font-family: fzqk, Microsoft YaHei, Helvetica, Arial, sans-serif !important;
   .content {
     width: 1600px;
     height: 95px;
@@ -12,7 +13,7 @@
       height: 55px;
       cursor: pointer;
       background: url("./img/header.png") no-repeat 0 center;
-      margin: 20px;
+      margin: 20px 0;
     }
     .menu {
       display: flex;
@@ -54,6 +55,12 @@
         color: #eab27f;
         margin: 0 10px;
         &:hover {
+          text-decoration: underline;
+        }
+      }
+      .login-out{
+        cursor: pointer;
+        &:hover{
           text-decoration: underline;
         }
       }

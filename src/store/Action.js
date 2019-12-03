@@ -65,8 +65,7 @@ export const _get_userInfo = function(token) {
         resolve(res.data);
       } else {
         const action = {
-          type: "set_token",
-          data: null
+          type: "clear_user"
         };
         store.dispatch(action);
         Util.delCookie("token");
@@ -74,4 +73,12 @@ export const _get_userInfo = function(token) {
       }
     });
   });
+};
+//注销
+export const _clear_userInfo = function(token) {
+  const action = {
+    type: "clear_user"
+  };
+  store.dispatch(action);
+  Util.delCookie("token");
 };

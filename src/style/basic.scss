@@ -319,6 +319,95 @@ textarea {
     }
   }
 }
+/*确认层样式*/
+.daidai-confirm-style{
+  &.ant-modal,
+  .ant-modal {
+    padding: 0;
+  }
+  .ant-modal-content {
+    border: 3px #d3a785 solid;
+    padding: 3px;
+    background: transparent;
+    position: relative;
+    &::after{
+      content: ' ';
+      position: absolute;
+      width: 15px;
+      height: 15px;
+      bottom: 3px;
+      left: 3px;
+      z-index: 10;
+      background: url('./img/style-3.png') no-repeat 0 0;
+    }
+    &::before{
+      content: ' ';
+      position: absolute;
+      width: 15px;
+      height: 15px;
+      bottom: 3px;
+      right: 3px;
+      z-index: 10;
+      background: url('./img/style-4.png') no-repeat 0 0;
+    }
+    .ant-modal-body {
+      padding: 0;
+      border: 2px #e2c7af solid;
+      background: #fff;
+      position: relative;
+      &::after{
+        content: ' ';
+        position: absolute;
+        width: 15px;
+        height: 15px;
+        top: -2px;
+        left: -2px;
+        z-index: 10;
+        background: url('./img/style-1.png') no-repeat 0 0;
+      }
+      &::before{
+        content: ' ';
+        position: absolute;
+        width: 15px;
+        height: 15px;
+        top: -2px;
+        right: -2px;
+        z-index: 10;
+        background: url('./img/style-2.png') no-repeat 0 0;
+      }
+      .anticon{
+        display: none;
+      }
+      .ant-modal-confirm-body-wrapper{
+        padding: 20px 30px;
+        .ant-modal-confirm-title{
+          border-bottom: 1px #ccc dashed;
+          padding-bottom: 10px;
+          font-size: 20px;
+          color: #803228;
+        }
+        .ant-modal-confirm-content{
+          margin: 30px 0 10px 0;
+          font-size: 18px;
+        }
+        .ant-modal-confirm-btns{
+          .ant-btn{
+            border-color: #803228;
+            color: #803228;
+            font-size: 16px;
+            margin: 0 10px;
+            padding: 5px 20px;
+            height: 40px;
+          }
+          .ant-btn-primary{
+            background: #803228;
+            color: #fff;
+          }
+        }
+      }
+    }
+  }
+}
 /*滚动条*/
 .my-scroll-bar {
   .ScrollbarsCustom-Wrapper {

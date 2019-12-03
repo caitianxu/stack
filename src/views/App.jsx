@@ -14,6 +14,7 @@ const Description = asyncComponent(() => import("./description/Description"));
 const Help = asyncComponent(() => import("./help/Help"));
 const Cus = asyncComponent(() => import("./cus/Cus"));
 const Mechanisms = asyncComponent(() => import("./mechanisms/Mechanisms"));
+const Mechanism = asyncComponent(() => import("./mechanism/Mechanism"));
 const Experts = asyncComponent(() => import("./experts/Experts"));
 const Policys = asyncComponent(() => import("./policys/Policys"));
 const Books = asyncComponent(() => import("./books/Books"));
@@ -74,6 +75,8 @@ class App extends Component {
             <Route path="/cus" component={Cus} />
             {/* 机构 */}
             <Route path="/mechanisms" component={Mechanisms} />
+            {/* 机构详情 */}
+            <Route path="/mechanism" component={Mechanism} />
             {/* 专家 */}
             <Route path="/experts" component={Experts} />
             {/* 政策 */}

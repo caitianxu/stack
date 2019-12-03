@@ -90,6 +90,14 @@ const HTTP = {
   _get_book_list: param => {
     return service.post("/api/web/book/list", param);
   },
+  //收藏 取消收藏
+  _web_member_collect: param => {
+    return service.post("/api/web/member/collect", param);
+  },
+  //收藏 取消收藏
+  _web_org_detail: param => {
+    return service.post("/api/web/org/detail", param);
+  },
   //获取经纬度
   _get_point_data: () => {
     return fetchJsonp(

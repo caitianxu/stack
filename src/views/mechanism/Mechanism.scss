@@ -1,0 +1,20 @@
+.mechanism-page {
+  background: #f7f7f7;
+  font-family: "Microsoft YaHei";
+  .mechanism-content {
+    width: 1200px;
+    margin: 0 auto;
+    .page-breadcrumb {
+      padding: 15px 0 30px 0;
+      a:hover {
+        color: #803228;
+      }
+    }
+    .page-detail-plan {
+      padding: 45px;
+      background: #fff;
+      margin-bottom: 50px;
+      
+    }
+  }
+}

@@ -267,7 +267,7 @@ class Experts extends Component {
       }
     }
     return (
-      <div className="expert-page">
+      <div className="experts-page">
         <Header base={base} />
         <TopSearch base={base} tabIndex={5} searchArray={searchArray} searchReset={this.searchReset} setSearchParam={this.setSearchParam} />
         <div className="second-content">

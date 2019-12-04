@@ -234,7 +234,7 @@ class Plan2 extends Component {
               <div className="scroll-plan">
                 <span
                   className="acc-left"
-                  onClick={this.changeScrollLeft}
+                  onClick={this.changeScrollRight}
                 ></span>
                 <div className="scroll-border">
                   <div
@@ -256,7 +256,7 @@ class Plan2 extends Component {
                 </div>
                 <span
                   className="acc-right"
-                  onClick={this.changeScrollRight}
+                  onClick={this.changeScrollLeft}
                 ></span>
               </div>
               <span className="scroll-right"></span>

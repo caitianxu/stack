@@ -68,7 +68,7 @@ class Share extends Component {
     );
     return (
       <span>
-        <Popover visible={this.state.vis} onVisibleChange={this.handleVisibleChange} trigger="click" placement="topRight" content={shareContent}>
+        <Popover visible={this.state.vis} onVisibleChange={this.handleVisibleChange} trigger="click" placement="top" content={shareContent}>
           <span className="icon">
             <Icon type="share-alt" />
           </span>

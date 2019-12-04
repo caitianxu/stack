@@ -436,3 +436,34 @@ textarea {
     background-color: #7e3328;
   }
 }
+
+/*分享*/
+
+.share-parent {
+  ul {
+    display: flex;
+    margin: 0;
+    li {
+      width: 60px;
+      padding-top: 5px;
+      text-align: center;
+      cursor: pointer;
+      font-size: 12px;
+      &:hover {
+        background: #f7f7f7;
+      }
+      .bsPlatName {
+        padding-top: 10px;
+      }
+    }
+  }
+}
+.share-modal{
+  .weixin-code {
+    width: 200px;
+    height: 200px;
+    border: 1px #ccc solid;
+    padding: 5px;
+    background: url("./img/code.png") no-repeat center center / 190px 190px;
+  }
+}

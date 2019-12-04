@@ -48,3 +48,4 @@ response.setHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With,x-r
 2. 政策列表登录后就查不出数据了
 3. 政策列表差排序条件
 4. 图书列表差排序条件
+5. 图片地址的域名送多少

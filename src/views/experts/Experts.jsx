@@ -254,6 +254,10 @@ class Experts extends Component {
     }
     return originalElement;
   };
+  //进入详情页面
+  openDetail = item => {
+    this.props.history.push("/expert?id=" + item.expert_id);
+  }
   render() {
     const { base, countryParam, countrys, orgParam, orgs, searchParam, positions, positionParam, pageParam, pageData } = this.state;
     let searchArray = [];
@@ -387,7 +391,7 @@ class Experts extends Component {
             <div className="expert-items">
               {pageData.length > 0 ? pageData.map((item, index) => {
                 return (
-                  <div className="expert-item" key={`expert-${index}`}>
+                  <div className="expert-item" key={`expert-${index}`} onClick={this.openDetail.bind(this, item)}>
                     <div className="cover">
                       <img alt="" src={Util.transImgUrl(item.cover, "110x130")} />
                     </div>

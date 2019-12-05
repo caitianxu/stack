@@ -3,14 +3,14 @@ import store from "../../store/store";
 import Header from "../../components/header/Header";
 import Footer from "../../components/footer/Footer";
 import DetailSearch from "../../components/detailSearch/DetailSearch";
-import Share from "../../components/share/Share";
-import { Breadcrumb, Skeleton, Icon } from "antd";
 import { _get_url_search } from "../../store/Action";
+import { Breadcrumb, Skeleton, Icon } from "antd";
 import HTTP from "../../script/service";
+import Share from "../../components/share/Share";
+import "./Expert.scss";
 import Util from "../../script/util";
-import "./Mechanism.scss";
 
-class Mechanism extends Component {
+class Expert extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -33,9 +33,8 @@ class Mechanism extends Component {
   }
   //初始化
   componentDidMount() {
-    this.scrollLeft = 0;
     _get_url_search(param => {
-      HTTP._web_org_detail({
+      HTTP._web_expert_detail({
         id: param.id
       }).then(res => {
         if (res.code == 0) {
@@ -55,6 +54,7 @@ class Mechanism extends Component {
             }
           );
         }
+        console.log(res.data);
       });
     });
   }
@@ -65,25 +65,6 @@ class Mechanism extends Component {
     this.setState({
       data: { ...data }
     });
-  };
-  //左移动
-  changeScrollLeft = () => {
-    if (!this.titleScrollElement) return false;
-    let allWidth = (this.titleScrollElement.clientWidth - 1116) * -1;
-    this.scrollLeft -= 1116;
-    if (this.scrollLeft < allWidth) {
-      this.scrollLeft = allWidth;
-    }
-    this.titleScrollElement.style.transform = `translateX(${this.scrollLeft}px)`;
-  };
-  //右移动
-  changeScrollRight = () => {
-    if (!this.titleScrollElement) return false;
-    this.scrollLeft += 1116;
-    if (this.scrollLeft > 0) {
-      this.scrollLeft = 0;
-    }
-    this.titleScrollElement.style.transform = `translateX(${this.scrollLeft}px)`;
   };
   //展开 收起
   changeWorkListMore = () => {
@@ -101,21 +82,20 @@ class Mechanism extends Component {
       data: { ...data }
     });
   };
-
   render() {
     const { base, data } = this.state;
     return (
-      <div className="mechanism-page">
+      <div className="expert-page">
         <Header base={base} />
-        <DetailSearch tabIndex={4} />
-        <div className="mechanism-content">
+        <DetailSearch tabIndex={5} />
+        <div className="expert-content">
           <div className="page-breadcrumb">
             <Breadcrumb separator=">">
               <Breadcrumb.Item>首页</Breadcrumb.Item>
               <Breadcrumb.Item>
-                <a href="/mechanisms">机构</a>
+                <a href="/experts">专家</a>
               </Breadcrumb.Item>
-              {data ? <Breadcrumb.Item>{data.detail.org_name}</Breadcrumb.Item> : null}
+              {data ? <Breadcrumb.Item>{data.expert.name}</Breadcrumb.Item> : null}
             </Breadcrumb>
           </div>
           <div className="page-detail-plan">
@@ -128,44 +108,55 @@ class Mechanism extends Component {
                 <div className="detail-content">
                   <div className="detail-row-1">
                     <div className="cover">
-                      <img src={Util.transImgUrl(data.detail.cover)} alt="" />
+                      <img src={Util.transImgUrl(data.expert.cover)} alt="" />
                     </div>
                     <div className="detail">
-                      <h1>{data.detail.org_name}</h1>
+                      <h1>{data.expert.name}</h1>
                       <div className="c-row">
-                        {data.detail.former_name ? (
+                        {data.expert.enname ? (
                           <div className="c-col">
-                            【曾用名】:<label>{data.detail.former_name}</label>
+                            【曾 用 名 used name】:<label>{data.expert.enname}</label>
                           </div>
                         ) : null}
-                        {data.detail.pubdate ? (
+                        {data.expert.birthday ? (
                           <div className="c-col">
-                            【成立时间】:<label>{data.detail.pubdate}</label>
+                            【出生日期 Birth Data】:<label>{data.expert.birthday}</label>
                           </div>
                         ) : null}
-                        {data.detail.field ? (
+                        {data.expert.country ? (
                           <div className="c-col">
-                            【研究领域】:<label>{data.detail.field}</label>
+                            【所在地 Location】:<label>{data.expert.country}</label>
                           </div>
                         ) : null}
-                        {data.detail.address ? (
+                        {data.expert.org_name ? (
                           <div className="c-col">
-                            【地址】:<label>{data.detail.address}</label>
+                            【所属机构 Unit】:<label>{data.expert.org_name}</label>
                           </div>
                         ) : null}
-                        {data.detail.country ? (
+                        {data.expert.position ? (
                           <div className="c-col">
-                            【国家】:<label>{data.detail.country}</label>
+                            【职务 Position】:<label>{data.expert.position}</label>
                           </div>
                         ) : null}
-                        {data.detail.tel ? (
+                        {data.expert.background ? (
                           <div className="c-col">
-                            【电话/传真】:<label>{data.detail.tel}</label>
+                            【教育背景 Education background】:
+                            <label>{data.expert.background}</label>
                           </div>
                         ) : null}
-                        {data.detail.website ? (
+                        {data.expert.research ? (
                           <div className="c-col">
-                            【网址】:<label><a target="_blank" href={data.detail.website} rel="noopener noreferrer">{data.detail.website}</a></label>
+                            【研究领域 Research areas】:<label>{data.expert.research}</label>
+                          </div>
+                        ) : null}
+                        {data.expert.website ? (
+                          <div className="c-col">
+                            【个人主页 Homepage】:
+                            <label>
+                              <a href={data.expert.website} target="_blank" rel="noopener noreferrer">
+                                {data.expert.website}
+                              </a>
+                            </label>
                           </div>
                         ) : null}
                       </div>
@@ -193,53 +184,21 @@ class Mechanism extends Component {
                       </span>
                     </div>
                   </div>
-                  {data.detail.fulltxt ? (
+                  {data.expert.fulltxt ? (
                     <div className="detail-row-2">
-                      <h3>【机构简介】：</h3>
-                      <div className="remark">{data.detail.fulltxt}</div>
+                      <h3>【个人简介】：</h3>
+                      <div
+                        className="remark"
+                        dangerouslySetInnerHTML={{ __html: data.expert.fulltxt }}
+                      ></div>
                     </div>
                   ) : null}
                 </div>
               ) : null}
             </Skeleton>
           </div>
-          {/* 专家学者 */}
-          {data && data.expert && data.expert.length > 0 ? (
-            <div className="child-plan">
-              <div className="child-title">
-                <label>专家学者 Scholar</label>
-              </div>
-              <div className="plan-scholar">
-                {data.expert.length > 6 ? (
-                  <div className="scholar-left" onClick={this.changeScrollRight}>
-                    <Icon type="left" />
-                  </div>
-                ) : null}
-                <div className="scholar-scrolls">
-                  <div className="expert-items" ref={el => (this.titleScrollElement = el)}>
-                    {data.expert.map((item, index) => {
-                      return (
-                        <div className="expert" key={`expert-${index}`}>
-                          <div className="cover">
-                            <img alt="" src={Util.transImgUrl(item.cover)} />
-                          </div>
-                          <p>{item.name}</p>
-                          <p>{item.position}</p>
-                        </div>
-                      );
-                    })}
-                  </div>
-                </div>
-                {data.expert.length > 6 ? (
-                  <div className="scholar-right" onClick={this.changeScrollLeft}>
-                    <Icon type="right" />
-                  </div>
-                ) : null}
-              </div>
-            </div>
-          ) : null}
           {/* 科研成果 */}
-          {data && data.worklist && data.worklist.length > 0 ? (
+          {data && data.expert.worklist ? (
             <div className="child-plan">
               <div className="child-title">
                 <label>科研成果 Research results</label>
@@ -252,16 +211,10 @@ class Mechanism extends Component {
                   maxHeight: data.worklistMore ? "inherit" : "250px"
                 }}
               >
-                {data.worklist.map((item, index) => {
-                  let html = item.replace(/[↵,\n]/g, "<span class='br'></span>");
-                  return (
-                    <div
-                      className="worklist-p"
-                      key={`worklist-${index}`}
-                      dangerouslySetInnerHTML={{ __html: html }}
-                    />
-                  );
-                })}
+                <div
+                  className="worklist-p"
+                  dangerouslySetInnerHTML={{ __html: data.expert.worklist }}
+                ></div>
               </div>
               <div className="show-more" ref={el => (this.workListMoreEl = el)}>
                 {data.worklistMore ? (
@@ -272,11 +225,11 @@ class Mechanism extends Component {
               </div>
             </div>
           ) : null}
-          {/* 科研课题 */}
-          {data && data.project && data.project.length > 0 ? (
+          {/* 研究课题 */}
+          {data && data.expert.project ? (
             <div className="child-plan">
               <div className="child-title">
-                <label>科研成果 Research project</label>
+                <label>研究课题 Research project</label>
               </div>
               <div
                 className="child-worklist"
@@ -286,16 +239,10 @@ class Mechanism extends Component {
                   maxHeight: data.projectMore ? "inherit" : "250px"
                 }}
               >
-                {data.project.map((item, index) => {
-                  let html = item.replace(/[↵,\n]/g, "<span class='br'></span>");
-                  return (
-                    <div
-                      className="worklist-p"
-                      key={`worklist-${index}`}
-                      dangerouslySetInnerHTML={{ __html: html }}
-                    />
-                  );
-                })}
+                <div
+                  className="worklist-p"
+                  dangerouslySetInnerHTML={{ __html: data.expert.project }}
+                ></div>
               </div>
               <div className="show-more" ref={el => (this.projectMoreEl = el)}>
                 {data.projectMore ? (
@@ -313,14 +260,14 @@ class Mechanism extends Component {
                 <label>相关推荐 Relevant Recommendations</label>
               </div>
               <div className="org-list">
-                {data.orglist.map((item, index) => {
+                {data.expertlist.map((item, index) => {
                   return (
-                    <a href={`mechanism?id=${item.org_id}`} key={`org-${index}`}>
+                    <a href={`expert?id=${item.expert_id}`} key={`expert-${index}`}>
                       <div className="org">
                         <div className="cover">
                           <img alt="" src={Util.transImgUrl(item.cover)} />
                         </div>
-                        <p>{item.org_name}</p>
+                        <p>{item.name}</p>
                       </div>
                     </a>
                   );
@@ -335,4 +282,4 @@ class Mechanism extends Component {
   }
 }
 
-export default Mechanism;
+export default Expert;

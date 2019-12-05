@@ -272,7 +272,7 @@ class Policys extends Component {
       type: 3,
       action_type: item.collect ? 1 : 2,
       res_title: item.title
-    })
+    });
     this.setState({
       pageData: [...this.state.pageData]
     });
@@ -292,6 +292,10 @@ class Policys extends Component {
         this.getPageData();
       }
     );
+  };
+  //进入详情页面
+  openDetail = item => {
+    this.props.history.push("/policy?id=" + item.inter_id);
   };
   render() {
     const {
@@ -467,7 +471,7 @@ class Policys extends Component {
                         />
                       </span>
                       <div className="row-con">
-                        <div className="d1">
+                        <div className="d1" onClick={this.openDetail.bind(this, item)}>
                           {index + 1}、{item.title}
                         </div>
                         <div className="d2">

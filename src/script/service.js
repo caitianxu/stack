@@ -94,9 +94,17 @@ const HTTP = {
   _web_member_collect: param => {
     return service.post("/api/web/member/collect", param);
   },
-  //收藏 取消收藏
+  //机构详情
   _web_org_detail: param => {
     return service.post("/api/web/org/detail", param);
+  },
+  //专家详情
+  _web_expert_detail: param => {
+    return service.post("/api/web/expert/detail", param);
+  },
+  //政策详情
+  _web_policy_detail: param => {
+    return service.post("/api/web/policies/detail", param);
   },
   //获取经纬度
   _get_point_data: () => {

@@ -40,7 +40,7 @@ class Header extends Component {
               </NavLink>
             </li>
             <li>
-              <NavLink to="/pagers" isActive={this.oddEvent.bind(this, "/pagers")}>
+              <NavLink to="/papers" isActive={this.oddEvent.bind(this, "/papers")}>
                 论文Paper
               </NavLink>
             </li>

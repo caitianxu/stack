@@ -5,29 +5,29 @@ import Footer from "../../components/footer/Footer";
 import TopSearch from "../../components/topSearch/TopSearch";
 import { _get_url_search } from "../../store/Action";
 import { Pagination, Checkbox, Icon, Select, Spin } from "antd";
+import "./Papers.scss";
 import HTTP from "../../script/service";
-import "./Books.scss";
-import Util from "../../script/util";
 const { Option } = Select;
 
 const KeyValue = {
   cat: "分类",
-  cat_id: "分类id",
-  isfull: "权限",
   searchText: "关键词",
-  subject_and: "and",
   language: "语种",
-  pubyear: "出版时间",
-  special: "专题",
-  pubdate_start: "出版开始日期",
-  pubdate_end: "出版结束日期",
-  title: "标题",
-  title2: "标题",
-  series: "丛书名",
-  series2: "丛书名"
+  paper_type: "论文类型",
+  foundation: "基金项目",
+  pubdate_start: "发布日期",
+  meettime_start: "会议时间",
+  meetname: "会议名称",
+  graduatedate_start: "学位年度",
+  graduateschool: "学位单位",
+  journal: "期刊",
+  pubyaer: "年",
+  issues: "期",
+  author: "作者",
+  keywords: "关键词",
+  title: "标题"
 };
-const isfulls = ["题录", "全文"];
-class Books extends Component {
+class Papers extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -35,43 +35,53 @@ class Books extends Component {
       childCats: null,
       cats: [], //分类
       catParam: {
+        type: 6, // （6:期刊论文，7:会议论文，8:学术论文）
         pageNum: 1,
         pageSize: 6,
         pages: 1
       },
-      specials: [], //专题
-      specialParam: {
-        pageNum: 1,
-        pageSize: 6,
-        pages: 1
-      },
-      fulls: [],
+      types: [], //类型
+      languages: [], //语种
       languageParam: {
         pageNum: 1,
         pageSize: 6,
         pages: 1
       },
-      languages: [], //语种
-      pubyearParam: {
+      journals: [], //期刊
+      journalParam: {
         pageNum: 1,
         pageSize: 6,
         pages: 1
       },
-      pubyears: [], //年限
       searchParam: {
         searchText: null,
-        title: null,
-        title2: null,
-        series: null,
-        series2: null,
-        language: null,
-        pubdate_start: null,
-        pubdate_end: null,
-        cat: null,
-        cat_id: null,
-        pubyear: null,
-        isfull: null,
-        special: null
+        cat: null, //分类
+        language: "", //语言
+        paper_type: null, //类型
+        foundation: null, //基金项目
+        pubdate_start: null, //发布开始日期
+        pubdate_end: null, //发布结束日期
+        meettime_start: null, //会议时间开始时间
+        meettime_end: null, //会议时间结束时间
+        meetname: null, //会议名称
+        graduatedate_start: null, //学位年度开始时间
+        graduatedate_end: null, //学位年度束时间
+        graduateschool: null, //学位单位
+        journal: null, //期刊
+        journal_id: null, //期刊id
+        pubyaer: null, //年 year
+        issues: null, //期 period
+        author_and: "and", //并含作者（and/or）
+        author: null, //作者
+        author_condition: "and", //作者并含条件   （and/or）
+        author2: null, //并含作者
+        keywords_and: "and", //并含作者（and/or）
+        keywords: null, //作者
+        keywords_condition: "and", //作者并含条件   （and/or）
+        keywords2: null, //并含作者
+        title: null, //作者
+        title_condition: "and", //作者并含条件   （and/or）
+        title2: null //并含作者
       },
       pageParam: {
         pageNum: 1,
@@ -99,10 +109,9 @@ class Books extends Component {
   //初始化
   componentDidMount() {
     this.getCatList();
-    this.getBookFull();
     this.getLanguageList();
-    this.getPubyearList();
-    this.getSpecialList();
+    this.getPaperTypes();
+    this.getJournalList();
     _get_url_search(param => {
       this.setState(
         {
@@ -114,151 +123,6 @@ class Books extends Component {
       );
     });
   }
-  //获取所有一级分类
-  getCatList = () => {
-    let { catParam } = this.state;
-    HTTP._get_book_cats(catParam).then(res => {
-      if (res.code == 0) {
-        this.setState({
-          cats: res.data.rows,
-          catParam: { ...catParam, pages: res.data.pages }
-        });
-      }
-    });
-  };
-  //分页语种数据
-  changeCatList = n => {
-    let { pageNum, pages } = this.state.catParam;
-    if (pageNum + n < 1) return;
-    if (pageNum + n > pages) return;
-    this.setState(
-      {
-        catParam: { ...this.state.catParam, pageNum: pageNum + n }
-      },
-      () => {
-        this.getCatList();
-      }
-    );
-  };
-  //获取内容权限
-  getBookFull = () => {
-    HTTP._get_book_full().then(res => {
-      if (res.code == 0) {
-        this.setState({
-          fulls: [...res.data]
-        });
-      }
-    });
-  };
-  //获取语种
-  getLanguageList = () => {
-    let { languageParam } = this.state;
-    HTTP._get_book_language(languageParam).then(res => {
-      if (res.code == 0) {
-        this.setState({
-          languages: res.data.rows,
-          languageParam: { ...languageParam, pages: res.data.pages }
-        });
-      }
-    });
-  };
-  //分页语种数据
-  changeLanguageList = n => {
-    let { pageNum, pages } = this.state.languageParam;
-    if (pageNum + n < 1) return;
-    if (pageNum + n > pages) return;
-    this.setState(
-      {
-        languageParam: { ...this.state.languageParam, pageNum: pageNum + n }
-      },
-      () => {
-        this.getLanguageList();
-      }
-    );
-  };
-  //获取出版日期
-  getPubyearList = () => {
-    let { pubyearParam } = this.state;
-    HTTP._get_book_pubdate(pubyearParam).then(res => {
-      if (res.code == 0) {
-        this.setState({
-          pubyears: res.data.rows,
-          pubyearParam: { ...pubyearParam, pages: res.data.pages }
-        });
-      }
-    });
-  };
-  //分页出版日期数据
-  changePubyearList = n => {
-    let { pageNum, pages } = this.state.pubyearParam;
-    if (pageNum + n < 1) return;
-    if (pageNum + n > pages) return;
-    this.setState(
-      {
-        pubyearParam: { ...this.state.pubyearParam, pageNum: pageNum + n }
-      },
-      () => {
-        this.getPubyearList();
-      }
-    );
-  };
-  //获取专题日期
-  getSpecialList = () => {
-    let { specialParam } = this.state;
-    HTTP._get_book_series(specialParam).then(res => {
-      if (res.code == 0) {
-        this.setState({
-          specials: res.data.rows,
-          specialParam: { ...specialParam, pages: res.data.pages }
-        });
-      }
-    });
-  };
-  //分页专题数据
-  changeSpecialList = n => {
-    let { pageNum, pages } = this.state.specialParam;
-    if (pageNum + n < 1) return;
-    if (pageNum + n > pages) return;
-    this.setState(
-      {
-        specialParam: { ...this.state.specialParam, pageNum: pageNum + n }
-      },
-      () => {
-        this.getSpecialList();
-      }
-    );
-  };
-  //设置筛选条件
-  setSearchParam = (key, value) => {
-    let { searchParam, pageParam } = this.state;
-    if (key == "title" && !value) {
-      searchParam["title"] = null;
-      searchParam["title2"] = null;
-    } else if (key == "series" && !value) {
-      searchParam["series"] = null;
-      searchParam["series2"] = null;
-    } else if (key == "cat") {
-      if (value) {
-        searchParam["cat"] = value.name;
-        searchParam["cat_id"] = value.id;
-      } else {
-        searchParam["cat"] = null;
-        searchParam["cat_id"] = null;
-      }
-    } else {
-      searchParam[key] = value;
-    }
-    pageParam.pageNum = 1;
-    this.setState(
-      {
-        searchParam: { ...searchParam },
-        pageParam: { ...pageParam }
-      },
-      () => {
-        this.getPageData();
-      }
-    );
-  };
   //清空筛选条件
   searchReset = () => {
     let { pageParam } = this.state;
@@ -267,18 +131,33 @@ class Books extends Component {
       {
         searchParam: {
           searchText: null,
-          title: null,
-          title2: null,
-          series: null,
-          series2: null,
-          language: null,
-          pubdate_start: null,
-          pubdate_end: null,
-          cat: null,
-          cat_id: null,
-          pubyear: null,
-          isfull: null,
-          special: null
+          cat: null, //分类
+          language: "", //语言
+          paper_type: null, //类型
+          foundation: null, //基金项目
+          pubdate_start: null, //发布开始日期
+          pubdate_end: null, //发布结束日期
+          meettime_start: null, //会议时间开始时间
+          meettime_end: null, //会议时间结束时间
+          meetname: null, //会议名称
+          graduatedate_start: null, //学位年度开始时间
+          graduatedate_end: null, //学位年度束时间
+          graduateschool: null, //学位单位
+          journal: null, //期刊
+          journal_id: null, //期刊id
+          pubyaer: null, //年 year
+          issues: null, //期 period
+          author_and: "and", //并含作者（and/or）
+          author: null, //作者
+          author_condition: "and", //作者并含条件   （and/or）
+          author2: null, //并含作者
+          keywords_and: "and", //并含作者（and/or）
+          keywords: null, //作者
+          keywords_condition: "and", //作者并含条件   （and/or）
+          keywords2: null, //并含作者
+          title: null, //作者
+          title_condition: "and", //作者并含条件   （and/or）
+          title2: null //并含作者
         },
         pageParam: { ...pageParam }
       },
@@ -287,80 +166,16 @@ class Books extends Component {
       }
     );
   };
-  //本页数据
-  getPageData = () => {
-    let { searchParam, pageParam } = this.state;
-    HTTP._get_book_list({
-      ...searchParam,
-      ...pageParam
-    }).then(res => {
+  //获取所有一级分类
+  getCatList = () => {
+    let { catParam } = this.state;
+    HTTP._get_paper_cat_list(catParam).then(res => {
       if (res.code == 0) {
-        pageParam.pages = res.data.pages;
-        pageParam.total = res.data.total;
         this.setState({
-          pageParam: pageParam,
-          pageData: res.data.rows,
-          checkall: false
+          cats: res.data.rows,
+          catParam: { ...catParam, pages: res.data.pages }
         });
       }
-    });
-  };
-  //分页回调
-  onPagChange = page => {
-    let { pageParam } = this.state;
-    pageParam.pageNum = page;
-    this.setState(
-      {
-        pageParam: pageParam
-      },
-      () => {
-        this.getPageData();
-      }
-    );
-  };
-  //分页控件
-  itemRender = (current, type, originalElement) => {
-    if (type === "prev") {
-      return <span className="prev">上一页</span>;
-    }
-    if (type === "next") {
-      return <span className="next">下一页</span>;
-    }
-    return originalElement;
-  };
-  //row - box
-  changeBox = (item, e) => {
-    item.checked = e.target.checked;
-    let sels = this.state.pageData.filter(item => item.checked);
-    let checkall = false;
-    if (sels.length == this.state.pageData.length) {
-      checkall = true;
-    }
-    this.setState({
-      checkall: checkall,
-      pageData: [...this.state.pageData]
-    });
-  };
-  //全选
-  setCheckAll = e => {
-    let checkall = e.target.checked;
-    this.state.pageData.forEach(item => (item.checked = checkall));
-    this.setState({
-      checkall: checkall,
-      pageData: [...this.state.pageData]
-    });
-  };
-  //设置收藏 取消收藏
-  changeFollow = item => {
-    item.collect = !item.collect;
-    HTTP._web_member_collect({
-      res_id: item.book_id,
-      type: 3,
-      action_type: item.collect ? 1 : 2,
-      res_title: item.title
-    });
-    this.setState({
-      pageData: [...this.state.pageData]
     });
   };
   //展开、收起分类
@@ -401,47 +216,244 @@ class Books extends Component {
       }
     });
   };
-  //更改本页数量
-  changePapeSize = e => {
+  //设置筛选条件
+  setSearchParam = (key, value) => {
+    let { searchParam, pageParam } = this.state;
+    if (key == "title" && !value) {
+      searchParam["title"] = null;
+      searchParam["title2"] = null;
+    } else if (key == "keywords" && !value) {
+      searchParam["keywords"] = null;
+      searchParam["keywords2"] = null;
+    } else if (key == "author" && !value) {
+      searchParam["author"] = null;
+      searchParam["author2"] = null;
+    } else if (key == "cat") {
+      if (value) {
+        searchParam["cat"] = value.name;
+        searchParam["cat_id"] = value.id;
+      } else {
+        searchParam["cat"] = null;
+        searchParam["cat_id"] = null;
+      }
+    } else if (key == "journal") {
+      if (value) {
+        searchParam["journal"] = value.name;
+        searchParam["journal_id"] = value.id;
+      } else {
+        searchParam["journal"] = null;
+        searchParam["journal_id"] = null;
+      }
+    } else {
+      searchParam[key] = value;
+    }
+    pageParam.pageNum = 1;
     this.setState(
       {
-        pageParam: {
-          pageNum: 1,
-          pageSize: e,
-          pages: 1,
-          total: 0
-        }
+        searchParam: { ...searchParam },
+        pageParam: { ...pageParam }
       },
       () => {
         this.getPageData();
       }
     );
   };
+  //分页语种数据
+  changeCatList = n => {
+    let { pageNum, pages } = this.state.catParam;
+    if (pageNum + n < 1) return;
+    if (pageNum + n > pages) return;
+    this.setState(
+      {
+        catParam: { ...this.state.catParam, pageNum: pageNum + n }
+      },
+      () => {
+        this.getCatList();
+      }
+    );
+  };
+  //本页数据
+  getPageData = () => {
+    let { searchParam, pageParam } = this.state;
+    HTTP._get_paper_list({
+      ...searchParam,
+      ...pageParam
+    }).then(res => {
+      if (res.code == 0) {
+        pageParam.pages = res.data.pages;
+        pageParam.total = res.data.total;
+        this.setState({
+          pageParam: pageParam,
+          pageData: res.data.rows,
+          checkall: false
+        });
+      }
+    });
+  };
+  //分页回调
+  onPagChange = page => {
+    let { pageParam } = this.state;
+    pageParam.pageNum = page;
+    this.setState(
+      {
+        pageParam: pageParam
+      },
+      () => {
+        this.getPageData();
+      }
+    );
+  };
+  //分页控件
+  itemRender = (current, type, originalElement) => {
+    if (type === "prev") {
+      return <span className="prev">上一页</span>;
+    }
+    if (type === "next") {
+      return <span className="next">下一页</span>;
+    }
+    return originalElement;
+  };
+  //获取语种
+  getLanguageList = () => {
+    let { languageParam } = this.state;
+    HTTP._get_paper_language_list(languageParam).then(res => {
+      if (res.code == 0) {
+        this.setState({
+          languages: res.data.rows,
+          languageParam: { ...languageParam, pages: res.data.pages }
+        });
+      }
+    });
+  };
+  //分页语种数据
+  changeLanguageList = n => {
+    let { pageNum, pages } = this.state.languageParam;
+    if (pageNum + n < 1) return;
+    if (pageNum + n > pages) return;
+    this.setState(
+      {
+        languageParam: { ...this.state.languageParam, pageNum: pageNum + n }
+      },
+      () => {
+        this.getLanguageList();
+      }
+    );
+  };
+  //获取期刊
+  getJournalList = () => {
+    let { journalParam } = this.state;
+    HTTP._get_paper_journal_list(journalParam).then(res => {
+      if (res.code == 0) {
+        this.setState({
+          journals: res.data.rows,
+          journalParam: { ...journalParam, pages: res.data.pages }
+        });
+      }
+    });
+  };
+  //分页期刊数据
+  changeJournalList = n => {
+    let { pageNum, pages } = this.state.journalParam;
+    if (pageNum + n < 1) return;
+    if (pageNum + n > pages) return;
+    this.setState(
+      {
+        journalParam: { ...this.state.journalParam, pageNum: pageNum + n }
+      },
+      () => {
+        this.getJournalList();
+      }
+    );
+  };
+  //获取类型
+  getPaperTypes = () => {
+    HTTP._get_paper_type_list().then(res => {
+      if (res.code == 0) {
+        this.setState({
+          types: res.data
+        });
+      }
+    });
+  };
+  //全选
+  setCheckAll = e => {
+    let checkall = e.target.checked;
+    this.state.pageData.forEach(item => (item.checked = checkall));
+    this.setState({
+      checkall: checkall,
+      pageData: [...this.state.pageData]
+    });
+  };
+  //设置收藏 取消收藏
+  changeFollow = (item, e) => {
+    e.stopPropagation();
+    e.preventDefault();
+    item.collect = !item.collect;
+    HTTP._web_member_collect({
+      res_id: item.book_id,
+      type: 3,
+      action_type: item.collect ? 1 : 2,
+      res_title: item.title
+    });
+    this.setState({
+      pageData: [...this.state.pageData]
+    });
+  };
+  stopParent = e => {
+    e.stopPropagation();
+    e.preventDefault();
+  };
+  //row - box
+  changeBox = (item, e) => {
+    item.checked = e.target.checked;
+    let sels = this.state.pageData.filter(item => item.checked);
+    let checkall = false;
+    if (sels.length == this.state.pageData.length) {
+      checkall = true;
+    }
+    this.setState({
+      checkall: checkall,
+      pageData: [...this.state.pageData]
+    });
+  };
   //进入详情页面
   openDetail = item => {
-    this.props.history.push("/book?id=" + item.book_id);
+    this.props.history.push("/paper?id=" + item.res_id);
   };
   render() {
     const {
       base,
-      childCats,
-      cats,
-      catParam,
-      fulls,
-      specials,
-      specialParam,
-      languageParam,
-      languages,
-      pubyearParam,
-      pubyears,
-      searchParam,
       pageParam,
+      searchParam,
       pageData,
+      catParam,
+      cats,
+      childCats,
+      languages,
+      languageParam,
+      types,
+      journals,
+      journalParam,
       checkall
     } = this.state;
+
     let searchArray = [];
     for (let i in searchParam) {
-      if (i == "subject_and" || i == "title2" || i == "series2" || i == "cat_id") {
+      if (
+        i == "pubdate_end" ||
+        i == "meettime_end" ||
+        i == "graduatedate_end" ||
+        i == "author_and" ||
+        i == "author_condition" ||
+        i == "keywords_and" ||
+        i == "keywords_condition" ||
+        i == "title_condition" ||
+        i == "author2" ||
+        i == "keywords2" ||
+        i == "title2" ||
+        i == "journal_id" ||
+        i == "cat_id"
+      ) {
         continue;
       } else if (i == "title" && searchParam[i]) {
         searchArray.push({
@@ -449,17 +461,17 @@ class Books extends Component {
           name: KeyValue[i],
           value: searchParam[i] + " 并含 " + searchParam["title2"]
         });
-      } else if (i == "series" && searchParam[i]) {
+      } else if (i == "keywords" && searchParam[i]) {
         searchArray.push({
           key: i,
           name: KeyValue[i],
-          value: searchParam[i] + " 并含 " + searchParam["series2"]
+          value: searchParam[i] + " 并含 " + searchParam["keywords2"]
         });
-      } else if (i == "isfull" && searchParam[i]) {
+      } else if (i == "author" && searchParam[i]) {
         searchArray.push({
           key: i,
           name: KeyValue[i],
-          value: isfulls[searchParam[i]]
+          value: searchParam[i] + " 并含 " + searchParam["author2"]
         });
       } else if (searchParam[i]) {
         searchArray.push({
@@ -469,12 +481,13 @@ class Books extends Component {
         });
       }
     }
+
     return (
-      <div className="books-page">
+      <div className="papers-page">
         <Header base={base} />
         <TopSearch
           base={base}
-          tabIndex={2}
+          tabIndex={1}
           searchArray={searchArray}
           searchReset={this.searchReset}
           setSearchParam={this.setSearchParam}
@@ -557,25 +570,6 @@ class Books extends Component {
             </div>
             <div className="search-group">
               <div className="group-title">
-                <h3>内容权限</h3>
-                <p>Content permissions</p>
-              </div>
-              <div className="group-content">
-                {fulls.map((item, index) => {
-                  return (
-                    <dl
-                      key={`isfull-${index}`}
-                      onClick={this.setSearchParam.bind(this, "isfull", item.name)}
-                    >
-                      <dt>{isfulls[item.name]}</dt>
-                      <dd>{item.count}</dd>
-                    </dl>
-                  );
-                })}
-              </div>
-            </div>
-            <div className="search-group">
-              <div className="group-title">
                 <h3>语种</h3>
                 <p>Languages</p>
               </div>
@@ -612,51 +606,34 @@ class Books extends Component {
             </div>
             <div className="search-group">
               <div className="group-title">
-                <h3>出版时间</h3>
-                <p>Publication time</p>
+                <h3>论文类型</h3>
+                <p>Types of papers</p>
               </div>
               <div className="group-content">
-                {pubyears.map((item, index) => {
+                {types.map((item, index) => {
                   return (
                     <dl
                       key={`country-${index}`}
-                      onClick={this.setSearchParam.bind(this, "pubyear", item.name)}
+                      onClick={this.setSearchParam.bind(this, "paper_type", item.name)}
                     >
                       <dt>{item.name}</dt>
                       <dd>{item.count}</dd>
                     </dl>
                   );
                 })}
-              </div>
-              <div className="group-pagination">
-                <span className="page">
-                  {pubyearParam.pageNum}/{pubyearParam.pages}
-                </span>
-                <span
-                  className={pubyearParam.pageNum == 1 ? "paper dis" : "paper"}
-                  onClick={this.changePubyearList.bind(this, -1)}
-                >
-                  上一页
-                </span>
-                <span
-                  className={pubyearParam.pageNum >= pubyearParam.pages ? "paper dis" : "paper"}
-                  onClick={this.changePubyearList.bind(this, 1)}
-                >
-                  下一页
-                </span>
               </div>
             </div>
             <div className="search-group">
               <div className="group-title">
-                <h3>专题</h3>
-                <p>special</p>
+                <h3>来源刊物</h3>
+                <p>Source journals</p>
               </div>
               <div className="group-content">
-                {specials.map((item, index) => {
+                {journals.map((item, index) => {
                   return (
                     <dl
                       key={`country-${index}`}
-                      onClick={this.setSearchParam.bind(this, "special", item.name)}
+                      onClick={this.setSearchParam.bind(this, "journal", item)}
                     >
                       <dt>{item.name}</dt>
                       <dd>{item.count}</dd>
@@ -666,17 +643,17 @@ class Books extends Component {
               </div>
               <div className="group-pagination">
                 <span className="page">
-                  {specialParam.pageNum}/{specialParam.pages}
+                  {journalParam.pageNum}/{journalParam.pages}
                 </span>
                 <span
-                  className={specialParam.pageNum == 1 ? "paper dis" : "paper"}
-                  onClick={this.changeSpecialList.bind(this, -1)}
+                  className={journalParam.pageNum == 1 ? "paper dis" : "paper"}
+                  onClick={this.changeJournalList.bind(this, -1)}
                 >
                   上一页
                 </span>
                 <span
-                  className={specialParam.pageNum >= specialParam.pages ? "paper dis" : "paper"}
-                  onClick={this.changeSpecialList.bind(this, 1)}
+                  className={journalParam.pageNum >= journalParam.pages ? "paper dis" : "paper"}
+                  onClick={this.changeJournalList.bind(this, 1)}
                 >
                   下一页
                 </span>
@@ -724,7 +701,7 @@ class Books extends Component {
                 </div>
               </div>
             </div>
-            <div className="books-items">
+            <div className="papers-items">
               {pageData.length > 0 ? (
                 pageData.map((item, index) => {
                   return (
@@ -736,29 +713,12 @@ class Books extends Component {
                         />
                       </span>
                       <div className="row-con">
-                        <div className="d1">{index + 1}、</div>
-                        <div className="cover" onClick={this.openDetail.bind(this, item)}>
-                          <img alt="" src={Util.transImgUrl(item.cover)} />
+                        <div className="d1" onClick={this.openDetail.bind(this, item)}>
+                          {index + 1}、{item.title}
                         </div>
-                        <div className="detail">
-                          <div className="title" onClick={this.openDetail.bind(this, item)}>
-                            {item.title}
-                          </div>
-                          {item.authors ? <p>作者：{item.authors}</p> : null}
-                          {item.press ? <p>出版社：{item.press}</p> : null}
-                          {item.isbn ? <p>ISBN：{item.isbn}</p> : null}
-                          <div className="book-icons">
-                            {/* pdf full_path */}
-                            <span className="pdf">
-                              <Icon type="file-pdf" />
-                              <label>PDF</label>
-                            </span>
-                            <span className="link">
-                              <Icon type="link" />
-                              <label>全文链接</label>
-                            </span>
-                          </div>
-                        </div>
+                        {item.abstracts ? <p>{item.abstracts}</p> : null}
+                        {item.issues ? <p>{item.issues}</p> : null}
+                        {item.journal ? <p>{item.journal}</p> : null}
                       </div>
                       {item.collect ? (
                         <div className="action follow" onClick={this.changeFollow.bind(this, item)}>
@@ -776,6 +736,7 @@ class Books extends Component {
                 <div className="not-data">没有找到相关内容</div>
               )}
             </div>
+
             <div className={pageParam.pages <= 1 ? "page-papers none" : "page-papers"}>
               <span className="label">共{pageParam.total}个结果</span>
               <span className="pagination">
@@ -797,4 +758,4 @@ class Books extends Component {
   }
 }
 
-export default Books;
+export default Papers;

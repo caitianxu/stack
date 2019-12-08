@@ -188,7 +188,7 @@ class Books extends Component {
               <Option value="">不限unlimited</Option>
               {language.map((item, index) => {
                 return (
-                  <Option key={`language-${index}`} value={item.dicvalue}>
+                  <Option key={`language-${index}`} value={item.dicname}>
                     {item.dicname}
                   </Option>
                 );

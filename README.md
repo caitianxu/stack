@@ -49,3 +49,4 @@ response.setHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With,x-r
 3. 政策列表差排序条件
 4. 图书列表差排序条件
 5. 图片地址的域名送多少
+6. 图书详情接口，内容与设计图差异太多。 返回的属性不全， 返回属性有空格，也与文档不一致。

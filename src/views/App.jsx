@@ -22,6 +22,8 @@ const Policy = asyncComponent(() => import("./policy/Policy"));
 const Books = asyncComponent(() => import("./books/Books"));
 const Book = asyncComponent(() => import("./book/Book"));
 const Papers = asyncComponent(() => import("./papers/Papers"));
+const Paper = asyncComponent(() => import("./paper/Paper"));
+const Center = asyncComponent(() => import("./center/Center"));
 
 class App extends Component {
   constructor(props) {
@@ -95,6 +97,10 @@ class App extends Component {
             <Route path="/book" component={Book} />
             {/* 论文 */}
             <Route path="/papers" component={Papers} />
+            {/* 论文详情 */}
+            <Route path="/paper" component={Paper} />
+            {/* 个人中心 */}
+            <Route path="/center" component={Center} />
 
             <Route path="/:local" component={Index} />
           </Switch>

@@ -221,14 +221,32 @@
       }
     }
   }
-
   .plan-1 {
     .banner {
       float: left;
-      width: 100%;
-      img {
-        width: 100%;
+      width: 1470px;
+      height: 560px;
+      overflow: hidden;
+      position: relative;
+      background: rgba(0, 0, 0, 1);
+      .car-link {
+        display: block;
+        width: 1470px;
         height: 560px;
+        cursor: pointer;
+        img {
+          width: 100%;
+          height: 100%;
+        }
+      }
+      .ant-carousel .slick-dots {
+        height: 20px;
+        li {
+          button {
+            width: 30px;
+            height: 4px;
+          }
+        }
       }
     }
     .classly {
@@ -241,22 +259,22 @@
           width: 220px;
           height: 150px;
           position: relative;
-          &.expert {
+          &.experts {
             background: url("./img/expert.png") no-repeat center center;
           }
-          &.mechanism {
+          &.mechanisms {
             background: url("./img/jigou.png") no-repeat center center;
           }
-          &.paper {
+          &.papers {
             background: url("./img/lunwen.png") no-repeat center center;
           }
-          &.topic {
+          &.topics {
             background: url("./img/special.png") no-repeat center center;
           }
-          &.book {
+          &.books {
             background: url("./img/tushu.png") no-repeat center center;
           }
-          &.policy {
+          &.policys {
             background: url("./img/zhengce.png") no-repeat center center;
           }
           &:hover::after,
@@ -350,6 +368,8 @@
               white-space: nowrap;
               padding: 0 15px;
               line-height: 76px;
+              min-width: 100px;
+              text-align: center;
               cursor: pointer;
               &:hover,
               &.active {
@@ -453,25 +473,48 @@
               overflow: hidden;
               padding: 0 20px;
             }
-            .cover {
-              padding: 40px 0;
-              text-align: center;
-              img {
-                width: 120px;
-              }
-            }
-            .name {
-              padding: 0 30px;
-              font-size: 16px;
-              color: #803228;
-              margin-bottom: 10px;
-              max-height: 48px;
+            .sw-scroll {
+              position: relative;
               overflow: hidden;
-            }
-            p {
-              padding: 0 30px;
-              color: #803228;
-              margin-bottom: 5px;
+              width: 300px;
+              height: 420px;
+              .sw-scroll-list {
+                position: absolute;
+                white-space: nowrap;
+                display: flex;
+                -webkit-transition-timing-function: "ease-out";
+                transition-timing-function: "ease-out";
+                transition-duration: 0.5s;
+                -moz-transition-duration: 0.5s;
+                -webkit-transition-duration: 0.5s;
+                -o-transition-duration: 0.5s;
+                .sw-book {
+                  width: 300px;
+                  white-space: nowrap;
+                  overflow: hidden;
+                  .cover {
+                    padding: 30px 0;
+                    text-align: center;
+                    img {
+                      width: 120px;
+                    }
+                  }
+                  .name {
+                    padding: 0 30px;
+                    font-size: 16px;
+                    color: #803228;
+                    margin-bottom: 10px;
+                    max-height: 72px;
+                    overflow: hidden;
+                    white-space: normal;
+                  }
+                  p {
+                    padding: 0 30px;
+                    color: #803228;
+                    margin-bottom: 5px;
+                  }
+                }
+              }
             }
           }
         }
@@ -595,10 +638,12 @@
       top: 100px;
       .p3-list {
         padding: 0 120px;
+        height: 450px;
         .con-row-item {
           padding-top: 15px;
           padding-bottom: 30px;
           position: relative;
+          display: block;
           .title {
             color: #eab27f;
             font-size: 20px;
@@ -606,6 +651,10 @@
             overflow: hidden;
             text-overflow: ellipsis;
             margin-bottom: 10px;
+            display: block;
+            &:hover {
+              text-decoration: underline;
+            }
           }
           .desc {
             color: #c38862;
@@ -655,8 +704,7 @@
             cursor: pointer;
             display: block;
             margin: 80px 0px 80px 50px;
-            background: url("./img/plan-2-sw-left.png") no-repeat center center /
-              40% auto;
+            background: url("./img/plan-2-sw-left.png") no-repeat center center / 40% auto;
           }
         }
         .sw-content {
@@ -719,7 +767,8 @@
                   h3 {
                     color: #803228;
                     margin-bottom: 10px;
-                    white-space: nowrap;
+                    white-space: normal;
+                    max-height: 48px;
                     overflow: hidden;
                     text-overflow: ellipsis;
                   }
@@ -756,8 +805,7 @@
             cursor: pointer;
             display: block;
             margin: 80px 50px 80px 0px;
-            background: url("./img/plan-2-sw-right.png") no-repeat center center /
-              40% auto;
+            background: url("./img/plan-2-sw-right.png") no-repeat center center / 40% auto;
           }
         }
       }
@@ -786,10 +834,15 @@
             overflow: hidden;
             text-overflow: ellipsis;
             cursor: pointer;
+            a {
+              color: #333;
+            }
           }
           &:hover {
             color: #803228;
-            dd {
+            dd,
+            a {
+              color: #803228;
               text-decoration: underline;
             }
           }
@@ -1053,6 +1106,9 @@
           text-overflow: ellipsis;
           margin-bottom: 12px;
           cursor: pointer;
+          a {
+            color: #eab27f;
+          }
           &:hover,
           &.active {
             text-decoration: underline;

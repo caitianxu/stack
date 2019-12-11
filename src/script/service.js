@@ -130,11 +130,39 @@ const HTTP = {
   _web_book_detail: param => {
     return service.post("/api/web/book/detail", param);
   },
+  //论文详情
+  _web_paper_detail: param => {
+    return service.post("/api/web/paper/detail", param);
+  },
+  //轮播图（首页）
+  _web_index_1: param => {
+    return service.post("/api/web/index/1", param);
+  },
+  //plan2（首页）
+  _web_index_2: param => {
+    return service.post("/api/web/index/2", param);
+  },
+  //plan3（首页）
+  _web_index_3: param => {
+    return service.post("/api/web/index/3", param);
+  },
+  //plan4（首页）
+  _web_index_4: param => {
+    return service.post("/api/web/index/4", param);
+  },
+  //plan5（首页）
+  _web_index_5: param => {
+    return service.post("/api/web/index/5", param);
+  },
+  //plan6（首页）
+  _web_index_6: param => {
+    return service.post("/api/web/index/6", param);
+  },
   //获取经纬度
   _get_point_data: () => {
     return fetchJsonp(
       "https://api.map.baidu.com/location/ip?ak=G0T3IZDatGXYGTaGiUHY2tXUZNQpcDxP&coor=bd09ll"
-    ).then(function (response) {
+    ).then(function(response) {
       return response.json();
     });
   }

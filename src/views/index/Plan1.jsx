@@ -1,80 +1,126 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import Menus from "./Menus";
+import { Carousel } from "antd";
 import TopSearch from "./TopSearch";
+import HTTP from "../../script/service";
+import Util from "../../script/util";
 
 class Plan1 extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      type: "papers"
+      selIndex: 0,
+      data: [
+        {
+          name: "papers",
+          item_id: 43,
+          title: "论文",
+          enTitle: "Academic Paper",
+          count: 0,
+          contentList: []
+        },
+        {
+          name: "books",
+          item_id: 44,
+          title: "图书",
+          enTitle: "Books",
+          count: 0,
+          contentList: []
+        },
+        {
+          name: "policys",
+          item_id: 45,
+          title: "政策",
+          enTitle: "Policy",
+          count: 0,
+          contentList: []
+        },
+        {
+          name: "experts",
+          item_id: 46,
+          title: "专家",
+          enTitle: "Experts",
+          count: 0,
+          contentList: []
+        },
+        {
+          name: "mechanisms",
+          item_id: 47,
+          title: "机构",
+          enTitle: "Organization",
+          count: 0,
+          contentList: []
+        },
+        {
+          name: "topics",
+          item_id: 48,
+          title: "专题",
+          enTitle: "Topics",
+          count: 0,
+          contentList: []
+        }
+      ]
     };
   }
-  changeType = type => {
+  changeType = index => {
     this.setState({
-      type: type
+      selIndex: index
     });
   };
+  componentDidMount() {
+    HTTP._web_index_1().then(res => {
+      let { data } = this.state;
+      res.data.forEach((item, index) => {
+        data[index].count = Util.numberFormat(item.count);
+        data[index].contentList = item.contentList;
+      });
+      console.log("plan1", data);
+      this.setState({
+        data: [...data]
+      });
+    });
+  }
   render() {
     const { height, menuIndex, changeIndex, base } = this.props;
-    const { type } = this.state;
+    const { data, selIndex } = this.state;
     return (
       <div className="plan plan-1" style={{ height: `${height}px` }}>
         <div className="main-page-parent">
           <div className="plan-left">
-            <TopSearch base={base} url={type} />
+            <TopSearch base={base} url={data[selIndex].name} />
             <div className="banner">
-              <img alt="" src="/assets/img/bann1.png" />
+              <Carousel autoplay>
+                {data[selIndex].contentList.map((item, index) => {
+                  return (
+                    <a target="_blank" rel="noopener noreferrer" href={item.url} className="car-link" key={`car-link-${index}`}>
+                      <img alt="" src="/assets/img/bann1.png" />
+                    </a>
+                  );
+                })}
+              </Carousel>
             </div>
             <div className="classly">
-              <span className="classly-link" onMouseOver={this.changeType.bind(this, "paper")}>
-                <Link to="/index">
-                  <div className={type == "paper" ? "cover paper active" : "cover paper"}></div>
-                  <p>3,800,200+</p>
-                  <p>论文</p>
-                  <p>Academic Paper</p>
-                </Link>
-              </span>
-              <span className="classly-link" onMouseOver={this.changeType.bind(this, "book")}>
-                <Link to="/index">
-                  <div className={type == "book" ? "cover book active" : "cover book"}></div>
-                  <p>800,200+</p>
-                  <p>图书</p>
-                  <p>Books</p>
-                </Link>
-              </span>
-              <span className="classly-link" onMouseOver={this.changeType.bind(this, "policy")}>
-                <Link to="/index">
-                  <div className={type == "policy" ? "cover policy active" : "cover policy"}></div>
-                  <p>300,200+</p>
-                  <p>政策</p>
-                  <p>Policy</p>
-                </Link>
-              </span>
-              <span className="classly-link" onMouseOver={this.changeType.bind(this, "expert")}>
-                <Link to="/index">
-                  <div className={type == "expert" ? "cover expert active" : "cover expert"}></div>
-                  <p>6200+</p>
-                  <p>专家</p>
-                  <p>Experts</p>
-                </Link>
-              </span>
-              <span className="classly-link" onMouseOver={this.changeType.bind(this, "mechanism")}>
-                <Link to="/index">
-                  <div className={type == "mechanism" ? "cover mechanism active" : "cover mechanism"}></div>
-                  <p>600+</p>
-                  <p>机构</p>
-                  <p>Organization</p>
-                </Link>
-              </span>
-              <span className="classly-link" onMouseOver={this.changeType.bind(this, "topic")}>
-                <Link to="/index">
-                  <div className={type == "topic" ? "cover topic active" : "cover topic"}></div>
-                  <p>10+</p>
-                  <p>专题</p>
-                  <p>Topics</p>
-                </Link>
-              </span>
+              {data.map((item, index) => {
+                return (
+                  <span
+                    className="classly-link"
+                    key={`classly-${index}`}
+                    onClick={this.changeType.bind(this, index)}
+                  >
+                    <Link to="/index">
+                      <div
+                        className={
+                          selIndex == index ? `cover ${item.name} active` : `cover ${item.name}`
+                        }
+                      ></div>
+                      <p>{item.count}+</p>
+                      <p>{item.title}</p>
+                      <p>{item.enTitle}</p>
+                    </Link>
+                  </span>
+                );
+              })}
             </div>
             <span className="special-icon">
               <Link to="/specials" />

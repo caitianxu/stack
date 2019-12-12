@@ -8,6 +8,7 @@ import "./Center.scss";
 
 import Message from "./Message";
 import MeInfo from "./MeInfo";
+import Account from "./Account";
 
 class Center extends Component {
   constructor(props) {
@@ -83,7 +84,9 @@ class Center extends Component {
                     </div>
                   </div>
                 </div>
-                <div className={`menu-parent ${type == "meinfo" ? "active" : ""}`}>
+                <div
+                  className={`menu-parent ${type == "meinfo" || type == "account" ? "active" : ""}`}
+                >
                   <div className="one-menu">
                     <div className="one-t1">
                       <span className="icon f2"></span>
@@ -98,7 +101,12 @@ class Center extends Component {
                     >
                       个人信息
                     </div>
-                    <div className={`menu-item`}>账户关联</div>
+                    <div
+                      className={`menu-item ${type == "account" ? "active" : ""}`}
+                      onClick={this.changeType.bind(this, "account")}
+                    >
+                      账户关联
+                    </div>
                     <div className={`menu-item`}>修改密码</div>
                   </div>
                 </div>
@@ -139,6 +147,10 @@ class Center extends Component {
               {/* 个人信息 */}
               {type == "meinfo" ? (
                 <MeInfo ref={el => (this.meinfoElement = el)} base={base} />
+              ) : null}
+              {/* 账户关联 */}
+              {type == "account" ? (
+                <Account ref={el => (this.accountElement = el)} base={base} />
               ) : null}
             </div>
           </div>

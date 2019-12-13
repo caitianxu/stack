@@ -9,6 +9,12 @@ import "./Center.scss";
 import Message from "./Message";
 import MeInfo from "./MeInfo";
 import Account from "./Account";
+import ChangePwd from "./ChangePwd";
+import Purchase from "./Purchase";
+import Orders from "./Orders";
+import Browse from "./Browse";
+import Collect from "./Collect";
+import Search from "./Search";
 
 class Center extends Component {
   constructor(props) {
@@ -66,7 +72,6 @@ class Center extends Component {
                   </div>
                   <div className="nick">{base.userInfo.nick_name}</div>
                 </div>
-
                 <div className={`menu-parent ${type == "message" ? "active" : ""}`}>
                   <div className="one-menu">
                     <div className="one-t1">
@@ -85,7 +90,9 @@ class Center extends Component {
                   </div>
                 </div>
                 <div
-                  className={`menu-parent ${type == "meinfo" || type == "account" ? "active" : ""}`}
+                  className={`menu-parent ${
+                    type == "meinfo" || type == "account" || type == "changepwd" ? "active" : ""
+                  }`}
                 >
                   <div className="one-menu">
                     <div className="one-t1">
@@ -107,10 +114,19 @@ class Center extends Component {
                     >
                       账户关联
                     </div>
-                    <div className={`menu-item`}>修改密码</div>
+                    <div
+                      className={`menu-item ${type == "changepwd" ? "active" : ""}`}
+                      onClick={this.changeType.bind(this, "changepwd")}
+                    >
+                      修改密码
+                    </div>
                   </div>
                 </div>
-                <div className="menu-parent">
+                <div
+                  className={`menu-parent ${
+                    type == "purchase" || type == "orders" ? "active" : ""
+                  }`}
+                >
                   <div className="one-menu">
                     <div className="one-t1">
                       <span className="icon f3"></span>
@@ -119,11 +135,25 @@ class Center extends Component {
                     <div className="one-t2">My order</div>
                   </div>
                   <div className="two-menus">
-                    <div className="menu-item">在线充值</div>
-                    <div className="menu-item">订单列表</div>
+                    <div
+                      className={`menu-item ${type == "purchase" ? "active" : ""}`}
+                      onClick={this.changeType.bind(this, "purchase")}
+                    >
+                      在线充值
+                    </div>
+                    <div
+                      className={`menu-item ${type == "orders" ? "active" : ""}`}
+                      onClick={this.changeType.bind(this, "orders")}
+                    >
+                      订单列表
+                    </div>
                   </div>
                 </div>
-                <div className="menu-parent">
+                <div
+                  className={`menu-parent ${
+                    type == "collect" || type == "search" || type == "browse" ? "active" : ""
+                  }`}
+                >
                   <div className="one-menu">
                     <div className="one-t1">
                       <span className="icon f4"></span>
@@ -132,9 +162,24 @@ class Center extends Component {
                     <div className="one-t2">Full record</div>
                   </div>
                   <div className="two-menus">
-                    <div className="menu-item">我的收藏</div>
-                    <div className="menu-item">检索历史</div>
-                    <div className="menu-item">浏览历史</div>
+                    <div
+                      className={`menu-item ${type == "collect" ? "active" : ""}`}
+                      onClick={this.changeType.bind(this, "collect")}
+                    >
+                      我的收藏
+                    </div>
+                    <div
+                      className={`menu-item ${type == "search" ? "active" : ""}`}
+                      onClick={this.changeType.bind(this, "search")}
+                    >
+                      检索历史
+                    </div>
+                    <div
+                      className={`menu-item ${type == "browse" ? "active" : ""}`}
+                      onClick={this.changeType.bind(this, "browse")}
+                    >
+                      浏览历史
+                    </div>
                   </div>
                 </div>
               </div>
@@ -151,6 +196,34 @@ class Center extends Component {
               {/* 账户关联 */}
               {type == "account" ? (
                 <Account ref={el => (this.accountElement = el)} base={base} />
+              ) : null}
+              {/* 修改密码 */}
+              {type == "changepwd" ? (
+                <ChangePwd
+                  ref={el => (this.changepwdElement = el)}
+                  base={base}
+                  changeType={this.changeType}
+                />
+              ) : null}
+              {/* 在线充值 */}
+              {type == "purchase" ? (
+                <Purchase ref={el => (this.purchaseElement = el)} base={base} />
+              ) : null}
+              {/* 订单列表 */}
+              {type == "orders" ? (
+                <Orders ref={el => (this.ordersElement = el)} base={base} />
+              ) : null}
+              {/* 我的收藏 */}
+              {type == "collect" ? (
+                <Collect ref={el => (this.collectElement = el)} base={base} />
+              ) : null}
+              {/* 检索历史 */}
+              {type == "search" ? (
+                <Search ref={el => (this.searchElement = el)} base={base} />
+              ) : null}
+              {/* 浏览历史 */}
+              {type == "browse" ? (
+                <Browse ref={el => (this.browseElement = el)} base={base} />
               ) : null}
             </div>
           </div>

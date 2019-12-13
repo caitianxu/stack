@@ -158,6 +158,10 @@ const HTTP = {
   _web_index_6: param => {
     return service.post("/api/web/index/6", param);
   },
+  //修改密码
+  _update_pwd: param => {
+    return service.post("/api/web/member/updatepwd", param);
+  },
   //获取经纬度
   _get_point_data: () => {
     return fetchJsonp(

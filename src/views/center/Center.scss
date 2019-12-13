@@ -152,7 +152,7 @@
   .page-papers {
     display: flex;
     justify-content: center;
-    margin: 20px 0 30px;
+    margin: 30px 0;
     &.none {
       display: none;
     }
@@ -355,44 +355,44 @@
               margin-right: 5px;
             }
           }
-          .link{
+          .link {
             margin: 0;
             line-height: 30px;
             color: #7e332e;
             font-size: 14px;
             cursor: pointer;
-            &:hover{
+            &:hover {
               text-decoration: underline;
             }
           }
-          .form-input{
+          .form-input {
             border: 1px #eee solid;
             line-height: 20px;
             padding: 5px;
             width: 200px;
           }
-          .user-cover-row{
+          .user-cover-row {
             display: flex;
             margin-top: -35px;
-            .cover{
+            .cover {
               width: 100px;
               height: 100px;
               overflow: hidden;
               border-radius: 50%;
               border: 1px #ddd solid;
-              img{
+              img {
                 width: 100px;
                 height: 100px;
                 border-radius: 50%;
               }
             }
-            .link{
+            .link {
               margin: 0 20px;
               line-height: 100px;
               color: #7e332e;
               font-size: 14px;
               cursor: pointer;
-              &:hover{
+              &:hover {
                 text-decoration: underline;
               }
             }
@@ -404,10 +404,10 @@
       text-align: center;
       margin-top: 100px;
       button {
-        width: 240px;
-        height: 60px;
-        line-height: 60px;
-        font-size: 22px;
+        width: 200px;
+        height: 50px;
+        line-height: 50px;
+        font-size: 18px;
         cursor: pointer;
         margin: 0 30px;
         color: #fff;
@@ -417,14 +417,14 @@
         &:hover {
           background: #8b4238;
         }
-        &.cancel{
+        &.cancel {
           background: #cccccc;
         }
       }
     }
   }
   /*账号关联*/
-  .center-account-detail{
+  .center-account-detail {
     .center-meinfo-header {
       border-bottom: 1px #ddd dashed;
       .meinfo-row-1 {
@@ -474,68 +474,162 @@
           }
         }
       }
-      .meinfo-row-3{
+      .meinfo-row-3 {
         line-height: 30px;
         color: #803228;
         margin-bottom: 20px;
         font-size: 16px;
       }
     }
-  }
-}
-
-/*绑定手机*/
-.change-phone-plan{
-  width: 100%;
-  height: 450px;
-  font-family: "Microsoft YaHei";
-  .change-phone-content{
-    padding: 55px 45px;
-    .phone-row{
-      display: flex;
-      margin-bottom: 30px;
-      .phone-label{
-        text-align: right;
-        padding-right: 20px;
-        width: 180px;
-        p{
-          margin: 0;
-          line-height: 25px;
-          font-size: 16px;
-          color: #1a1a1a;
-        }
+    .center-account-header {
+      padding: 20px 0;
+      .p1 {
+        font-size: 16px;
+        color: #1a1a1a;
+        margin-bottom: 15px;
       }
-      .phone-control{
-        width: 370px;
+      .p2 {
         display: flex;
-        input{
-          line-height: 30px;
-          padding: 10px;
+        line-height: 40px;
+        margin-bottom: 15px;
+        input {
+          padding: 10px 10px;
+          line-height: 20px;
           flex: 1;
+          font-size: 16px;
           border: 1px #ddd solid;
         }
-        .send-btn{
-          width: 150px;
-          text-align: center;
-          background: #803228;
+      }
+      .p3 {
+        margin-bottom: 15px;
+        button {
+          background: #7e332e;
           color: #fff;
-          padding: 5px 0;
+          border-radius: 5px;
+          border: none;
+          padding: 0 20px;
           cursor: pointer;
-          p{
-            margin: 0;
-            line-height: 20px;
+          font-size: 16px;
+          line-height: 40px;
+          &:hover {
+            background: #8b4238;
           }
         }
       }
     }
-    .phone-button{
+    .center-table-data {
+      width: 100%;
+      td {
+        border: 1px #ccc dashed;
+        text-align: center;
+        padding: 10px 10px;
+        line-height: 30px;
+        font-size: 16px;
+        color: #1a1a1a;
+      }
+    }
+  }
+  /*修改密码*/
+  .center-changepwd-detail {
+    .center-meinfo-header {
+      border-bottom: 1px #ddd dashed;
+      .meinfo-row-1 {
+        display: flex;
+        margin-bottom: 20px;
+        .cover {
+          width: 100px;
+          height: 100px;
+          border-radius: 50%;
+          overflow: hidden;
+          border: 1px #ddd solid;
+          img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+          }
+        }
+        .nickname {
+          font-size: 16px;
+          color: #1a1a1a;
+          padding-left: 20px;
+          line-height: 100px;
+          label {
+            margin-right: 20px;
+          }
+        }
+      }
+      .meinfo-row-2 {
+        display: flex;
+        margin-bottom: 30px;
+        span {
+          line-height: 30px;
+          color: #1a1a1a;
+          font-size: 16px;
+        }
+        .recharge {
+          background: #7e332e;
+          color: #fff;
+          border-radius: 3px;
+          border: none;
+          padding: 0 10px;
+          cursor: pointer;
+          font-size: 16px;
+          margin: 0 0 0 40px;
+          &:hover {
+            background: #8b4238;
+          }
+        }
+      }
+    }
+
+    .center-meinfo-detail {
+      padding: 20px 0;
+      .me-info-row {
+        display: flex;
+        padding: 15px 0;
+        font-size: 16px;
+        line-height: 40px;
+        .l-label {
+          color: #1a1a1a;
+          width: 85px;
+          text-align: justify;
+          height: 40px;
+          position: relative;
+          &::after {
+            width: 100%;
+            display: inline-block;
+            content: " ";
+          }
+        }
+        .l-value {
+          color: #1a1a1a;
+          position: relative;
+          margin-left: 20px;
+          &::before {
+            content: "：";
+            position: absolute;
+            top: 0;
+            line-height: 40px;
+            left: -20px;
+          }
+          .form-input {
+            border: 1px #eee solid;
+            line-height: 30px;
+            padding: 5px 10px;
+            width: 500px;
+            border-radius: 3px;
+          }
+        }
+      }
+    }
+    .center-meinfo-actions {
       text-align: center;
-      padding-top: 30px;
+      margin-top: 100px;
       button {
-        width: 240px;
-        height: 60px;
-        line-height: 60px;
-        font-size: 22px;
+        width: 200px;
+        height: 50px;
+        line-height: 50px;
+        font-size: 18px;
         cursor: pointer;
         margin: 0 30px;
         color: #fff;
@@ -545,7 +639,347 @@
         &:hover {
           background: #8b4238;
         }
-        &.cancel{
+        &.cancel {
+          background: #cccccc;
+        }
+      }
+    }
+  }
+  /*在线充值*/
+  .center-purchase-detail {
+    .center-purchase-header {
+      border-bottom: 1px #ddd dashed;
+      .header-row {
+        display: flex;
+        margin-bottom: 30px;
+        font-size: 16px;
+        color: #1a1a1a;
+        .row-label {
+          padding-right: 10px;
+        }
+        .row-value {
+          .col {
+            margin-right: 30px;
+            .txt {
+              padding-right: 5px;
+              color: #803228;
+            }
+          }
+          .link {
+            color: #803228;
+            cursor: pointer;
+            &:hover {
+              text-decoration: underline;
+            }
+          }
+        }
+      }
+    }
+    .center-meinfo-detail {
+      padding: 20px 0;
+      .me-info-row {
+        display: flex;
+        padding: 10px 0;
+        font-size: 16px;
+        line-height: 45px;
+        .l-label {
+          color: #1a1a1a;
+          width: 85px;
+          text-align: justify;
+          height: 45px;
+          position: relative;
+          &::after {
+            width: 100%;
+            display: inline-block;
+            content: " ";
+          }
+        }
+        .l-value {
+          color: #1a1a1a;
+          position: relative;
+          margin-left: 20px;
+          &::before {
+            content: "：";
+            position: absolute;
+            top: 0;
+            line-height: 45px;
+            left: -20px;
+          }
+          .form-input {
+            border: 1px #eee solid;
+            line-height: 20px;
+            padding: 5px;
+            width: 200px;
+          }
+        }
+      }
+      .prices-all {
+        display: flex;
+        .price-col {
+          margin-right: 20px;
+          cursor: pointer;
+          background: #fff;
+          border-radius: 3px;
+          padding-right: 10px;
+          display: flex;
+          overflow: hidden;
+          label {
+            background: #7e332e;
+            padding: 0 10px;
+            color: #eab27f;
+            margin-right: 10px;
+          }
+          &:hover,
+          &.active {
+            background: #803228;
+            color: #fff;
+          }
+        }
+      }
+      .pay-value {
+        font-size: 24px;
+        color: #803228;
+        span {
+          font-size: 16px;
+          color: #1a1a1a;
+          padding: 0 2px;
+        }
+      }
+      .pay-types {
+        display: flex;
+        .pay-type {
+          display: flex;
+          margin-right: 30px;
+          cursor: pointer;
+          position: relative;
+          border: 1px transparent solid;
+          padding: 0 10px;
+          border-radius: 5px;
+          &.alipay .bg {
+            color: #1cacea;
+            font-size: 28px;
+            margin-right: 5px;
+            cursor: pointer;
+          }
+          &.weixinpay .bg {
+            color: #fff;
+            font-size: 20px;
+            background: #28b836;
+            padding: 0 5px;
+            border-radius: 50%;
+            line-height: 30px;
+            height: 30px;
+            width: 30px;
+            margin: 8px 5px 0 0;
+            text-align: center;
+            cursor: pointer;
+          }
+          &.weixinpay {
+            &.active,
+            &:hover {
+              background: #803228;
+              color: #fff;
+              .bg {
+                color: #803228;
+                background: #fff;
+              }
+            }
+          }
+          &.yuepay .bg {
+            color: #803228;
+            font-size: 28px;
+            margin-right: 5px;
+            cursor: pointer;
+          }
+          &.active,
+          &:hover {
+            background: #803228;
+            color: #fff;
+            .bg {
+              color: #fff;
+            }
+          }
+        }
+      }
+    }
+    .center-meinfo-actions {
+      text-align: center;
+      margin-top: 100px;
+      button {
+        width: 300px;
+        height: 50px;
+        line-height: 50px;
+        font-size: 18px;
+        cursor: pointer;
+        margin: 0 30px;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        background: #803228;
+        &:hover {
+          background: #8b4238;
+        }
+        &.cancel {
+          background: #cccccc;
+        }
+      }
+    }
+  }
+  /*订单列表*/
+  .center-orders-detail {
+    .center-orders-search {
+      display: flex;
+      margin-bottom: 40px;
+      .search-col {
+        margin-right: 20px;
+
+        .ant-calendar-picker {
+          .ant-input {
+            height: auto;
+            padding: 0 0 0 0;
+            background: transparent;
+            .ant-calendar-range-picker-separator {
+              line-height: 38px;
+            }
+            input {
+              width: auto;
+              border: none;
+              height: 40px !important;
+            }
+          }
+          input {
+            height: 40px !important;
+          }
+          .ant-calendar-range-picker-input {
+            width: 149px !important;
+            padding: 10px 20px 10px 0;
+          }
+        }
+        .ant-select-selection--single {
+          height: 40px;
+          background: transparent;
+          .ant-select-selection__rendered {
+            line-height: 38px;
+          }
+        }
+      }
+    }
+    .table-title {
+      margin-bottom: 20px;
+      display: flex;
+      justify-content: space-between;
+      .t-left {
+        display: flex;
+      }
+      .ant-checkbox-wrapper {
+        margin: 5px 0;
+        height: 20px;
+      }
+      .delete-all {
+        background: #7e332e;
+        color: #fff;
+        border-radius: 3px;
+        border: none;
+        padding: 0 10px;
+        cursor: pointer;
+        font-size: 12px;
+        margin: 0 10px;
+        &:hover {
+          background: #8b4238;
+        }
+      }
+    }
+    .center-table-data {
+      width: 100%;
+      th {
+        border: 1px #ccc dashed;
+        text-align: center;
+        padding: 10px 10px;
+        line-height: 30px;
+        font-size: 16px;
+        color: #1a1a1a;
+        font-weight: normal;
+        white-space: nowrap;
+      }
+      td {
+        border: 1px #ccc dashed;
+        text-align: center;
+        padding: 10px 10px;
+        line-height: 30px;
+        font-size: 14px;
+        color: #666;
+        .link{
+          color: #803228;
+          cursor: pointer;
+          text-decoration: underline;
+        }
+      }
+    }
+  }
+}
+
+/*绑定手机*/
+.change-phone-plan {
+  width: 100%;
+  height: 450px;
+  font-family: "Microsoft YaHei";
+  .change-phone-content {
+    padding: 55px 45px;
+    .phone-row {
+      display: flex;
+      margin-bottom: 30px;
+      .phone-label {
+        text-align: right;
+        padding-right: 20px;
+        width: 180px;
+        p {
+          margin: 0;
+          line-height: 25px;
+          font-size: 16px;
+          color: #1a1a1a;
+        }
+      }
+      .phone-control {
+        width: 370px;
+        display: flex;
+        input {
+          line-height: 30px;
+          padding: 10px;
+          flex: 1;
+          border: 1px #ddd solid;
+        }
+        .send-btn {
+          width: 150px;
+          text-align: center;
+          background: #803228;
+          color: #fff;
+          padding: 5px 0;
+          cursor: pointer;
+          p {
+            margin: 0;
+            line-height: 20px;
+          }
+        }
+      }
+    }
+    .phone-button {
+      text-align: center;
+      padding-top: 30px;
+      button {
+        width: 200px;
+        height: 50px;
+        line-height: 50px;
+        font-size: 18px;
+        cursor: pointer;
+        margin: 0 30px;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        background: #803228;
+        &:hover {
+          background: #8b4238;
+        }
+        &.cancel {
           background: #cccccc;
         }
       }

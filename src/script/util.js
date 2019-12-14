@@ -98,8 +98,8 @@ const Util = {
     } else if (url.indexOf("/assets/") !== -1) {
       return url;
     } else {
-      // return "http://rds.abcvote.cn" + url;
-      return "/assets/img/null.png";
+      return "http://rds.abcvote.cn" + url;
+      // return "/assets/img/null.png";
     }
   }
 };

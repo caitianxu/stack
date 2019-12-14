@@ -6,7 +6,7 @@ import qs from "qs";
 import { withRouter } from "react-router-dom";
 const { RangePicker } = DatePicker;
 const { Option } = Select;
-
+//paper_type/论文类型   （6:期刊论文，7:会议论文，8:学术论文）  *必选
 class Papers extends Component {
   constructor(props) {
     super(props);

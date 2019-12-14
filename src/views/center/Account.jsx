@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import Util from "../../script/util";
 import { Pagination } from "antd";
 
+// /api/web/memberorg/search
+// org_name/机构名称
 class Account extends Component {
   constructor(props) {
     super(props);

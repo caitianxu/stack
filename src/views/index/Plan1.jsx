@@ -94,7 +94,7 @@ class Plan1 extends Component {
                 {data[selIndex].contentList.map((item, index) => {
                   return (
                     <a target="_blank" rel="noopener noreferrer" href={item.url} className="car-link" key={`car-link-${index}`}>
-                      <img alt="" src="/assets/img/bann1.png" />
+                      <img alt="" src={Util.transImgUrl(item.cover)} />
                     </a>
                   );
                 })}

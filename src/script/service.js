@@ -67,6 +67,10 @@ const HTTP = {
     return service.post("/api/web/policies/level", param);
   },
   //政策列表
+  _get_policies_type: param => {
+    return service.post("/api/web/policies/type/list", param);
+  },
+  //政策列表
   _get_policies_list: param => {
     return service.post("/api/web/policies/list", param);
   },
@@ -170,6 +174,17 @@ const HTTP = {
   _ip_login: param => {
     return service.post("/api/web/ip/login", param);
   },
+  //支付
+  _pay_order: param => {
+    return service.post("/api/web/wechat/pay/order", param);
+  },
+  //支付状态
+  _pay_order_state: param => {
+    return service.post("/api/web/order/status", param);
+  },
+
+  
+
   //获取经纬度
   _get_point_data: () => {
     return fetchJsonp(

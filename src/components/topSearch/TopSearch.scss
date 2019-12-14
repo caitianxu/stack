@@ -200,8 +200,13 @@
           margin: 0;
           padding: 0 15px;
           cursor: pointer;
-          &:hover{
+          &:hover,&.active{
             background: #f7f7f7;
+            color: #803228;
+            font-weight: bold;
+            dt,dd{
+              color: #803228;
+            }
           }
           dt{
             flex: 1;

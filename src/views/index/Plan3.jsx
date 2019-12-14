@@ -75,7 +75,7 @@ class Plan3 extends Component {
                   topContent.map((top, index) => {
                     return (
                       <div className="con-row-item" key={`top-${index}`}>
-                        <Link to={`/papers?id=${top.res_id}`} className="title">
+                        <Link to={`/paper?id=${top.res_id}&type=6`} className="title">
                           {top.title}
                         </Link>
                         <div className="desc">

@@ -1,7 +1,29 @@
 import React, { Component } from "react";
 import { Icon } from "antd";
+import Pay from "../../components/pay/Pay";
+import HTTP from "../../script/service";
 
-class Purchase extends Component { 
+class Purchase extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      pay_order_no: null,
+      qr_code: null,
+      visible: false
+    };
+  }
+  submitPay = () => {
+    HTTP._pay_order().then(res => {
+      console.log("cxxx", res);
+      if (res.code == 0) {
+        this.setState(res.data);
+        this.payElement.showModal(res.data);
+      }
+    });
+  };
+  paySuccess = () => {
+    console.log("支付成功======================================>回调主页面");
+  };
   render() {
     const { userInfo } = this.props.base;
     return (
@@ -88,6 +110,7 @@ class Purchase extends Component {
         <div className="center-meinfo-actions">
           <button onClick={this.submitPay}>确认支付 Confirm payment</button>
         </div>
+        <Pay ref={el => (this.payElement = el)} paySuccess={this.paySuccess} />
       </div>
     );
   }

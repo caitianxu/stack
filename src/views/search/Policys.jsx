@@ -12,9 +12,17 @@ class Policys extends Component {
     super(props);
     this.state = {
       language: [],
+      policies_types:[{
+        id: 4,
+        name: "政策法规"
+      },{
+        id: 5,
+        name: "政策解读"
+      }],
       param: {
         subject_and: "and", //subject_and/主题词条件（and/or）
         language: "", //语言
+        policies_type: 4, //政策类型 4:政策法规，5:政策解读
         pubdate_start: null, //发布开始日期
         pubdate_end: null, //发布结束日期
         writedate_start: null, //成文开始日期
@@ -73,6 +81,7 @@ class Policys extends Component {
       param: {
         subject_and: "and", //subject_and/主题词条件（and/or）
         language: "", //语言
+        policies_type: 4, //政策类型 4:政策法规，5:政策解读
         pubdate_start: null, //发布开始日期
         pubdate_end: null, //发布结束日期
         writedate_start: null, //成文开始日期
@@ -87,7 +96,7 @@ class Policys extends Component {
     });
   };
   render() {
-    const { language, param } = this.state;
+    const { language, param, policies_types } = this.state;
     const getTime = key => {
       let ll = [
         param[key[0]] ? moment(param[key[0]], "YYYY-MM-DD") : null,
@@ -183,6 +192,24 @@ class Policys extends Component {
                 />
               </span>
             </div>
+          </div>
+        </div>
+        <div className="search-row">
+          <label className="search-label">政策类型 Types</label>
+          <div className="search-control">
+            <Select
+              style={{ width: 320 }}
+              value={param.policies_type}
+              onChange={this.onChangeSelect.bind(this, "policies_type")}
+            >
+              {policies_types.map((item, index) => {
+                return (
+                  <Option key={`language-${index}`} value={item.id}>
+                    {item.name}
+                  </Option>
+                );
+              })}
+            </Select>
           </div>
         </div>
         <div className="search-row">

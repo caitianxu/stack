@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import Menus from "./Menus";
 import TopSearch from "./TopSearch";
 import HTTP from "../../script/service";
+import { withRouter } from "react-router-dom";
+import Util from "../../script/util";
 
 class Plan5 extends Component {
   constructor(props) {
@@ -18,6 +20,10 @@ class Plan5 extends Component {
       });
     });
   }
+  //专家
+  toExpert = item => {
+    this.props.history.push(`./expert?id=${item.res_id}`);
+  };
   render() {
     const { height, menuIndex, changeIndex, base } = this.props;
     const { data } = this.state;
@@ -29,9 +35,13 @@ class Plan5 extends Component {
             <div className="plan-content">
               {data.map((item, index) => {
                 return (
-                  <div className="content-item" key={`user-${index}`}>
+                  <div
+                    className="content-item"
+                    key={`user-${index}`}
+                    onClick={this.toExpert.bind(this, item)}
+                  >
                     <div className="cover">
-                      <img alt="" src="/assets/img/user.png" />
+                      <img alt="" src={Util.transImgUrl(item.cover)} />
                     </div>
                     <div className="detail">
                       <h3>弗雷德·泰维斯</h3>
@@ -52,4 +62,4 @@ class Plan5 extends Component {
   }
 }
 
-export default Plan5;
+export default withRouter(Plan5);

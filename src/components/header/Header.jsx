@@ -1,34 +1,62 @@
-import React, { Component } from "react";
+import React, {
+	Component
+} from "react";
 import { NavLink, Link } from "react-router-dom";
 import { _clear_userInfo } from "../../store/Action";
 import { Modal } from "antd";
 import "./Header.scss";
 
-const { confirm } = Modal;
+const {
+	confirm
+} = Modal;
 class Header extends Component {
-  //地址匹配
-  oddEvent = (name, match, location) => {
-    if (window.location.href.indexOf(name) != -1) {
-      return true;
-    }
-    return false;
-  };
-  //退出
-  singnOut = () => {
-    confirm({
-      className:"daidai-confirm-style",
-      title: "提示 Tips",
-      content: "你确定要退出登录吗?",
-      centered: true,
-      onOk() {
-        _clear_userInfo();
-      }
-    });
-  };
-  render() {
-    const { base } = this.props;
-    return (
-      <div className="com-header">
+	//地址匹配
+	oddEvent = (name, match, location) => {
+		if(window.location.href.indexOf(name) != -1) {
+			return true;
+		}
+		return false;
+	};
+	//退出
+	singnOut = () => {
+		confirm({
+			className: "daidai-confirm-style",
+			title: "提示 Tips",
+			content: "你确定要退出登录吗?",
+			centered: true,
+			onOk() {
+				_clear_userInfo();
+			}
+		});
+	};
+	render() {
+		const {
+			base
+		} = this.props;
+		console.log(base)
+		const getLoginAccountInfo = () => {
+			if(base && base.userInfo) {
+				return <div className="actions">
+              <Link to="/center">你好，{base.userInfo.nick_name}</Link>
+              <span className="login-out" onClick={this.singnOut}>
+                退出 sign out
+              </span>
+            </div>
+			}
+			if(base && base.orgInfo) {
+				return <div className="actions">
+              <Link to="/center">你好，{base.orgInfo.nick_name}</Link>
+              <span className="login-out" onClick={this.singnOut}>
+                退出 sign out
+              </span>
+            </div>
+			}
+			return <div className="actions">
+              <Link to="/login">登录 Login</Link>/<Link to="/regist">注册 Register</Link>
+            </div>
+		}
+		return(
+			<div className="com-header">
         <div className="content">
           <Link to="/index" className="logo">
             &nbsp;
@@ -70,22 +98,11 @@ class Header extends Component {
               </NavLink>
             </li>
           </ul>
-          {base && base.userInfo ? (
-            <div className="actions">
-              <Link to="/center">你好，{base.userInfo.nick_name}</Link>
-              <span className="login-out" onClick={this.singnOut}>
-                退出 sign out
-              </span>
-            </div>
-          ) : (
-            <div className="actions">
-              <Link to="/login">登录 Login</Link>/<Link to="/regist">注册 Register</Link>
-            </div>
-          )}
+          {getLoginAccountInfo()}
         </div>
       </div>
-    );
-  }
+		);
+	}
 }
 
 export default Header;

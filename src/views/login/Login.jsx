@@ -3,7 +3,7 @@ import Header from "../../components/header/Header";
 import Footer from "../../components/footer/Footer";
 import { Link } from "react-router-dom";
 import { Icon, message } from "antd";
-import { _get_user_info } from "../../store/Action";
+import { _get_user_info, _get_orgInfo } from "../../store/Action";
 import store from "../../store/store";
 import "./Login.scss";
 
@@ -53,6 +53,13 @@ class Login extends Component {
       message.error(res.message);
     });
   };
+  loginIPIn = () => {
+  	_get_orgInfo().then(res => {
+  		this.props.history.push("/index");
+  	}).catch(res => {
+  		message.error(res.message);
+  	})
+  }
   render() {
     return (
       <div>
@@ -90,7 +97,7 @@ class Login extends Component {
                 />
               </div>
               <div className="ip-row">
-                <span className="ip-action">IP一键登录</span>
+                <span className="ip-action" onClick={this.loginIPIn}>IP一键登录</span>
               </div>
               <div className="form-action" onClick={this.loginIn}></div>
               <div className="link-row">

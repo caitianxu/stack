@@ -74,6 +74,25 @@ export const _get_userInfo = function(token) {
     });
   });
 };
+//获取机构信息
+export const _get_orgInfo = function(token) {
+  return new Promise(function(resolve, reject) {
+    HTTP._ip_login().then(res => {
+      if (res.code == 0) {
+        const action = {
+          type: "change_org_info",
+          data: { ...res.data}
+        };
+        store.dispatch(action);
+        resolve(res.data);
+      }
+      else{
+      	reject(res);
+      }
+    });
+  });
+};
+
 //注销
 export const _clear_userInfo = function(token) {
   const action = {

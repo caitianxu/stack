@@ -162,6 +162,10 @@ const HTTP = {
   _update_pwd: param => {
     return service.post("/api/web/member/updatepwd", param);
   },
+  //IP登录
+  _ip_login: param => {
+    return service.post("/api/web/ip/login", param);
+  },
   //获取经纬度
   _get_point_data: () => {
     return fetchJsonp(

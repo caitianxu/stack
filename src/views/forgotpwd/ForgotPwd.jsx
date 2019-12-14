@@ -2,15 +2,14 @@ import React, { Component } from "react";
 import Header from "../../components/header/Header";
 import Footer from "../../components/footer/Footer";
 import { Link } from "react-router-dom";
-import { Icon, message } from "antd";
-import "./Regist.scss";
+import { message } from "antd";
+import "./ForgotPwd.scss";
 import HTTP from "../../script/service";
 
-class Regist extends Component {
+export default class ForgotPwd extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      box: false,
       phone: null,
       code: null,
       username: null,
@@ -19,11 +18,6 @@ class Regist extends Component {
       time: 0
     };
   }
-  changeBox = () => {
-    this.setState({
-      box: !this.state.box
-    });
-  };
   showXieyi = e => {
     message.info("补全协议内容");
     e.stopPropagation();
@@ -39,7 +33,7 @@ class Regist extends Component {
     }
     HTTP._send_phone_code({
       phone: this.state.phone,
-      code_type: 1
+      code_type: 2
     }).then(res => {
       if (res.code == 0) {
         this.setState({
@@ -68,7 +62,7 @@ class Regist extends Component {
   };
   //注册
   formSubmit = () => {
-    const { box, phone, code, username, password, password1 } = this.state;
+    const { phone, code, password, password1 } = this.state;
     const myreg = /^[1][3-9][0-9]{9}$/;
     if (!myreg.test(phone)) {
       message.error("请输入正确的手机号码");
@@ -76,10 +70,6 @@ class Regist extends Component {
     }
     if (!code || code.length != 6) {
       message.error("请输入验证码");
-      return false;
-    }
-    if (!username || username.length < 2) {
-      message.error("请输入用户名");
       return false;
     }
     if (!password || password.length < 6) {
@@ -90,11 +80,7 @@ class Regist extends Component {
       message.error("两次的密码输入不一致");
       return false;
     }
-    if (!box) {
-      message.error("请详细阅读并同意服务协议");
-      return false;
-    }
-    HTTP._web_register({
+    HTTP._forgetpwd({
       phone: phone,
       passwd: password,
       code: code
@@ -107,13 +93,12 @@ class Regist extends Component {
     });
   };
   render() {
-    const { box } = this.state;
     return (
       <div>
         <Header />
         <div className="page-main">
-          <div className="regist-content">
-            <h1>请填写以下信息注册成为会员：</h1>
+          <div className="forgotpwd-content">
+            <h1>请填写以下信息重置登录密码：</h1>
             <div className="form-row">
               <label className="form-label">手机号：</label>
               <div className="form-control">
@@ -154,21 +139,6 @@ class Regist extends Component {
               </div>
             </div>
             <div className="form-row">
-              <label className="form-label">用户名：</label>
-              <div className="form-control">
-                <input
-                  className="ip3"
-                  type="text"
-                  name="username"
-                  autoComplete="off"
-                  value={this.state.username || ""}
-                  onChange={this.changeFormValue}
-                  maxLength="18"
-                  placeholder="用户名可包含大写、小写英文字母，数字，中文，长度为2至18位"
-                />
-              </div>
-            </div>
-            <div className="form-row">
               <label className="form-label">密码：</label>
               <div className="form-control">
                 <input
@@ -201,22 +171,8 @@ class Regist extends Component {
             <div className="form-row">
               <label className="form-label">&nbsp;</label>
               <div className="form-control">
-                <div className="xieyi" onClick={this.changeBox}>
-                  {box ? (
-                    <Icon type="check-circle" theme="filled" />
-                  ) : (
-                    <i className="box"></i>
-                  )}
-                  已阅读并同意平台的
-                  <span onClick={this.showXieyi}>《服务协议》</span>
-                </div>
-              </div>
-            </div>
-            <div className="form-row">
-              <label className="form-label">&nbsp;</label>
-              <div className="form-control">
                 <button className="form-btn" onClick={this.formSubmit}>
-                  立即注册 Sign up now
+                  找回密码 Forgot Password
                 </button>
                 <span className="form-other">
                   已注册?{" "}
@@ -233,5 +189,3 @@ class Regist extends Component {
     );
   }
 }
-
-export default Regist;

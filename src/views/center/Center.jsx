@@ -39,8 +39,8 @@ class Center extends Component {
   }
   //初始化
   componentDidMount() {
-    const { member_id, token } = this.state.base;
-    if (!member_id && !token) {
+    const { member_id, token, orgInfo } = this.state.base;
+    if (!member_id && !token && !orgInfo) {
       this.props.history.push("/login");
     } else {
       _get_url_search(param => {

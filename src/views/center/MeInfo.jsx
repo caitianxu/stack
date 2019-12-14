@@ -101,7 +101,7 @@ class MeInfo extends Component {
               <span className="l-value">
                 <div className="user-cover-row">
                   <div className="cover">
-                    <img src={Util.transImgUrl(userInfo.icon)} />
+                    <img src={Util.transImgUrl(userInfo.icon)} alt=""/>
                   </div>
                   <span className="link">更好头像</span>
                 </div>
@@ -164,7 +164,7 @@ class MeInfo extends Component {
         <div className="center-meinfo-header">
           <div className="meinfo-row-1">
             <div className="cover">
-              <img src={Util.transImgUrl(userInfo.icon)} />
+              <img src={Util.transImgUrl(userInfo.icon)} alt=""/>
             </div>
             <div className="nickname">
               <label>您好，{userInfo.nick_name}</label>

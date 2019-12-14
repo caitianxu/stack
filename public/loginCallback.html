@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta http-equiv="Access-Control-Allow-Origin" content="*">
+  <title>loginCallback</title>
+  <link href="/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+  <style>
+    html,body{
+      margin: 0;
+      padding: 0;
+    }
+    .success{
+      position: absolute;
+      width: 250px;
+      height: 200px;
+      top: 50%;
+      left: 50%;
+      text-align: center;
+      padding-top: 50px;
+      margin-top: -125px;
+      margin-left: -125px;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- <div class="success">
+    <svg t="1564633456450" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2246" width="80" height="80"><path d="M510.645654 959.349561c-247.25636 0-447.691345-200.446241-447.691345-447.700555 0-247.24715 200.436008-447.692369 447.691345-447.692369 247.25636 0 447.693392 200.445218 447.693392 447.692369C958.339046 758.90332 757.902014 959.349561 510.645654 959.349561zM784.191774 354.236883l-14.387685-14.387685c-7.949043-7.949043-20.826328-7.949043-28.77537 0L442.600909 632.086006 333.044724 517.430686c-3.597945-3.596921-12.958126-0.060375-20.908192 7.888667l-14.387685 14.389732c-7.949043 7.949043-11.465123 17.309224-7.869225 20.895913L436.064029 713.574948c3.576455 3.597945 12.936637 0.049119 20.886703-7.888667l14.368242-14.388708c2.542916-2.523473 4.411473-5.136997 5.960759-7.710612l306.913065-300.56345C792.142863 375.083677 792.142863 362.185926 784.191774 354.236883z" p-id="2247" fill="#52c41a"></path></svg>
+    <h2>登录成功!</h2>
+  </div> -->
+  <script type="text/javascript">
+    function unParam(str, key) {
+      var param = {},
+        array = str.replace("?", "").replace("/", "").split('&');
+      for (var i = 0; i < array.length; i++) {
+        if (array[i].indexOf('=') != -1) {
+          var slef = array[i].split('=');
+          param[slef[0]] = slef[1];
+        }
+      }
+      return key ? param[key] : param;
+    }
+    var param = unParam(window.location.search)
+    if (window.parent && window.parent.loginSuccess) {
+      window.parent.loginSuccess(param.token);
+    }
+  </script>
+</body>
+
+</html>

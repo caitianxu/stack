@@ -4,7 +4,7 @@ import Header from "../../components/header/Header";
 import Footer from "../../components/footer/Footer";
 import DetailSearch from "../../components/detailSearch/DetailSearch";
 import { _get_url_search } from "../../store/Action";
-import { Breadcrumb, Skeleton, Icon } from "antd";
+import { Breadcrumb, Icon } from "antd";
 import HTTP from "../../script/service";
 import Share from "../../components/share/Share";
 import "./Paper.scss";
@@ -34,7 +34,8 @@ class Paper extends Component {
   componentDidMount() {
     _get_url_search(param => {
       HTTP._web_paper_detail({
-        id: param.id
+        id: param.id,
+        type: param.type
       }).then(res => {
         if (res.code == 0) {
           this.setState({

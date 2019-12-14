@@ -10,6 +10,10 @@ const HTTP = {
   _get_language: param => {
     return service.post("/dictype/language", param);
   },
+  //语言
+  _forgetpwd: param => {
+    return service.post("/api/web/forgetpwd", param);
+  },
   //获取验证码
   _send_phone_code: param => {
     return service.post("/api/web/send/code", param);

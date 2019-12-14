@@ -27,7 +27,7 @@ class Login extends Component {
     let ps = {};
     ps[e.target.name] = e.target.value;
     this.setState(ps);
-  };  
+  };
   //销毁
   componentWillUnmount() {
     this.setState = () => {
@@ -47,19 +47,36 @@ class Login extends Component {
     _get_user_info({
       account: account,
       passwd: password
-    }).then(res => {
-      this.props.history.push("/index");
-    }).catch(res => {
-      message.error(res.message);
-    });
+    })
+      .then(res => {
+        this.loginSuccess();
+      })
+      .catch(res => {
+        message.error(res.message);
+      });
+  };
+  loginSuccess = () => {
+    this.props.history.push("/index");
   };
   loginIPIn = () => {
-  	_get_orgInfo().then(res => {
-  		this.props.history.push("/index");
-  	}).catch(res => {
-  		message.error(res.message);
-  	})
-  }
+    _get_orgInfo()
+      .then(res => {
+        this.loginSuccess();
+      })
+      .catch(res => {
+        message.error(res.message);
+      });
+  };
+  openWeixin = () => {
+    window.location.href =
+      "https://open.weixin.qq.com/connect/qrconnect?appid=wx99ed6185eb824777&redirect_uri=http://rds.abcvote.cn/api/web/wechat/login&response_type=code&scope=snsapi_login";
+    //this.weixinElement.showModal();
+  };
+  openWeibo = () => {
+    window.location.href =
+      "https://api.weibo.com/oauth2/authorize?client_id=297740094&response_type=code&redirect_uri=rds.abcvote.cn/api/web/weibo/login";
+    // this.weiboElement.showModal();
+  };
   render() {
     return (
       <div>
@@ -97,21 +114,23 @@ class Login extends Component {
                 />
               </div>
               <div className="ip-row">
-                <span className="ip-action" onClick={this.loginIPIn}>IP一键登录</span>
+                <span className="ip-action" onClick={this.loginIPIn}>
+                  IP一键登录
+                </span>
               </div>
               <div className="form-action" onClick={this.loginIn}></div>
               <div className="link-row">
                 <Link to="/regist" className="a1">
                   没有账号? 去注册
                 </Link>
-                <Link to="/a2" className="a2">
+                <Link to="/forgotpwd" className="a2">
                   忘记密码?
                 </Link>
               </div>
               <h3>第三方账号登录</h3>
               <div className="other-login">
-                <div className="weixin"></div>
-                <div className="weibo"></div>
+                <div className="weixin" onClick={this.openWeixin}></div>
+                <div className="weibo" onClick={this.openWeibo}></div>
               </div>
             </div>
           </div>

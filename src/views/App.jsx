@@ -3,10 +3,16 @@ import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
 import asyncComponent from "../script/asyncComponent";
 import store from "../store/store";
 import Util from "../script/util";
-import { _set_token, _get_userInfo } from "../store/Action";
+import {
+  _get_url_search,
+  _set_token,
+  _get_userInfo,
+  _get_orgInfo
+} from "../store/Action";
 
 const Index = asyncComponent(() => import("./index/Index"));
 const Login = asyncComponent(() => import("./login/Login"));
+const ForgotPwd = asyncComponent(() => import("./forgotpwd/ForgotPwd"));
 const Regist = asyncComponent(() => import("./regist/Regist"));
 const Search = asyncComponent(() => import("./search/Search"));
 const About = asyncComponent(() => import("./about/About"));
@@ -41,10 +47,23 @@ class App extends Component {
   };
   componentDidMount() {
     let token = Util.readCookie("token");
+    _get_url_search(param => {
+      if (param.token) {
+        token = param.token;
+      }
+    });
     if (token) {
       _set_token(token).then(res => {
-        _get_userInfo(res);
+        _get_userInfo(res)
+          .then(res => {
+            console.log("用户登录");
+          })
+          .catch(res => {
+            _get_orgInfo();
+          });
       });
+    } else {
+      _get_orgInfo();
     }
   }
   //销毁
@@ -67,6 +86,8 @@ class App extends Component {
             <Route path="/index" component={Index} />
             {/* 登录 */}
             <Route path="/login" component={Login} />
+            {/* 找回密码 */}
+            <Route path="/forgotpwd" component={ForgotPwd} />
             {/* 注册 */}
             <Route path="/regist" component={Regist} />
             {/* 搜索 */}

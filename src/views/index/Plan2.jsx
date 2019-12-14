@@ -122,7 +122,7 @@ class Plan2 extends Component {
                   pData[titleIndex].journal.map((item, index) => {
                     return (
                       <Link
-                        to={`/paper?id=${item.res_id}`}
+                        to={`/paper?id=${item.res_id}&type=6`}
                         key={`row-${index}`}
                         className="link-item"
                         title={item.title}
@@ -156,7 +156,7 @@ class Plan2 extends Component {
                         >
                           {pData[titleIndex].book.map((book, index) => {
                             return (
-                              <div className="sw-book" key={`book-${index}`}>
+                              <Link to={`/book?id=${book.res_id}`} className="sw-book" key={`book-${index}`}>
                                 <div className="cover">
                                   <img alt="" src="/assets/img/book.png" />
                                 </div>
@@ -165,7 +165,7 @@ class Plan2 extends Component {
                                 <p>ISBN：{book.isbn}</p>
                                 <p>出版日期：{book.pubdate}</p>
                                 <p>分类号：{book.bookcat}</p>
-                              </div>
+                              </Link>
                             );
                           })}
                         </div>

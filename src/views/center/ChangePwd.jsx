@@ -59,7 +59,7 @@ class ChangePwd extends Component {
         <div className="center-meinfo-header">
           <div className="meinfo-row-1">
             <div className="cover">
-              <img src={Util.transImgUrl(userInfo.icon)} />
+              <img src={Util.transImgUrl(userInfo.icon)} alt=""/>
             </div>
             <div className="nickname">
               <label>您好，{userInfo.nick_name}</label>

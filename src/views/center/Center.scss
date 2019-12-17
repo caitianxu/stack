@@ -371,15 +371,30 @@
             padding: 5px;
             width: 200px;
           }
+          .user-cover-parent{
+            margin-top: -35px;
+            height: 100px;
+            overflow: hidden;
+            .ant-upload{
+              margin: 0;
+              height: 100px;
+              border: none;
+              padding: 0;
+              background: transparent;
+            }
+          }
           .user-cover-row {
             display: flex;
-            margin-top: -35px;
+            height: 100px;
+            width: 200px;
+            overflow: hidden;
             .cover {
               width: 100px;
               height: 100px;
               overflow: hidden;
               border-radius: 50%;
               border: 1px #ddd solid;
+              overflow: hidden;
               img {
                 width: 100px;
                 height: 100px;
@@ -488,16 +503,35 @@
         color: #1a1a1a;
         margin-bottom: 15px;
       }
+      .p4 {
+        font-size: 16px;
+        color: #1a1a1a;
+        margin-bottom: 15px;
+        label{
+          padding: 0 10px;
+          color: #803228;
+          font-size: 22px;
+        }
+      }
       .p2 {
         display: flex;
         line-height: 40px;
         margin-bottom: 15px;
-        input {
-          padding: 10px 10px;
-          line-height: 20px;
+        // input {
+        //   padding: 10px 10px;
+        //   line-height: 20px;
+        //   flex: 1;
+        //   font-size: 16px;
+        //   border: 1px #ddd solid;
+        // }
+        .org-control{
           flex: 1;
-          font-size: 16px;
-          border: 1px #ddd solid;
+          .ant-select-selection{
+            height: 40px;
+          }
+          .ant-select-selection__rendered{
+            line-height: 38px;
+          }
         }
       }
       .p3 {
@@ -959,12 +993,17 @@
             margin: 0;
             line-height: 20px;
           }
+          &.dis{
+            background: #999;
+            cursor: default;
+          }
         }
       }
     }
     .phone-button {
-      text-align: center;
+      text-align: left;
       padding-top: 30px;
+      padding-left: 152px;
       button {
         width: 200px;
         height: 50px;

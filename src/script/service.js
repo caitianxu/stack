@@ -182,7 +182,22 @@ const HTTP = {
   _pay_order_state: param => {
     return service.post("/api/web/order/status", param);
   },
-
+  //文件上传
+  _file_upload: param => {
+    return service.post("/api/system/file/upload", param);
+  },
+  //文件上传
+  _member_update: param => {
+    return service.post("/api/web/member/update", param);
+  },
+  //关联结构记录
+  _bind_record_list: param => {
+    return service.post("/api/web/member/bind/record", param);
+  },
+  //搜索机构
+  _memberorg_search: param => {
+    return service.post("/api/web/memberorg/search", param);
+  },
   
 
   //获取经纬度

@@ -31,7 +31,7 @@ class Regist extends Component {
   };
   //发送验证码
   sendCode = () => {
-    if (this.time > 0) return false;
+    if (this.state.time > 0) return false;
     const myreg = /^[1][3-9][0-9]{9}$/;
     if (!myreg.test(this.state.phone)) {
       message.error("请输入正确的手机号码");

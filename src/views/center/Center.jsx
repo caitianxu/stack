@@ -191,7 +191,11 @@ class Center extends Component {
               ) : null}
               {/* 个人信息 */}
               {type == "meinfo" ? (
-                <MeInfo ref={el => (this.meinfoElement = el)} base={base} />
+                <MeInfo
+                  ref={el => (this.meinfoElement = el)}
+                  base={base}
+                  changeType={this.changeType}
+                />
               ) : null}
               {/* 账户关联 */}
               {type == "account" ? (

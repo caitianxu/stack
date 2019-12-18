@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import Util from "../../script/util";
-import { Pagination, Select, Spin, message } from "antd";
+import { Pagination, Select, Spin, message, Modal, Icon } from "antd";
 import HTTP from "../../script/service";
 const { Option } = Select;
 
@@ -8,6 +8,12 @@ class Account extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      childVisible: false,
+      bindType: "pwd", //pwd / org
+      bindParam: {
+        pwd: null,
+        org: null
+      },
       pageData: [],
       orgs: [],
       selectOrg: null,
@@ -55,13 +61,112 @@ class Account extends Component {
   onAssociation = () => {
     const { selectOrg } = this.state;
     if (selectOrg) {
-      
+      this.setState({
+        childVisible: true
+      });
     } else {
       message.warn("请输入并选择你要关联的机构");
     }
   };
+  //关联类型
+  changeBindType = b => {
+    this.setState({
+      bindType: b
+    });
+  };
+  //文本输入
+  changeBindForm = e => {
+    let { bindParam } = this.state;
+    bindParam[e.target.name] = e.target.value;
+    this.setState({
+      bindParam: { ...bindParam }
+    });
+  };
+  //关联机构
+  bindOrg = () => {
+    const { bindType, bindParam, selectOrg } = this.state;
+    if (bindType == "pwd" && !bindParam.pwd) {
+      message.warn("请填写机构密码");
+      return;
+    }
+    if (bindType == "org" && !bindParam.org) {
+      message.warn("请填写机构关联信息");
+      return;
+    }
+    HTTP._memberorg_bind({
+      org_id: selectOrg,
+      bind_type: bindType == "pwd" ? 2 : 1,
+      bind_remark: bindParam.org,
+      bind_pwd: bindParam.pwd
+    }).then(res => {
+      if (res.code == 0) {
+        this.getPageData();
+        this.hideChildModal();
+      } else {
+        message.warn(res.message);
+      }
+    });
+  };
+  //隐藏
+  hideChildModal = () => {
+    this.setState({
+      childVisible: false
+    });
+  };
+  //解除关联
+  unBindAccount = () => {
+    const { pageData } = this.state;
+    const { member_id } = this.props.base;
+    let bindOrg = null;
+    if (pageData && pageData.length) {
+      bindOrg = { ...pageData[0] };
+    }
+    HTTP._memberorg_relieve({
+      org_id: bindOrg.org_id,
+      member_id: member_id
+    }).then(res => {
+      if (res.code == 0) {
+        this.getPageData();
+      } else {
+        message.warn(res.message);
+      }
+    });
+  };
+
+  //分页回调
+  onPagChange = page => {
+    let { pageParam } = this.state;
+    pageParam.pageNum = page;
+    this.setState(
+      {
+        pageParam: pageParam
+      },
+      () => {
+        this.getPageData();
+      }
+    );
+  };
+  //分页控件
+  itemRender = (current, type, originalElement) => {
+    if (type === "prev") {
+      return <span className="prev">上一页</span>;
+    }
+    if (type === "next") {
+      return <span className="next">下一页</span>;
+    }
+    return originalElement;
+  };
   render() {
-    const { pageParam, pageData, selectOrg, fetching, orgs } = this.state;
+    const {
+      pageParam,
+      pageData,
+      selectOrg,
+      fetching,
+      orgs,
+      childVisible,
+      bindType,
+      bindParam
+    } = this.state;
     const { userInfo } = this.props.base;
     let bindOrg = null;
     if (pageData && pageData.length) {
@@ -82,7 +187,7 @@ class Account extends Component {
           </div>
           {bindOrg ? null : <div className="meinfo-row-3">您尚未关联账户</div>}
         </div>
-        {bindOrg ? (
+        {bindOrg && bindOrg.status != 3 ? (
           <div className="center-account-header">
             <p className="p1">关联的账户为已购买审判案例数据库使用权限的机构账户</p>
             {bindOrg.status == 1 ? (
@@ -102,7 +207,7 @@ class Account extends Component {
               </div>
             ) : null}
             <div className="p3">
-              <button>解除关联 Disassociate</button>
+              <button onClick={this.unBindAccount}>解除关联 Disassociate</button>
             </div>
           </div>
         ) : (
@@ -142,8 +247,8 @@ class Account extends Component {
             <tr>
               <td width="60">序号</td>
               <td>关联机构</td>
-              <td width="150">操作</td>
-              <td width="150">时间</td>
+              <td >操作</td>
+              <td >时间</td>
               <td width="80">状态</td>
             </tr>
           </thead>
@@ -176,6 +281,75 @@ class Account extends Component {
             />
           </span>
         </div>
+
+        <Modal
+          visible={childVisible}
+          wrapClassName="daidai-modal-style"
+          centered={true}
+          closable={false}
+          footer={null}
+          keyboard={false}
+          maskClosable={true}
+          width="500px"
+          onCancel={this.hideChildModal}
+        >
+          <div className="modal-parent-plan account-bind-plan">
+            <div className="style-border">
+              <i className="style-1"></i>
+              <i className="style-2"></i>
+              <i className="style-3"></i>
+              <i className="style-4"></i>
+            </div>
+            <div className="modal-parent-content">
+              <div className="modal-content-header">
+                <div className="header-title">
+                  <h3>
+                    <span
+                      className={bindType == "pwd" ? "active" : ""}
+                      onClick={this.changeBindType.bind(this, "pwd")}
+                    >
+                      密码关联
+                    </span>
+                    <span
+                      className={bindType == "org" ? "active" : ""}
+                      onClick={this.changeBindType.bind(this, "org")}
+                    >
+                      申请机构关联
+                    </span>
+                  </h3>
+                  <span className="close" onClick={this.hideChildModal}>
+                    <Icon type="close" />
+                  </span>
+                </div>
+              </div>
+              <div className="modal-content-conter">
+                {bindType == "pwd" ? (
+                  <div className="bind-pwd-plan">
+                    <input
+                      type="text"
+                      name="pwd"
+                      placeholder="请输入机构密码"
+                      value={bindParam.pwd || ""}
+                      onChange={this.changeBindForm}
+                    />
+                  </div>
+                ) : (
+                  <div className="bind-org-plan">
+                    <textarea
+                      placeholder="请输入便于管理员识别的验证信息，如姓名/学工号/院系信息等"
+                      name="org"
+                      value={bindParam.org || ""}
+                      onChange={this.changeBindForm}
+                    ></textarea>
+                  </div>
+                )}
+                <div className="btns">
+                  <button onClick={this.bindOrg}>确定 Sure</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </Modal>
       </div>
     );
   }

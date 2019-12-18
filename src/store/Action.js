@@ -75,7 +75,7 @@ export const _get_userInfo = function(token) {
   });
 };
 //获取机构信息
-export const _get_orgInfo = function(token) {
+export const _get_orgInfo = function() {
   return new Promise(function(resolve, reject) {
     HTTP._ip_login().then(res => {
       if (res.code == 0) {

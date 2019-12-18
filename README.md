@@ -44,7 +44,8 @@ response.setHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With,x-r
 
 
 ## 问题
-1.
+1.个人中心绑定手机 新增一个验证码类型， 新增一个绑定手机接口
+
 
 
 

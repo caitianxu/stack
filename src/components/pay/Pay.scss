@@ -1,8 +1,12 @@
 .weixin-pay-plan {
-  height: 500px;
-  .weixin-login-con {
+  height: 430px;
+  .weixin-pay-con {
     width: 100%;
-    height: 500px;
-    background: #f90;
+    padding: 30px;
+    .qcode{
+      border: 3px #7e332e solid;
+      height: 284px;
+      padding: 5px;
+    }
   }
 }

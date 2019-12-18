@@ -3,7 +3,7 @@ import store from "../../store/store";
 import Header from "../../components/header/Header";
 import Footer from "../../components/footer/Footer";
 import Util from "../../script/util";
-import { _get_url_search } from "../../store/Action";
+import { _get_url_search, _get_orgInfo } from "../../store/Action";
 import "./Center.scss";
 
 import Message from "./Message";
@@ -40,8 +40,15 @@ class Center extends Component {
   //初始化
   componentDidMount() {
     const { member_id, token, orgInfo } = this.state.base;
+    console.log(orgInfo);
     if (!member_id && !token && !orgInfo) {
-      this.props.history.push("/login");
+      _get_orgInfo()
+        .then(res => {
+          console.log("ooooooooo", res);
+        })
+        .catch(e => {
+          this.props.history.push("/login");
+        });
     } else {
       _get_url_search(param => {
         this.setState({
@@ -55,23 +62,33 @@ class Center extends Component {
     this.setState({
       type: t
     });
+    document.documentElement.scrollTo(0, 0);
   };
   render() {
     const { base, type } = this.state;
-    console.log(base);
     return (
       <div className="center-page">
         <Header base={base} />
-        {base && base.userInfo ? (
+        {base && (base.userInfo || base.orgInfo) ? (
           <div className="center-content">
             <div className="center-menu">
               <div className="menu-bg">
-                <div className="user">
-                  <div className="cover">
-                    <img src={Util.transImgUrl(base.userInfo.icon)} alt="" />
+                {base.userInfo ? (
+                  <div className="user">
+                    <div className="cover">
+                      <img src={Util.transImgUrl(base.userInfo.icon)} alt="" />
+                    </div>
+                    <div className="nick">{base.userInfo.nick_name}</div>
                   </div>
-                  <div className="nick">{base.userInfo.nick_name}</div>
-                </div>
+                ) : null}
+                {base.orgInfo ? (
+                  <div className="user">
+                    <div className="cover">
+                      <img src={Util.transImgUrl(base.orgInfo.icon)} alt="" />
+                    </div>
+                    <div className="nick">{base.orgInfo.org_name}</div>
+                  </div>
+                ) : null}
                 <div className={`menu-parent ${type == "message" ? "active" : ""}`}>
                   <div className="one-menu">
                     <div className="one-t1">
@@ -91,7 +108,12 @@ class Center extends Component {
                 </div>
                 <div
                   className={`menu-parent ${
-                    type == "meinfo" || type == "account" || type == "changepwd" ? "active" : ""
+                    type == "meinfo" ||
+                    type == "account" ||
+                    type == "changepwd" ||
+                    type == "orginfo"
+                      ? "active"
+                      : ""
                   }`}
                 >
                   <div className="one-menu">
@@ -101,57 +123,76 @@ class Center extends Component {
                     </div>
                     <div className="one-t2">Account management</div>
                   </div>
-                  <div className="two-menus">
-                    <div
-                      className={`menu-item ${type == "meinfo" ? "active" : ""}`}
-                      onClick={this.changeType.bind(this, "meinfo")}
-                    >
-                      个人信息
+                  {base.userInfo ? (
+                    <div className="two-menus">
+                      <div
+                        className={`menu-item ${type == "meinfo" ? "active" : ""}`}
+                        onClick={this.changeType.bind(this, "meinfo")}
+                      >
+                        个人信息
+                      </div>
+                      <div
+                        className={`menu-item ${type == "account" ? "active" : ""}`}
+                        onClick={this.changeType.bind(this, "account")}
+                      >
+                        账户关联
+                      </div>
+                      <div
+                        className={`menu-item ${type == "changepwd" ? "active" : ""}`}
+                        onClick={this.changeType.bind(this, "changepwd")}
+                      >
+                        修改密码
+                      </div>
                     </div>
-                    <div
-                      className={`menu-item ${type == "account" ? "active" : ""}`}
-                      onClick={this.changeType.bind(this, "account")}
-                    >
-                      账户关联
+                  ) : null}
+                  {base.orgInfo ? (
+                    <div className="two-menus">
+                      <div
+                        className={`menu-item ${type == "orginfo" ? "active" : ""}`}
+                        onClick={this.changeType.bind(this, "orginfo")}
+                      >
+                        机构信息
+                      </div>
                     </div>
-                    <div
-                      className={`menu-item ${type == "changepwd" ? "active" : ""}`}
-                      onClick={this.changeType.bind(this, "changepwd")}
-                    >
-                      修改密码
+                  ) : null}
+                </div>
+                {base.userInfo ? (
+                  <div
+                    className={`menu-parent ${
+                      type == "purchase" || type == "orders" ? "active" : ""
+                    }`}
+                  >
+                    <div className="one-menu">
+                      <div className="one-t1">
+                        <span className="icon f3"></span>
+                        <label>我的订单</label>
+                      </div>
+                      <div className="one-t2">My order</div>
+                    </div>
+                    <div className="two-menus">
+                      <div
+                        className={`menu-item ${type == "purchase" ? "active" : ""}`}
+                        onClick={this.changeType.bind(this, "purchase")}
+                      >
+                        在线充值
+                      </div>
+                      <div
+                        className={`menu-item ${type == "orders" ? "active" : ""}`}
+                        onClick={this.changeType.bind(this, "orders")}
+                      >
+                        订单列表
+                      </div>
                     </div>
                   </div>
-                </div>
+                ) : null}
                 <div
                   className={`menu-parent ${
-                    type == "purchase" || type == "orders" ? "active" : ""
-                  }`}
-                >
-                  <div className="one-menu">
-                    <div className="one-t1">
-                      <span className="icon f3"></span>
-                      <label>我的订单</label>
-                    </div>
-                    <div className="one-t2">My order</div>
-                  </div>
-                  <div className="two-menus">
-                    <div
-                      className={`menu-item ${type == "purchase" ? "active" : ""}`}
-                      onClick={this.changeType.bind(this, "purchase")}
-                    >
-                      在线充值
-                    </div>
-                    <div
-                      className={`menu-item ${type == "orders" ? "active" : ""}`}
-                      onClick={this.changeType.bind(this, "orders")}
-                    >
-                      订单列表
-                    </div>
-                  </div>
-                </div>
-                <div
-                  className={`menu-parent ${
-                    type == "collect" || type == "search" || type == "browse" ? "active" : ""
+                    type == "collect" ||
+                    type == "search" ||
+                    type == "browse" ||
+                    type == "statistics"
+                      ? "active"
+                      : ""
                   }`}
                 >
                   <div className="one-menu">
@@ -162,12 +203,21 @@ class Center extends Component {
                     <div className="one-t2">Full record</div>
                   </div>
                   <div className="two-menus">
-                    <div
-                      className={`menu-item ${type == "collect" ? "active" : ""}`}
-                      onClick={this.changeType.bind(this, "collect")}
-                    >
-                      我的收藏
-                    </div>
+                    {base.userInfo ? (
+                      <div
+                        className={`menu-item ${type == "collect" ? "active" : ""}`}
+                        onClick={this.changeType.bind(this, "collect")}
+                      >
+                        我的收藏
+                      </div>
+                    ) : (
+                      <div
+                        className={`menu-item ${type == "statistics" ? "active" : ""}`}
+                        onClick={this.changeType.bind(this, "statistics")}
+                      >
+                        数据统计
+                      </div>
+                    )}
                     <div
                       className={`menu-item ${type == "search" ? "active" : ""}`}
                       onClick={this.changeType.bind(this, "search")}
@@ -182,54 +232,77 @@ class Center extends Component {
                     </div>
                   </div>
                 </div>
+                <div
+                  className={`menu-parent ${
+                    type == "usermanage" || type == "orders" ? "active" : ""
+                  }`}
+                >
+                  <div className="one-menu">
+                    <div className="one-t1">
+                      <span className="icon f5"></span>
+                      <label>用户管理</label>
+                    </div>
+                    <div className="one-t2">User management</div>
+                  </div>
+                  <div className="two-menus">
+                    <div
+                      className={`menu-item ${type == "usermanage" ? "active" : ""}`}
+                      onClick={this.changeType.bind(this, "usermanage")}
+                    >
+                      管理员管理
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
-            <div className="center-right-all">
-              {/* 消息中心 */}
-              {type == "message" ? (
-                <Message ref={el => (this.messageElement = el)} base={base} />
-              ) : null}
-              {/* 个人信息 */}
-              {type == "meinfo" ? (
-                <MeInfo
-                  ref={el => (this.meinfoElement = el)}
-                  base={base}
-                  changeType={this.changeType}
-                />
-              ) : null}
-              {/* 账户关联 */}
-              {type == "account" ? (
-                <Account ref={el => (this.accountElement = el)} base={base} />
-              ) : null}
-              {/* 修改密码 */}
-              {type == "changepwd" ? (
-                <ChangePwd
-                  ref={el => (this.changepwdElement = el)}
-                  base={base}
-                  changeType={this.changeType}
-                />
-              ) : null}
-              {/* 在线充值 */}
-              {type == "purchase" ? (
-                <Purchase ref={el => (this.purchaseElement = el)} base={base} />
-              ) : null}
-              {/* 订单列表 */}
-              {type == "orders" ? (
-                <Orders ref={el => (this.ordersElement = el)} base={base} />
-              ) : null}
-              {/* 我的收藏 */}
-              {type == "collect" ? (
-                <Collect ref={el => (this.collectElement = el)} base={base} />
-              ) : null}
-              {/* 检索历史 */}
-              {type == "search" ? (
-                <Search ref={el => (this.searchElement = el)} base={base} />
-              ) : null}
-              {/* 浏览历史 */}
-              {type == "browse" ? (
-                <Browse ref={el => (this.browseElement = el)} base={base} />
-              ) : null}
-            </div>
+            {base && base.userInfo ? (
+              <div className="center-right-all">
+                {/* 消息中心 */}
+                {type == "message" ? (
+                  <Message ref={el => (this.messageElement = el)} base={base} />
+                ) : null}
+                {/* 个人信息 */}
+                {type == "meinfo" ? (
+                  <MeInfo
+                    ref={el => (this.meinfoElement = el)}
+                    base={base}
+                    changeType={this.changeType}
+                  />
+                ) : null}
+                {/* 账户关联 */}
+                {type == "account" ? (
+                  <Account ref={el => (this.accountElement = el)} base={base} />
+                ) : null}
+                {/* 修改密码 */}
+                {type == "changepwd" ? (
+                  <ChangePwd
+                    ref={el => (this.changepwdElement = el)}
+                    base={base}
+                    changeType={this.changeType}
+                  />
+                ) : null}
+                {/* 在线充值 */}
+                {type == "purchase" ? (
+                  <Purchase ref={el => (this.purchaseElement = el)} base={base} />
+                ) : null}
+                {/* 订单列表 */}
+                {type == "orders" ? (
+                  <Orders ref={el => (this.ordersElement = el)} base={base} />
+                ) : null}
+                {/* 我的收藏 */}
+                {type == "collect" ? (
+                  <Collect ref={el => (this.collectElement = el)} base={base} />
+                ) : null}
+                {/* 检索历史 */}
+                {type == "search" ? (
+                  <Search ref={el => (this.searchElement = el)} base={base} />
+                ) : null}
+                {/* 浏览历史 */}
+                {type == "browse" ? (
+                  <Browse ref={el => (this.browseElement = el)} base={base} />
+                ) : null}
+              </div>
+            ) : null}
           </div>
         ) : null}
         <Footer />

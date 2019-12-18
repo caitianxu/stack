@@ -198,6 +198,30 @@ const HTTP = {
   _memberorg_search: param => {
     return service.post("/api/web/memberorg/search", param);
   },
+  //关联机构
+  _memberorg_bind: param => {
+    return service.post("/api/web/memberorg/bind", param);
+  },
+  //解除关联
+  _memberorg_relieve: param => {
+    return service.post("/api/web/memberorg/relieve", param);
+  },
+  //订单列表
+  _order_list: param => {
+    return service.post("/api/web/member/order/list", param);
+  },
+  //收藏列表
+  _collect_list: param => {
+    return service.post("/api/web/member/collect/list", param);
+  },
+  //检索列表
+  _search_list: param => {
+    return service.post("/api/web/member/search/list", param);
+  },
+  //浏览列表
+  _browse_list: param => {
+    return service.post("/api/web/member/view/list", param);
+  },
   
 
   //获取经纬度

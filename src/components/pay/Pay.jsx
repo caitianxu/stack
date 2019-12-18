@@ -55,7 +55,7 @@ class Pay extends Component {
           footer={null}
           keyboard={false}
           maskClosable={true}
-          width="500px"
+          width="350px"
           onCancel={this.hideModal}
         >
           <div className="modal-parent-plan weixin-pay-plan">
@@ -80,9 +80,8 @@ class Pay extends Component {
                 <div className="qcode">
                   <QRCode
                     value={qr_code}
-                    size={200}
-                    bgColor={"#d5d5ff"}
-                    fgColor={"#2f2765"}
+                    size={268}
+                    fgColor={"#7e332e"}
                   />
                 </div>
               </div>

@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import { DatePicker, Select, Checkbox, Pagination } from "antd";
+import moment from "moment";
+import HTTP from "../../script/service";
 const { RangePicker } = DatePicker;
 const { Option } = Select;
 
@@ -8,24 +10,129 @@ class Orders extends Component {
     super(props);
     this.state = {
       checkall: false,
+      pageData: [],
+      searchParam: {
+        searchText: null,
+        start_time: null,
+        end_time: null,
+        pay_bank: null //0:线下支付，1:微信，2:支付宝
+      },
       pageParam: {
         pageNum: 1,
         pageSize: 10,
-        pages: 11,
-        total: 111
+        pages: 1,
+        total: 0
       }
     };
   }
+  componentDidMount() {
+    this.getPageData();
+  }
+  onChangePayType = n => {
+    let { searchParam } = this.state;
+    searchParam.pay_bank = n;
+    this.setState(
+      {
+        searchParam: { ...searchParam }
+      },
+      () => {
+        this.getPageData();
+      }
+    );
+  };
+  //时间
+  onChangeTime = (date, dateString) => {
+    let { searchParam } = this.state;
+    searchParam.start_time = dateString[0];
+    searchParam.end_time = dateString[1];
+    this.setState({
+      searchParam: { ...searchParam }
+    });
+  };
+  //获取数据
+  getPageData = () => {
+    let { searchParam, pageParam } = this.state;
+    HTTP._order_list({
+      ...searchParam,
+      ...pageParam
+    }).then(res => {
+      if (res.code == 0) {
+        pageParam.pages = res.data.pages;
+        pageParam.total = res.data.total;
+        this.setState({
+          pageParam: pageParam,
+          pageData: res.data.rows,
+          checkall: false
+        });
+      }
+    });
+  };
+  //row - box
+  changeBox = (item, e) => {
+    item.checked = e.target.checked;
+    let sels = this.state.pageData.filter(item => item.checked);
+    let checkall = false;
+    if (sels.length == this.state.pageData.length) {
+      checkall = true;
+    }
+    this.setState({
+      checkall: checkall,
+      pageData: [...this.state.pageData]
+    });
+  };
+  //全选
+  setCheckAll = e => {
+    let checkall = e.target.checked;
+    this.state.pageData.forEach(item => (item.checked = checkall));
+    this.setState({
+      checkall: checkall,
+      pageData: [...this.state.pageData]
+    });
+  };
+  //分页回调
+  onPagChange = page => {
+    let { pageParam } = this.state;
+    pageParam.pageNum = page;
+    this.setState(
+      {
+        pageParam: pageParam
+      },
+      () => {
+        this.getPageData();
+      }
+    );
+  };
+  //分页控件
+  itemRender = (current, type, originalElement) => {
+    if (type === "prev") {
+      return <span className="prev">上一页</span>;
+    }
+    if (type === "next") {
+      return <span className="next">下一页</span>;
+    }
+    return originalElement;
+  };
+  //单项删除
+  delItem = item => {
+    console.log(item)
+  }
   render() {
-    const { checkall, pageParam } = this.state;
+    const { checkall, pageParam, searchParam, pageData } = this.state;
+    const getTime = () => {
+      let ll = [
+        searchParam.start_time ? moment(searchParam.start_time, "YYYY-MM-DD") : null,
+        searchParam.end_time ? moment(searchParam.end_time, "YYYY-MM-DD") : null
+      ];
+      return ll;
+    };
     return (
       <div className="center-orders-detail">
         <div className="center-page-title">订单列表 Order List</div>
         <div className="center-orders-search">
           <div className="search-col">
             <RangePicker
-              //   onChange={this.onChange.bind(this, ["pubdate_start", "pubdate_end"])}
-              //   value={getTime(["pubdate_start", "pubdate_end"])}
+              onChange={this.onChangeTime}
+              value={getTime()}
               separator="-"
               style={{ width: 320 }}
             />
@@ -34,13 +141,13 @@ class Orders extends Component {
             <Select
               defaultValue=""
               style={{ width: 120 }}
-              //   value={param.subject_and}
-              //   onChange={this.onChangeSelect.bind(this, "subject_and")}
+              value={searchParam.pay_bank || ""}
+              onChange={this.onChangePayType}
             >
-              <Option value="">支付方式</Option>
-              <Option value="alipay">支付宝</Option>
-              <Option value="weixin">微信</Option>
-              <Option value="yue">余额</Option>
+              <Option value="">全部</Option>
+              <Option value="0">线下支付</Option>
+              <Option value="1">微信</Option>
+              <Option value="2">支付宝</Option>
             </Select>
           </div>
         </div>
@@ -66,16 +173,28 @@ class Orders extends Component {
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td><Checkbox checked={checkall} onClick={this.setCheckAll} /></td>
-              <td>中国人民大学出版社</td>
-              <td>2019-07-19 17:10:01</td>
-              <td>20190625103525503</td>
-              <td>支付宝</td>
-              <td>10</td>
-              <td><span className="link">已完成</span></td>
-              <td><span className="link">删除</span></td>
-            </tr>
+            {pageData.map((item, index) => {
+              return (
+                <tr key={`tr-${index}`}>
+                  <td>
+                    <Checkbox checked={checkall} onClick={this.setCheckAll} />
+                  </td>
+                  <td>{item.title || "-"}</td>
+                  <td>{item.create_time}</td>
+                  <td>{item.order_no}</td>
+                  <td>
+                    {item.pay_bank == 0 ? "线下支付" : null}
+                    {item.pay_bank == 1 ? "微信" : null}
+                    {item.pay_bank == 2 ? "支付宝" : null}
+                  </td>
+                  <td>{item.pay_fee || 0}</td>
+                  <td>{item.pay_status == 1 ? "待支付" : "已完成"}</td>
+                  <td>
+                    <span className="link" onClick={this.delItem.bind(this, item)}>删除</span>
+                  </td>
+                </tr>
+              );
+            })}
           </tbody>
         </table>
         <div className={pageParam.pages <= 1 ? "page-papers none" : "page-papers"}>

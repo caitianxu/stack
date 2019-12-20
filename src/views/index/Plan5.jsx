@@ -44,11 +44,10 @@ class Plan5 extends Component {
                       <img alt="" src={Util.transImgUrl(item.cover)} />
                     </div>
                     <div className="detail">
-                      <h3>弗雷德·泰维斯</h3>
+                      <h3>{item.title}</h3>
                       <p>国籍：{item.country}</p>
-                      <p>单位：悉尼大学</p>
-                      <p>研究领域：中国政治；中国当代史</p>
-                      <p>毛泽东研究</p>
+                      <p>单位：{item.pubunit}</p>
+                      <p>研究领域：{item.renark}</p>
                     </div>
                   </div>
                 );

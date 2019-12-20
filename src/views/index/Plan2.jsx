@@ -3,6 +3,7 @@ import Menus from "./Menus";
 import TopSearch from "./TopSearch";
 import { Link } from "react-router-dom";
 import HTTP from "../../script/service";
+import Util from "../../script/util";
 
 class Plan2 extends Component {
   constructor(props) {
@@ -158,7 +159,7 @@ class Plan2 extends Component {
                             return (
                               <Link to={`/book?id=${book.res_id}`} className="sw-book" key={`book-${index}`}>
                                 <div className="cover">
-                                  <img alt="" src="/assets/img/book.png" />
+                                  <img alt="" src={Util.transImgUrl(book.cover)}/>
                                 </div>
                                 <div className="name">书名：{book.title}</div>
                                 <p>作者：{book.author}</p>

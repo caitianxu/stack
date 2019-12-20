@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import TopSearch from "./TopSearch";
 import HTTP from "../../script/service";
 import { withRouter } from "react-router-dom";
+import Util from "../../script/util";
 
 class Plan3 extends Component {
   constructor(props) {
@@ -109,7 +110,7 @@ class Plan3 extends Component {
                           onMouseOver={this.changeSwIndex.bind(this, index)}
                         >
                           <div className="cover" onClick={this.activeToBook.bind(this, item)}>
-                            <img alt="" src="/assets/img/book.png" />
+                            <img alt="" src={Util.transImgUrl(item.cover)}/>
                             <div className="detail">
                               <h3>书名：{item.title}</h3>
                               <p>作者：{item.author}</p>

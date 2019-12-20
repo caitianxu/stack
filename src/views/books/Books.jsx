@@ -565,6 +565,7 @@ class Books extends Component {
                   return (
                     <dl
                       key={`isfull-${index}`}
+                      className={searchParam.isfull == item.name ? "active" : ""}
                       onClick={this.setSearchParam.bind(this, "isfull", item.name)}
                     >
                       <dt>{isfulls[item.name]}</dt>
@@ -584,6 +585,7 @@ class Books extends Component {
                   return (
                     <dl
                       key={`country-${index}`}
+                      className={searchParam.language == item.name ? "active" : ""}
                       onClick={this.setSearchParam.bind(this, "language", item.name)}
                     >
                       <dt>{item.name}</dt>
@@ -620,6 +622,7 @@ class Books extends Component {
                   return (
                     <dl
                       key={`country-${index}`}
+                      className={searchParam.pubyear == item.name ? "active" : ""}
                       onClick={this.setSearchParam.bind(this, "pubyear", item.name)}
                     >
                       <dt>{item.name}</dt>
@@ -656,6 +659,7 @@ class Books extends Component {
                   return (
                     <dl
                       key={`country-${index}`}
+                      className={searchParam.special == item.name ? "active" : ""}
                       onClick={this.setSearchParam.bind(this, "special", item.name)}
                     >
                       <dt>{item.name}</dt>

@@ -2,8 +2,8 @@ import React, { Component } from "react";
 import { Icon, Modal, message } from "antd";
 import Scrollbar from "react-scrollbars-custom";
 import { _set_classly_visible } from "../../store/Action";
-import "./Classly.scss";
 import HTTP from "../../script/service";
+import "./Classly.scss";
 
 class Classly extends Component {
   constructor(props) {
@@ -84,14 +84,19 @@ class Classly extends Component {
       }
     });
   }
+  toDetail = item => {
+    this.setState(
+      {
+        childVisible: false
+      },
+      () => {
+        _set_classly_visible(false);
+        this.props.history.push(`/papers?cat=${item.cat_name}&cat_id=${item.cat_id}`);
+      }
+    );
+  };
   render() {
-    const {
-      data,
-      selectIndex,
-      childVisible,
-      childData,
-      dataEnglish
-    } = this.state;
+    const { data, selectIndex, childVisible, childData, dataEnglish } = this.state;
     const { base } = this.props;
     return (
       <span>
@@ -109,10 +114,7 @@ class Classly extends Component {
                     >
                       {data.map((item, row) => {
                         return (
-                          <div
-                            key={`views-${row}`}
-                            className={`sw-views sw-row-${item.index}`}
-                          >
+                          <div key={`views-${row}`} className={`sw-views sw-row-${item.index}`}>
                             {item.list.map((view, col) => {
                               return (
                                 <div
@@ -126,12 +128,8 @@ class Classly extends Component {
                                     <i className="style-3"></i>
                                     <i className="style-4"></i>
                                   </div> */}
-                                  <div
-                                    className={`view-content view-type-${view.cat_id}`}
-                                  >
-                                    <div className="num">
-                                      {view.res_count || 0}
-                                    </div>
+                                  <div className={`view-content view-type-${view.cat_id}`}>
+                                    <div className="num">{view.res_count || 0}</div>
                                   </div>
                                 </div>
                               );
@@ -154,10 +152,7 @@ class Classly extends Component {
               </div>
             </div>
             <div className="classly-action">
-              <span
-                className="close"
-                onClick={_set_classly_visible.bind(this, false)}
-              >
+              <span className="close" onClick={_set_classly_visible.bind(this, false)}>
                 <Icon type="close" />
               </span>
               <span className="title">
@@ -207,6 +202,7 @@ class Classly extends Component {
                             <div
                               className="classly-mini-item"
                               key={`child-${index}`}
+                              onClick={this.toDetail.bind(this, item)}
                             >
                               <label>{item.cat_name}</label>
                               {item.res_count || 0}

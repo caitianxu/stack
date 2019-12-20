@@ -40,7 +40,23 @@ class Papers extends Component {
         pageSize: 6,
         pages: 1
       },
-      types: [], //类型
+      types: [
+        {
+          count: 0,
+          id: 6,
+          name: "期刊论文"
+        },
+        {
+          count: 0,
+          id: 7,
+          name: "会议论文"
+        },
+        {
+          count: 0,
+          id: 8,
+          name: "学位论文"
+        }
+      ], //类型
       languages: [], //语种
       languageParam: {
         pageNum: 1,
@@ -57,7 +73,8 @@ class Papers extends Component {
         searchText: null,
         cat: null, //分类
         language: "", //语言
-        paper_type: null, //类型
+        paper_type: "期刊论文", //类型
+        paper_type_id: 6, //类型
         foundation: null, //基金项目
         pubdate_start: null, //发布开始日期
         pubdate_end: null, //发布结束日期
@@ -133,7 +150,8 @@ class Papers extends Component {
           searchText: null,
           cat: null, //分类
           language: "", //语言
-          paper_type: null, //类型
+          paper_type: "期刊论文", //类型
+          paper_type_id: 6, //类型
           foundation: null, //基金项目
           pubdate_start: null, //发布开始日期
           pubdate_end: null, //发布结束日期
@@ -235,6 +253,14 @@ class Papers extends Component {
       } else {
         searchParam["cat"] = null;
         searchParam["cat_id"] = null;
+      }
+    } else if (key == "paper_type") {
+      if (value) {
+        searchParam["paper_type"] = value.name;
+        searchParam["paper_type_id"] = value.id;
+      } else {
+        searchParam["paper_type"] = "期刊论文";
+        searchParam["paper_type_id"] = 6;
       }
     } else if (key == "journal") {
       if (value) {
@@ -418,7 +444,9 @@ class Papers extends Component {
   };
   //进入详情页面
   openDetail = item => {
-    this.props.history.push("/paper?id=" + item.res_id);
+    this.props.history.push(
+      `/paper?type=${this.state.searchParam.paper_type_id}&id=${item.res_id}`
+    );
   };
   render() {
     const {
@@ -452,7 +480,9 @@ class Papers extends Component {
         i == "keywords2" ||
         i == "title2" ||
         i == "journal_id" ||
-        i == "cat_id"
+        i == "cat_id" ||
+        i == "paper_type" ||
+        i == "paper_type_id"
       ) {
         continue;
       } else if (i == "title" && searchParam[i]) {
@@ -494,6 +524,26 @@ class Papers extends Component {
         />
         <div className="second-content">
           <div className="second-left">
+            <div className="search-group">
+              <div className="group-title">
+                <h3>论文类型</h3>
+                <p>Types of papers</p>
+              </div>
+              <div className="group-content">
+                {types.map((item, index) => {
+                  return (
+                    <dl
+                      key={`country-${index}`}
+                      className={searchParam.paper_type_id == item.id ? "active" : ""}
+                      onClick={this.setSearchParam.bind(this, "paper_type", item)}
+                    >
+                      <dt>{item.name}</dt>
+                      <dd>{item.count}</dd>
+                    </dl>
+                  );
+                })}
+              </div>
+            </div>
             <div className="search-group">
               <div className="group-title">
                 <h3>学科分类</h3>
@@ -578,6 +628,7 @@ class Papers extends Component {
                   return (
                     <dl
                       key={`country-${index}`}
+                      className={searchParam.language == item.name ? "active" : ""}
                       onClick={this.setSearchParam.bind(this, "language", item.name)}
                     >
                       <dt>{item.name}</dt>
@@ -606,25 +657,6 @@ class Papers extends Component {
             </div>
             <div className="search-group">
               <div className="group-title">
-                <h3>论文类型</h3>
-                <p>Types of papers</p>
-              </div>
-              <div className="group-content">
-                {types.map((item, index) => {
-                  return (
-                    <dl
-                      key={`country-${index}`}
-                      onClick={this.setSearchParam.bind(this, "paper_type", item.name)}
-                    >
-                      <dt>{item.name}</dt>
-                      <dd>{item.count}</dd>
-                    </dl>
-                  );
-                })}
-              </div>
-            </div>
-            <div className="search-group">
-              <div className="group-title">
                 <h3>来源刊物</h3>
                 <p>Source journals</p>
               </div>
@@ -633,6 +665,7 @@ class Papers extends Component {
                   return (
                     <dl
                       key={`country-${index}`}
+                      className={searchParam.journal == item.name ? "active" : ""}
                       onClick={this.setSearchParam.bind(this, "journal", item)}
                     >
                       <dt>{item.name}</dt>
@@ -736,7 +769,6 @@ class Papers extends Component {
                 <div className="not-data">没有找到相关内容</div>
               )}
             </div>
-
             <div className={pageParam.pages <= 1 ? "page-papers none" : "page-papers"}>
               <span className="label">共{pageParam.total}个结果</span>
               <span className="pagination">

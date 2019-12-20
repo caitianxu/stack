@@ -30,20 +30,39 @@ class Browse extends Component {
   //获取数据
   getPageData = () => {
     let { searchParam, pageParam } = this.state;
-    HTTP._browse_list({
-      ...searchParam,
-      ...pageParam
-    }).then(res => {
-      if (res.code == 0) {
-        pageParam.pages = res.data.pages;
-        pageParam.total = res.data.total;
-        this.setState({
-          pageParam: pageParam,
-          pageData: res.data.rows,
-          checkall: false
-        });
-      }
-    });
+    const { orgInfo } = this.props.base;
+    if (orgInfo) {
+      searchParam.org_id = orgInfo.org_id;
+      HTTP._browse_org_list({
+        ...searchParam,
+        ...pageParam
+      }).then(res => {
+        if (res.code == 0) {
+          pageParam.pages = res.data.pages;
+          pageParam.total = res.data.total;
+          this.setState({
+            pageParam: pageParam,
+            pageData: res.data.rows,
+            checkall: false
+          });
+        }
+      });
+    } else {
+      HTTP._browse_list({
+        ...searchParam,
+        ...pageParam
+      }).then(res => {
+        if (res.code == 0) {
+          pageParam.pages = res.data.pages;
+          pageParam.total = res.data.total;
+          this.setState({
+            pageParam: pageParam,
+            pageData: res.data.rows,
+            checkall: false
+          });
+        }
+      });
+    }
   };
   //时间
   onChangeTime = (date, dateString) => {

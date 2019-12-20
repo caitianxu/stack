@@ -320,7 +320,11 @@ class Policys extends Component {
   };
   //进入详情页面
   openDetail = item => {
-    this.props.history.push("/policy?id=" + item.inter_id);
+    let id = item.inter_id;
+    if (!id && item.policies_id) {
+      id = item.policies_id;
+    }
+    this.props.history.push("/policy?id=" + id);
   };
   render() {
     const {
@@ -382,11 +386,7 @@ class Policys extends Component {
                     <dl
                       key={`country-${index}`}
                       className={searchParam.policies_type == item.id ? "active" : ""}
-                      onClick={this.setSearchParam.bind(
-                        this,
-                        "policies_type",
-                        item.id
-                      )}
+                      onClick={this.setSearchParam.bind(this, "policies_type", item.id)}
                     >
                       <dt>{item.name}</dt>
                       <dd>{item.count}</dd>
@@ -406,11 +406,8 @@ class Policys extends Component {
                   return (
                     <dl
                       key={`country-${index}`}
-                      onClick={this.setSearchParam.bind(
-                        this,
-                        "disagency",
-                        item.name
-                      )}
+                      className={searchParam.disagency == item.name ? "active" : ""}
+                      onClick={this.setSearchParam.bind(this, "disagency", item.name)}
                     >
                       <dt>{item.name}</dt>
                       <dd>{item.count}</dd>
@@ -423,19 +420,13 @@ class Policys extends Component {
                   {disagencyParam.pageNum}/{disagencyParam.pages}
                 </span>
                 <span
-                  className={
-                    disagencyParam.pageNum == 1 ? "paper dis" : "paper"
-                  }
+                  className={disagencyParam.pageNum == 1 ? "paper dis" : "paper"}
                   onClick={this.changeDisagencyList.bind(this, -1)}
                 >
                   上一页
                 </span>
                 <span
-                  className={
-                    disagencyParam.pageNum >= disagencyParam.pages
-                      ? "paper dis"
-                      : "paper"
-                  }
+                  className={disagencyParam.pageNum >= disagencyParam.pages ? "paper dis" : "paper"}
                   onClick={this.changeDisagencyList.bind(this, 1)}
                 >
                   下一页
@@ -452,11 +443,8 @@ class Policys extends Component {
                   return (
                     <dl
                       key={`country-${index}`}
-                      onClick={this.setSearchParam.bind(
-                        this,
-                        "level",
-                        item.name
-                      )}
+                      className={searchParam.level == item.name ? "active" : ""}
+                      onClick={this.setSearchParam.bind(this, "level", item.name)}
                     >
                       <dt>{item.name}</dt>
                       <dd>{item.count}</dd>
@@ -475,11 +463,7 @@ class Policys extends Component {
                   上一页
                 </span>
                 <span
-                  className={
-                    levelParam.pageNum >= levelParam.pages
-                      ? "paper dis"
-                      : "paper"
-                  }
+                  className={levelParam.pageNum >= levelParam.pages ? "paper dis" : "paper"}
                   onClick={this.changeLevelList.bind(this, 1)}
                 >
                   下一页
@@ -540,10 +524,7 @@ class Policys extends Component {
                         />
                       </span>
                       <div className="row-con">
-                        <div
-                          className="d1"
-                          onClick={this.openDetail.bind(this, item)}
-                        >
+                        <div className="d1" onClick={this.openDetail.bind(this, item)}>
                           {index + 1}、{item.title}
                         </div>
                         <div className="d2">
@@ -553,17 +534,11 @@ class Policys extends Component {
                         </div>
                       </div>
                       {item.collect ? (
-                        <div
-                          className="action follow"
-                          onClick={this.changeFollow.bind(this, item)}
-                        >
+                        <div className="action follow" onClick={this.changeFollow.bind(this, item)}>
                           <Icon type="star" theme="filled" />
                         </div>
                       ) : (
-                        <div
-                          className="action"
-                          onClick={this.changeFollow.bind(this, item)}
-                        >
+                        <div className="action" onClick={this.changeFollow.bind(this, item)}>
                           <Icon type="star" />
                         </div>
                       )}
@@ -574,11 +549,7 @@ class Policys extends Component {
                 <div className="not-data">没有找到相关内容</div>
               )}
             </div>
-            <div
-              className={
-                pageParam.pages <= 1 ? "page-papers none" : "page-papers"
-              }
-            >
+            <div className={pageParam.pages <= 1 ? "page-papers none" : "page-papers"}>
               <span className="label">共{pageParam.total}个结果</span>
               <span className="pagination">
                 <Pagination

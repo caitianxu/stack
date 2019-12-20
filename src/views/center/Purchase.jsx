@@ -79,7 +79,11 @@ class Purchase extends Component {
         <div className="center-purchase-header">
           <div className="header-row">
             <label className="row-label">账户包库时长：</label>
-            <div className="row-value">2017.08.10 - 2019.10.10</div>
+            <div className="row-value">
+              {userInfo.start_time && userInfo.end_time
+                ? `${userInfo.start_time} - ${userInfo.end_time}`
+                : "无"}
+            </div>
           </div>
           {/* <div className="header-row">
             <label className="row-label">账户余额：</label>

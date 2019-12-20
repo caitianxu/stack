@@ -184,7 +184,7 @@ class Mechanisms extends Component {
   //进入详情页面
   openDetail = item => {
     this.props.history.push("/mechanism?id=" + item.org_id);
-  }
+  };
   render() {
     const { base, countryParam, countrys, searchParam, pageParam, pageData } = this.state;
     let searchArray = [];
@@ -200,7 +200,13 @@ class Mechanisms extends Component {
     return (
       <div className="mechanisms-page">
         <Header base={base} />
-        <TopSearch base={base} tabIndex={4} searchArray={searchArray} searchReset={this.searchReset} setSearchParam={this.setSearchParam} />
+        <TopSearch
+          base={base}
+          tabIndex={4}
+          searchArray={searchArray}
+          searchReset={this.searchReset}
+          setSearchParam={this.setSearchParam}
+        />
         <div className="second-content">
           <div className="second-left">
             <div className="search-group">
@@ -211,7 +217,11 @@ class Mechanisms extends Component {
               <ul className="group-content">
                 {countrys.map((item, index) => {
                   return (
-                    <li key={`country-${index}`} onClick={this.setSearchParam.bind(this, "country", item.name)}>
+                    <li
+                      key={`country-${index}`}
+                      className={searchParam.country == item.name ? "active" : ""}
+                      onClick={this.setSearchParam.bind(this, "country", item.name)}
+                    >
                       {item.name}
                     </li>
                   );
@@ -221,10 +231,16 @@ class Mechanisms extends Component {
                 <span className="page">
                   {countryParam.pageNum}/{countryParam.pages}
                 </span>
-                <span className={countryParam.pageNum == 1 ? "paper dis" : "paper"} onClick={this.changeCountryList.bind(this, -1)}>
+                <span
+                  className={countryParam.pageNum == 1 ? "paper dis" : "paper"}
+                  onClick={this.changeCountryList.bind(this, -1)}
+                >
                   上一页
                 </span>
-                <span className={countryParam.pageNum >= countryParam.pages ? "paper dis" : "paper"} onClick={this.changeCountryList.bind(this, 1)}>
+                <span
+                  className={countryParam.pageNum >= countryParam.pages ? "paper dis" : "paper"}
+                  onClick={this.changeCountryList.bind(this, 1)}
+                >
                   下一页
                 </span>
               </div>
@@ -235,7 +251,11 @@ class Mechanisms extends Component {
               {pageData.length > 0 ? (
                 pageData.map((item, index) => {
                   return (
-                    <div className="mechanism-item" key={`me-${index}`} onClick={this.openDetail.bind(this, item)}>
+                    <div
+                      className="mechanism-item"
+                      key={`me-${index}`}
+                      onClick={this.openDetail.bind(this, item)}
+                    >
                       <div className="cover">
                         <img src={Util.transImgUrl(item.cover, "130x110")} alt="" />
                       </div>
@@ -259,7 +279,13 @@ class Mechanisms extends Component {
             <div className={pageParam.pages <= 1 ? "page-papers none" : "page-papers"}>
               <span className="label">共{pageParam.total}个结果</span>
               <span className="pagination">
-                <Pagination hideOnSinglePage={true} current={pageParam.pageNum} total={pageParam.total} onChange={this.onPagChange} itemRender={this.itemRender} />
+                <Pagination
+                  hideOnSinglePage={true}
+                  current={pageParam.pageNum}
+                  total={pageParam.total}
+                  onChange={this.onPagChange}
+                  itemRender={this.itemRender}
+                />
               </span>
             </div>
           </div>

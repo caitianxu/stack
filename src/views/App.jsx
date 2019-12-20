@@ -3,12 +3,7 @@ import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
 import asyncComponent from "../script/asyncComponent";
 import store from "../store/store";
 import Util from "../script/util";
-import {
-  _get_url_search,
-  _set_token,
-  _get_userInfo,
-  _get_orgInfo
-} from "../store/Action";
+import { _get_url_search, _set_token, _get_userInfo, _get_orgInfo } from "../store/Action";
 
 const Index = asyncComponent(() => import("./index/Index"));
 const Login = asyncComponent(() => import("./login/Login"));
@@ -30,6 +25,8 @@ const Book = asyncComponent(() => import("./book/Book"));
 const Papers = asyncComponent(() => import("./papers/Papers"));
 const Paper = asyncComponent(() => import("./paper/Paper"));
 const Center = asyncComponent(() => import("./center/Center"));
+const Subjects = asyncComponent(() => import("./subjects/Subjects"));
+const Subject = asyncComponent(() => import("./subject/Subject"));
 
 class App extends Component {
   constructor(props) {
@@ -56,7 +53,7 @@ class App extends Component {
       _set_token(token).then(res => {
         _get_userInfo(res)
           .then(res => {
-            console.log("用户登录");
+            console.log("用户登录", res);
           })
           .catch(res => {
             _get_orgInfo();
@@ -122,6 +119,10 @@ class App extends Component {
             <Route path="/paper" component={Paper} />
             {/* 个人中心 */}
             <Route path="/center" component={Center} />
+            {/* 专题 */}
+            <Subjects path="/subjects" component={Center} />
+            {/* 专题详情 */}
+            <Subject path="/subject" component={Center} />
 
             <Route path="/:local" component={Index} />
           </Switch>

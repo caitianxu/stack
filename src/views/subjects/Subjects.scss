@@ -1,0 +1,194 @@
+.subjects-page {
+  background: #f7f7f7;
+  font-family: "Microsoft YaHei";
+  .subjects-page-content {
+    width: 1200px;
+    margin: 0 auto;
+  }
+  .page-banner {
+    padding: 20px 0;
+    width: 1200px;
+    margin: 0 auto;
+  }
+  .page-search {
+    background: #fff;
+    padding: 10px 20px;
+    dl {
+      display: flex;
+      font-size: 16px;
+      line-height: 30px;
+      padding: 10px 0;
+      margin: 0;
+      &.border {
+        border-top: 1px #ddd dashed;
+        padding: 20px 0 10px 0;
+      }
+      dt {
+        width: 90px;
+        margin: 0;
+      }
+      dd {
+        display: flex;
+        flex-wrap: wrap;
+        flex: 1;
+        margin: 0;
+        .c-item {
+          cursor: pointer;
+          margin-right: 20px;
+          &.active,
+          &:hover {
+            color: #803228;
+            font-weight: bold;
+          }
+        }
+      }
+    }
+    .search-control {
+      border: 1px #ccc solid;
+      border-radius: 20px;
+      padding: 4px 0 4px 20px;
+      display: flex;
+      overflow: hidden;
+      input {
+        border: none;
+        height: 30px;
+        width: 250px;
+        line-height: 30px;
+        font-size: 14px;
+      }
+      .icon {
+        cursor: pointer;
+        padding: 0 15px 0 10px;
+        &:hover {
+          color: #803228;
+        }
+      }
+    }
+  }
+  .page-orderby {
+    padding: 30px 30px;
+    font-size: 16px;
+    display: flex;
+    justify-content: space-between;
+    line-height: 30px;
+    .c-left {
+      display: flex;
+    }
+    .orderby-item {
+      border: 1px #ddd solid;
+      padding: 0 10px;
+      margin-right: 15px;
+      color: #999;
+      text-align: center;
+      width: 95px;
+      cursor: pointer;
+      &:hover,
+      &.active {
+        color: #803228;
+      }
+      .icon {
+        padding-left: 5px;
+      }
+    }
+  }
+  .page-data-list {
+    padding: 0 25px 25px 25px;
+    background: #fff;
+    margin-bottom: 50px;
+    .data-row {
+      display: flex;
+      padding: 25px 0;
+      border-bottom: 1px #ccc dashed;
+      .cover {
+        width: 360px;
+        height: 240px;
+        cursor: pointer;
+        background: #f7f7f7;
+        img {
+          width: 100%;
+          height: 100%;
+        }
+      }
+      .detail {
+        flex: 1;
+        overflow: hidden;
+        padding-left: 25px;
+        h3 {
+          font-size: 20px;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          margin-bottom: 30px;
+          cursor: pointer;
+          a {
+            color: #1a1a1a;
+            &:hover {
+              text-decoration: underline;
+              color: #803228;
+            }
+          }
+        }
+        dl {
+          margin: 0;
+          display: flex;
+          line-height: 30px;
+          dt {
+            width: 50px;
+            margin: 0;
+          }
+          dd {
+            flex: 1;
+            margin: 0;
+            max-height: 180px;
+            overflow: hidden;
+            text-align: justify;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-line-clamp: 6;
+            -webkit-box-orient: vertical;
+          }
+        }
+      }
+    }
+  }
+
+  /*分页*/
+  .page-papers {
+    display: flex;
+    justify-content: center;
+    padding: 50px 0;
+    &.none {
+      display: none;
+    }
+    .label,
+    .numbers {
+      line-height: 32px;
+      margin: 0 30px 0 0;
+      color: #898989;
+      font-size: 14px;
+    }
+    .prev,
+    .next {
+      margin: 0 10px;
+    }
+    .ant-pagination-item {
+      border: none;
+    }
+    .ant-pagination-item-active:focus a,
+    .ant-pagination-item-active:hover a {
+      color: #803228;
+    }
+    .ant-pagination-item:focus a,
+    .ant-pagination-item:hover a {
+      color: #803228;
+    }
+    .ant-pagination-item-active a {
+      color: #fff !important;
+      background: #803228;
+      border-radius: 50%;
+    }
+    .ant-pagination-item-container .anticon {
+      color: #803228;
+    }
+  }
+}

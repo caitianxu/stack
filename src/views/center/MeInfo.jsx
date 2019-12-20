@@ -24,7 +24,8 @@ class MeInfo extends Component {
       param: {},
       bindPhoneParam: {
         phone: null,
-        code: null
+        code: null,
+        passwd: null
       }
     };
   }
@@ -121,9 +122,14 @@ class MeInfo extends Component {
       code_type: 3
     }).then(res => {
       if (res.code == 0) {
-        this.setState({
-          time: 60
-        });
+        this.setState(
+          {
+            time: 60
+          },
+          () => {
+            this.changeTime();
+          }
+        );
       } else {
         message.error(res.message);
       }
@@ -142,7 +148,26 @@ class MeInfo extends Component {
   };
   //绑定手机
   changeMyPhone = () => {
-    message.info("没有绑定手机接口");
+    const { bindPhoneParam } = this.state;
+    if (!bindPhoneParam.phone) {
+      message.warn("请输入手机号码");
+      return;
+    }
+    if (!bindPhoneParam.code) {
+      message.warn("请输入手机验证码");
+      return;
+    }
+    if (!bindPhoneParam.passwd) {
+      message.warn("请输入登录密码");
+      return;
+    }
+    HTTP._bind_phone(bindPhoneParam).then(res => {
+      if (res.code == 0) {
+        this.hidePhoneModal();
+      } else {
+        message.error(res.message);
+      }
+    });
   };
   render() {
     const { userInfo } = this.props.base;
@@ -342,7 +367,6 @@ class MeInfo extends Component {
           </div>
         </div>
         {edit ? <span>{editInfo()}</span> : <span>{defaultInfo()}</span>}
-
         {/* 绑定手机 */}
         <Modal
           visible={bindPhoneVisible}
@@ -416,6 +440,21 @@ class MeInfo extends Component {
                           <p>get verification code</p>
                         </div>
                       )}
+                    </div>
+                  </div>
+                  <div className="phone-row">
+                    <div className="phone-label">
+                      <p>登录密码</p>
+                      <p>Login Password</p>
+                    </div>
+                    <div className="phone-control">
+                      <input
+                        type="password"
+                        name="passwd"
+                        value={bindPhoneParam.passwd || ""}
+                        onChange={this.changePhoneForm}
+                        placeholder="请输入登录密码"
+                      />
                     </div>
                   </div>
                   <div className="phone-button">

@@ -6,6 +6,7 @@ class Message extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      checkall: false,
       pageParam: {
         pageNum: 1,
         pageSize: 10,

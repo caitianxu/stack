@@ -257,9 +257,20 @@ class Experts extends Component {
   //进入详情页面
   openDetail = item => {
     this.props.history.push("/expert?id=" + item.expert_id);
-  }
+  };
   render() {
-    const { base, countryParam, countrys, orgParam, orgs, searchParam, positions, positionParam, pageParam, pageData } = this.state;
+    const {
+      base,
+      countryParam,
+      countrys,
+      orgParam,
+      orgs,
+      searchParam,
+      positions,
+      positionParam,
+      pageParam,
+      pageData
+    } = this.state;
     let searchArray = [];
     for (let i in searchParam) {
       if (searchParam[i]) {
@@ -273,7 +284,13 @@ class Experts extends Component {
     return (
       <div className="experts-page">
         <Header base={base} />
-        <TopSearch base={base} tabIndex={5} searchArray={searchArray} searchReset={this.searchReset} setSearchParam={this.setSearchParam} />
+        <TopSearch
+          base={base}
+          tabIndex={5}
+          searchArray={searchArray}
+          searchReset={this.searchReset}
+          setSearchParam={this.setSearchParam}
+        />
         <div className="second-content">
           <div className="second-left">
             {/* 所在地区 */}
@@ -285,7 +302,11 @@ class Experts extends Component {
               <ul className="group-content">
                 {countrys.map((item, index) => {
                   return (
-                    <li key={`country-${index}`} onClick={this.setSearchParam.bind(this, "country", item.name)}>
+                    <li
+                      key={`country-${index}`}
+                      className={searchParam.country == item.name ? "active" : ""}
+                      onClick={this.setSearchParam.bind(this, "country", item.name)}
+                    >
                       {item.name}
                     </li>
                   );
@@ -295,10 +316,16 @@ class Experts extends Component {
                 <span className="page">
                   {countryParam.pageNum}/{countryParam.pages}
                 </span>
-                <span className={countryParam.pageNum == 1 ? "paper dis" : "paper"} onClick={this.changeCountryList.bind(this, -1)}>
+                <span
+                  className={countryParam.pageNum == 1 ? "paper dis" : "paper"}
+                  onClick={this.changeCountryList.bind(this, -1)}
+                >
                   上一页
                 </span>
-                <span className={countryParam.pageNum >= countryParam.pages ? "paper dis" : "paper"} onClick={this.changeCountryList.bind(this, 1)}>
+                <span
+                  className={countryParam.pageNum >= countryParam.pages ? "paper dis" : "paper"}
+                  onClick={this.changeCountryList.bind(this, 1)}
+                >
                   下一页
                 </span>
               </div>
@@ -312,7 +339,11 @@ class Experts extends Component {
               <ul className="group-content">
                 {positions.map((item, index) => {
                   return (
-                    <li key={`country-${index}`} onClick={this.setSearchParam.bind(this, "position", item.name)}>
+                    <li
+                      key={`country-${index}`}
+                      className={searchParam.position == item.name ? "active" : ""}
+                      onClick={this.setSearchParam.bind(this, "position", item.name)}
+                    >
                       {item.name}
                     </li>
                   );
@@ -322,10 +353,16 @@ class Experts extends Component {
                 <span className="page">
                   {positionParam.pageNum}/{positionParam.pages}
                 </span>
-                <span className={positionParam.pageNum == 1 ? "paper dis" : "paper"} onClick={this.changePositionList.bind(this, -1)}>
+                <span
+                  className={positionParam.pageNum == 1 ? "paper dis" : "paper"}
+                  onClick={this.changePositionList.bind(this, -1)}
+                >
                   上一页
                 </span>
-                <span className={positionParam.pageNum >= positionParam.pages ? "paper dis" : "paper"} onClick={this.changePositionList.bind(this, 1)}>
+                <span
+                  className={positionParam.pageNum >= positionParam.pages ? "paper dis" : "paper"}
+                  onClick={this.changePositionList.bind(this, 1)}
+                >
                   下一页
                 </span>
               </div>
@@ -339,7 +376,11 @@ class Experts extends Component {
               <ul className="group-content">
                 {orgs.map((item, index) => {
                   return (
-                    <li key={`org-${index}`} onClick={this.setSearchParam.bind(this, "org_name", item.name)}>
+                    <li
+                      key={`org-${index}`}
+                      className={searchParam.org_name == item.name ? "active" : ""}
+                      onClick={this.setSearchParam.bind(this, "org_name", item.name)}
+                    >
                       {item.name}
                     </li>
                   );
@@ -349,10 +390,16 @@ class Experts extends Component {
                 <span className="page">
                   {orgParam.pageNum}/{orgParam.pages}
                 </span>
-                <span className={orgParam.pageNum == 1 ? "paper dis" : "paper"} onClick={this.changeOrgList.bind(this, -1)}>
+                <span
+                  className={orgParam.pageNum == 1 ? "paper dis" : "paper"}
+                  onClick={this.changeOrgList.bind(this, -1)}
+                >
                   上一页
                 </span>
-                <span className={orgParam.pageNum >= orgParam.pages ? "paper dis" : "paper"} onClick={this.changeOrgList.bind(this, 1)}>
+                <span
+                  className={orgParam.pageNum >= orgParam.pages ? "paper dis" : "paper"}
+                  onClick={this.changeOrgList.bind(this, 1)}
+                >
                   下一页
                 </span>
               </div>
@@ -389,26 +436,40 @@ class Experts extends Component {
               <span>Z</span>
             </div>
             <div className="expert-items">
-              {pageData.length > 0 ? pageData.map((item, index) => {
-                return (
-                  <div className="expert-item" key={`expert-${index}`} onClick={this.openDetail.bind(this, item)}>
-                    <div className="cover">
-                      <img alt="" src={Util.transImgUrl(item.cover, "110x130")} />
+              {pageData.length > 0 ? (
+                pageData.map((item, index) => {
+                  return (
+                    <div
+                      className="expert-item"
+                      key={`expert-${index}`}
+                      onClick={this.openDetail.bind(this, item)}
+                    >
+                      <div className="cover">
+                        <img alt="" src={Util.transImgUrl(item.cover, "110x130")} />
+                      </div>
+                      <div className="detail">
+                        <h1>{item.name}</h1>
+                        {item.country ? <p>所在地：{item.country}</p> : null}
+                        {item.org_name ? <p>工作单位：{item.org_name}</p> : null}
+                        {item.research ? <p>研究领域：{item.research}</p> : null}
+                      </div>
                     </div>
-                    <div className="detail">
-                      <h1>{item.name}</h1>
-                      {item.country ? <p>所在地：{item.country}</p> : null}
-                      {item.org_name ? <p>工作单位：{item.org_name}</p> : null}
-                      {item.research ? <p>研究领域：{item.research}</p> : null}
-                    </div>
-                  </div>
-                );
-              }) : <div className="not-data">没有找到相关内容</div>}
+                  );
+                })
+              ) : (
+                <div className="not-data">没有找到相关内容</div>
+              )}
             </div>
             <div className={pageParam.pages <= 1 ? "page-papers none" : "page-papers"}>
               <span className="label">共{pageParam.total}个结果</span>
               <span className="pagination">
-                <Pagination hideOnSinglePage={true} current={pageParam.pageNum} total={pageParam.total} onChange={this.onPagChange} itemRender={this.itemRender} />
+                <Pagination
+                  hideOnSinglePage={true}
+                  current={pageParam.pageNum}
+                  total={pageParam.total}
+                  onChange={this.onPagChange}
+                  itemRender={this.itemRender}
+                />
               </span>
             </div>
           </div>

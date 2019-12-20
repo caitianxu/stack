@@ -178,7 +178,7 @@ export default class Index extends Component {
               changeIndex={this.changeIndex}
             />
           </div>
-          <Classly base={base} ref={el => (this.classlyElement = el)} />
+          <Classly base={base} ref={el => (this.classlyElement = el)} history={this.props.history}/>
         </div>
       </div>
     );

@@ -118,8 +118,8 @@ class Header extends Component {
             </li>
             <li>
               <NavLink
-                to="/topics"
-                isActive={this.oddEvent.bind(this, "/topics")}
+                to="/subjects"
+                isActive={this.oddEvent.bind(this, "/subjects")}
               >
                 专题Special Topic
               </NavLink>

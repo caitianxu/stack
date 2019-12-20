@@ -69,6 +69,14 @@
         }
         p{
             margin: 10px 0 0 0;
+            text-align: justify;
+            line-height: 25px;
+            max-height: 75px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
         }
       }
       .action {

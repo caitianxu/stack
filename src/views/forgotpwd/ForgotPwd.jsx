@@ -38,6 +38,8 @@ export default class ForgotPwd extends Component {
       if (res.code == 0) {
         this.setState({
           time: 60
+        }, () => {
+          this.changeTime();
         });
       } else {
         message.error(res.message);

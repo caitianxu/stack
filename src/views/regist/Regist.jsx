@@ -42,9 +42,14 @@ class Regist extends Component {
       code_type: 1
     }).then(res => {
       if (res.code == 0) {
-        this.setState({
-          time: 60
-        });
+        this.setState(
+          {
+            time: 60
+          },
+          () => {
+            this.changeTime();
+          }
+        );
       } else {
         message.error(res.message);
       }
@@ -202,11 +207,7 @@ class Regist extends Component {
               <label className="form-label">&nbsp;</label>
               <div className="form-control">
                 <div className="xieyi" onClick={this.changeBox}>
-                  {box ? (
-                    <Icon type="check-circle" theme="filled" />
-                  ) : (
-                    <i className="box"></i>
-                  )}
+                  {box ? <Icon type="check-circle" theme="filled" /> : <i className="box"></i>}
                   已阅读并同意平台的
                   <span onClick={this.showXieyi}>《服务协议》</span>
                 </div>

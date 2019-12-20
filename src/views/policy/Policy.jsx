@@ -49,7 +49,7 @@ class Policy extends Component {
     const { base, data } = this.state;
     let html = "";
     if (data && data.detail && data.detail.fulltxt) {
-      html = data.detail.fulltxt.replace(/[↵,\n,　　]/g, "<span class='br'></span>");
+      html = data.detail.fulltxt.replace(/[↵,\n]/g, "<span class='br'></span>");
     }
     return (
       <div className="policy-page">

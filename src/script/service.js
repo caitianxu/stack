@@ -218,9 +218,45 @@ const HTTP = {
   _search_list: param => {
     return service.post("/api/web/member/search/list", param);
   },
+  //机构检索列表
+  _search_org_list: param => {
+    return service.post("/api/web/memberorg/search/list", param);
+  },
   //浏览列表
   _browse_list: param => {
     return service.post("/api/web/member/view/list", param);
+  },
+  //机构浏览列表
+  _browse_org_list: param => {
+    return service.post("/api/web/memberorg/view/list", param);
+  },
+  //绑定手机
+  _bind_phone: param => {
+    return service.post("/api/web/bind/phone", param);
+  },
+  //确认机构密码
+  _memberorg_checkpwd: param => {
+    return service.post("/api/web/memberorg/checkpwd", param);
+  },
+  //关联通知
+  _memberorg_audit: param => {
+    return service.post("/api/web/memberorg/audit", param);
+  },
+  //关联审核
+  _memberorg_bind_sure: param => {
+    return service.post("/api/web/memberorg/bind/sure", param);
+  },
+  //关联用户
+  _memberorg_member_list: param => {
+    return service.post("/api/web/memberorg/member/list", param);
+  },
+  //专题列表
+  _get_subject_list: param => {
+    return service.post("/api/web/subject/list", param);
+  },
+  //专题详情
+  _get_subject_detail: param => {
+    return service.post("/api/web/subject/detail", param);
   },
   
 

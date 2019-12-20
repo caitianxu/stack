@@ -31,7 +31,7 @@ service.interceptors.response.use(
   response => {
     if (response.data.code === 600) {
       //当前用户登录信息已失效, 需要重新登录
-      window.location.href = "/login";
+      //window.location.href = "/login";
     }
     return response.data;
   },

@@ -258,6 +258,10 @@ const HTTP = {
   _get_subject_detail: param => {
     return service.post("/api/web/subject/detail", param);
   },
+  //汉学大事记
+  _web_sinology: param => {
+    return service.post("/api/web/sinology", param);
+  },
   
 
   //获取经纬度

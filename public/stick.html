@@ -1,23 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta name="theme-color" content="#000000" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="renderer" content="webkit|ie-comp|ie-stand" />
+    <meta http-equiv="content-type" content="text/html;charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta http-equiv="Access-Control-Allow-Origin" content="*" />
+    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+    <title>汉学大事记</title>
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+  </head>
 
-<head>
-  <meta name="theme-color" content="#000000" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-  <meta name="renderer" content="webkit|ie-comp|ie-stand" />
-  <meta http-equiv="content-type" content="text/html;charset=utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-  <meta http-equiv="Access-Control-Allow-Origin" content="*" />
-  <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
-  <title>Reach Blank ~</title>
-  <meta name="keywords" content="" />
-  <meta name="description" content="" />
-  <link rel="stylesheet" href="%PUBLIC_URL%/assets/css/animate.min.css" />
-</head>
-
-<body>
-  <noscript>You need to enable JavaScript to run this app.</noscript>
-  <div id="root"></div>
-</body>
-
+  <body>
+    <noscript>You need to enable JavaScript to run this app.</noscript>
+    <span class="icon-header"></span>
+    <span class="icon-footer"></span>
+    <div id="root" class="noSelect">
+      <div class="stick-content">
+        <div class="header">
+          <div class="header-scroll"></div>
+        </div>
+        <div class="footer">
+          <div class="footer-scroll" style="left:0"></div>
+        </div>
+      </div>
+    </div>
+    <div class="page-fix">
+      <div class="fix-con">
+        <span class="citem active" type="0">全部</span>
+        <span class="citem" type="1">亚洲</span>
+        <span class="citem" type="2">欧美</span>
+      </div>
+      <span class="action"></span>
+    </div>
+  </body>
 </html>

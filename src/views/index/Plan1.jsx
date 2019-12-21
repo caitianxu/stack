@@ -123,7 +123,7 @@ class Plan1 extends Component {
               })}
             </div>
             <span className="special-icon">
-              <Link to="/specials" />
+              <Link to="/stick.html" target="_blank"/>
             </span>
           </div>
           <Menus menuIndex={menuIndex} changeIndex={changeIndex} base={base} />

@@ -45,6 +45,12 @@ class Book extends Component {
         }
         console.log(res.data);
       });
+
+      HTTP._book_read({
+        book_id: param.id
+      }).then(res => {
+        console.log("xxx", res);
+      });
     });
   }
 

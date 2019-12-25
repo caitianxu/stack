@@ -88,7 +88,8 @@ class MeInfo extends Component {
     HTTP._member_update({
       icon: param.icon,
       real_name: param.real_name,
-      sex: param.sex
+      sex: param.sex,
+      nick_name: param.nick_name
     }).then(res => {
       if (res.code == 0) {
         message.success("用户信息修改成功");
@@ -192,6 +193,10 @@ class MeInfo extends Component {
               <span className="l-value">{userInfo.real_name || "未填写"}</span>
             </div>
             <div className="me-info-row">
+              <label className="l-label">昵称</label>
+              <span className="l-value">{userInfo.nick_name || "未填写"}</span>
+            </div>
+            <div className="me-info-row">
               <label className="l-label">性别</label>
               <span className="l-value">
                 {userInfo.sex == 1 ? (
@@ -281,6 +286,18 @@ class MeInfo extends Component {
                   type="text"
                   name="real_name"
                   value={param.real_name || ""}
+                  onChange={this.changeForm}
+                  className="form-input"
+                />
+              </span>
+            </div>
+            <div className="me-info-row">
+              <label className="l-label">昵称</label>
+              <span className="l-value">
+                <input
+                  type="text"
+                  name="nick_name"
+                  value={param.nick_name || ""}
                   onChange={this.changeForm}
                   className="form-input"
                 />

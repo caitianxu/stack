@@ -2,8 +2,47 @@ import React, { Component } from "react";
 import { DatePicker, Pagination } from "antd";
 import moment from "moment";
 import HTTP from "../../script/service";
+import { Link } from "react-router-dom";
 const { RangePicker } = DatePicker;
 
+const vier_type = {
+  1: {
+    name: "机构",
+    url: "/mechanism?id="
+  },
+  2: {
+    name: "专家",
+    url: "/expert?id="
+  },
+  3: {
+    name: "图书",
+    url: "/book?id="
+  },
+  4: {
+    name: "政策法规",
+    url: "/policy?id="
+  },
+  5: {
+    name: "政策解读",
+    url: "/policy?id="
+  },
+  6: {
+    name: "期刊论文",
+    url: "/paper?id="
+  },
+  7: {
+    name: "会议论文",
+    url: "/paper?id="
+  },
+  8: {
+    name: "学术论文",
+    url: "/paper?id="
+  },
+  9: {
+    name: "专题",
+    url: "/subjects?id="
+  }
+};
 class Browse extends Component {
   constructor(props) {
     super(props);
@@ -123,7 +162,8 @@ class Browse extends Component {
           <thead>
             <tr>
               <th width="60">序号</th>
-              <th width="600">检索条件</th>
+              <th width="500">标题</th>
+              <th width="100">资源类型</th>
               <th>时间</th>
             </tr>
           </thead>
@@ -133,8 +173,9 @@ class Browse extends Component {
                 <tr key={`tr-${index}`}>
                   <td>{index + 1}</td>
                   <td>
-                    <div className="title">{item.searchtext || "-"}</div>
+                    <Link to={`${vier_type[item.type].url}${item.res_id}`} className="title">{item.res_title ? item.res_title.trim() : "-"}</Link>
                   </td>
+                  <td>{vier_type[item.type].name}</td>
                   <td>{item.date}</td>
                 </tr>
               );

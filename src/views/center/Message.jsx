@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Checkbox, Select, Pagination } from "antd";
+import HTTP from "../../script/service";
 const { Option } = Select;
 
 class Message extends Component {
@@ -7,14 +8,47 @@ class Message extends Component {
     super(props);
     this.state = {
       checkall: false,
+      searchParam: {
+        type: null
+      },
+      pageData: [],
       pageParam: {
         pageNum: 1,
         pageSize: 10,
-        pages: 11,
-        total: 111
+        pages: 1,
+        total: 0
       }
     };
   }
+  componentDidMount() {
+    this.getPageData();
+    console.log("xxxx");
+  }
+  //获取数据
+  getPageData = () => {
+    console.log("1222");
+    let { searchParam, pageParam } = this.state;
+    const { orgInfo, token } = this.props.base;
+    if (token) {
+      searchParam.token = token;
+    } else {
+      searchParam.org_id = orgInfo.org_id;
+    }
+    HTTP._message_list({
+      ...searchParam,
+      ...pageParam
+    }).then(res => {
+      if (res.code == 0) {
+        pageParam.pages = res.data.pages;
+        pageParam.total = res.data.total;
+        this.setState({
+          pageParam: pageParam,
+          pageData: res.data.rows,
+          checkall: false
+        });
+      }
+    });
+  };
   //全选
   setCheckAll = e => {
     let checkall = e.target.checked;
@@ -46,10 +80,8 @@ class Message extends Component {
     }
     return originalElement;
   };
-  //数据分页
-  getPageData = () => {};
   render() {
-    const { checkall, pageParam } = this.state;
+    const { checkall, pageParam, pageData } = this.state;
     return (
       <div className="center-message-page">
         <div className="center-page-title">消息中心 Message</div>
@@ -61,27 +93,35 @@ class Message extends Component {
             <button className="delete-all">批量删除 Batch deletion</button>
           </span>
           <span className="t-right">
-            <Select defaultValue="1">
-              <Option value="1">全部通知</Option>
+            <Select defaultValue="">
+              <Option value="">全部通知</Option>
+              <Option value="1">系统通知</Option>
+              <Option value="2">绑定通知</Option>
             </Select>
           </span>
         </div>
-        <div className="message-rows">
-          <div className="message-row">
-            <span className="box">
-              <Checkbox checked={checkall} onClick={this.setCheckAll} />
-            </span>
-            <span className="row-title">【绑定通知】您已经与中国人民大学出版社绑定成功。</span>
-            <div className="row-time">2019-07-02 10:56</div>
+        {pageData.length ? (
+          <div className="message-rows">
+            {pageData.map((item, index) => {
+              return (
+                <div className="message-row" key={`item-${index}`}>
+                  <span className="box">
+                    <Checkbox checked={checkall} onClick={this.setCheckAll} />
+                  </span>
+                  <span className="row-title">
+                    【{item.type == 1 ? "系统通知" : "绑定通知"}】{item.content}
+                  </span>
+                  <div className="row-time">{item.create_time}</div>
+                </div>
+              );
+            })}
           </div>
-          <div className="message-row">
-            <span className="box">
-              <Checkbox checked={checkall} onClick={this.setCheckAll} />
-            </span>
-            <span className="row-title">【绑定通知】您已经与中国人民大学出版社绑定成功。</span>
-            <div className="row-time">2019-07-02 10:56</div>
+        ) : (
+          <div className="message-rows">
+            <div className="message-row-notdata">没有相关数据</div>
           </div>
-        </div>
+        )}
+
         <div className={pageParam.pages <= 1 ? "page-papers none" : "page-papers"}>
           <span className="label">共{pageParam.total}个结果</span>
           <span className="pagination">

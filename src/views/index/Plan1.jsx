@@ -53,7 +53,7 @@ class Plan1 extends Component {
           contentList: []
         },
         {
-          name: "topics",
+          name: "subjects",
           item_id: 48,
           title: "专题",
           enTitle: "Topics",
@@ -106,9 +106,9 @@ class Plan1 extends Component {
                   <span
                     className="classly-link"
                     key={`classly-${index}`}
-                    onClick={this.changeType.bind(this, index)}
+                    onMouseOver={this.changeType.bind(this, index)}
                   >
-                    <Link to="/index">
+                    <Link to={`/${item.name}`}>
                       <div
                         className={
                           selIndex == index ? `cover ${item.name} active` : `cover ${item.name}`

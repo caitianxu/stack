@@ -180,12 +180,17 @@
           :-ms-input-placeholder {
             color: #803228;
           }
-          .anticon {
+          .icon-search{
             position: absolute;
             color: #803228;
             font-size: 22px;
-            right: 20px;
-            top: 15px;
+            right: 0;
+            top: 0;
+            line-height: 50px;
+            cursor: pointer;
+            width: 50px;
+            height: 50px;
+            text-align: center;
           }
         }
         .master-search {
@@ -268,7 +273,7 @@
           &.papers {
             background: url("./img/lunwen.png") no-repeat center center;
           }
-          &.topics {
+          &.subjects {
             background: url("./img/special.png") no-repeat center center;
           }
           &.books {

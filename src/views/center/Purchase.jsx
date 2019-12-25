@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Icon, message } from "antd";
 import Pay from "../../components/pay/Pay";
 import HTTP from "../../script/service";
+import { _get_userInfo } from "../../store/Action";
 
 class Purchase extends Component {
   constructor(props) {
@@ -11,49 +12,50 @@ class Purchase extends Component {
       qr_code: null,
       visible: false,
       payType: 1, // 1支付宝 2微信
-      payArray: [
-        {
-          id: 1,
-          price: 150,
-          label: "推荐",
-          name: "1个月150元"
-        },
-        {
-          id: 3,
-          price: 360,
-          label: "推荐",
-          name: "3个月360元"
-        },
-        {
-          id: 6,
-          price: 630,
-          label: "特惠",
-          name: "6个月630元"
-        },
-        {
-          id: 12,
-          price: 960,
-          label: "超值",
-          name: "12个月960元"
-        }
-      ],
-      selPrice: {
-        id: 1,
-        price: 150,
-        label: "推荐",
-        name: "1个月150元"
-      }
+      payArray: [],
+      selPrice: {}
     };
   }
-  submitPay = () => {
-    HTTP._pay_order().then(res => {
+  componentDidMount() {
+    HTTP._pay_list().then(res => {
       if (res.code == 0) {
-        this.setState(res.data);
-        this.payElement.showModal(res.data);
-      } else {
-        message.warn(res.message);
+        this.setState({
+          payArray: [...res.data],
+          selPrice: res.data[0]
+        });
       }
     });
+  }
+  //发起支付
+  submitPay = () => {
+    const { payType, selPrice } = this.state;
+    if (payType == 2) {
+      HTTP._wechat_pay_order({
+        title: selPrice.title,
+        order_type: 2,
+        pay_id: selPrice.id
+      }).then(res => {
+        if (res.code == 0) {
+          this.setState(res.data);
+          this.payElement.showModal(res.data);
+        } else {
+          message.warn(res.message);
+        }
+      });
+    } else {
+      HTTP._ali_pay_order({
+        title: selPrice.title,
+        order_type: 2,
+        pay_id: selPrice.id
+      }).then(res => {
+        if (res.code == 0) {
+          this.setState(res.data);
+          this.payElement.showModal(res.data);
+        } else {
+          message.warn(res.message);
+        }
+      });
+    }
   };
   //价格
   onChangePrice = item => {
@@ -68,6 +70,7 @@ class Purchase extends Component {
     });
   };
   paySuccess = () => {
+    _get_userInfo();
     console.log("支付成功======================================>回调主页面");
   };
   render() {
@@ -111,8 +114,7 @@ class Purchase extends Component {
                       onClick={this.onChangePrice.bind(this, item)}
                       key={`acc-${index}`}
                     >
-                      <label>{item.label}</label>
-                      <span>{item.name}</span>
+                      <span>{item.title}</span>
                     </div>
                   );
                 })}
@@ -163,7 +165,11 @@ class Purchase extends Component {
         <div className="center-meinfo-actions">
           <button onClick={this.submitPay}>确认支付 Confirm payment</button>
         </div>
-        <Pay ref={el => (this.payElement = el)} paySuccess={this.paySuccess} />
+        <Pay
+          ref={el => (this.payElement = el)}
+          paySuccess={this.paySuccess}
+          payType={this.state.payType}
+        />
       </div>
     );
   }

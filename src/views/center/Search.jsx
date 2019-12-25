@@ -2,8 +2,47 @@ import React, { Component } from "react";
 import { DatePicker, Pagination } from "antd";
 import moment from "moment";
 import HTTP from "../../script/service";
+import { Link } from "react-router-dom";
 const { RangePicker } = DatePicker;
 
+const vier_type = {
+  1: {
+    name: "机构",
+    url: "/mechanisms?searchText="
+  },
+  2: {
+    name: "专家",
+    url: "/experts?searchText="
+  },
+  3: {
+    name: "图书",
+    url: "/books?searchText="
+  },
+  4: {
+    name: "政策法规",
+    url: "/policys?searchText="
+  },
+  5: {
+    name: "政策解读",
+    url: "/policys?searchText="
+  },
+  6: {
+    name: "期刊论文",
+    url: "/papers?searchText="
+  },
+  7: {
+    name: "会议论文",
+    url: "/papers?searchText="
+  },
+  8: {
+    name: "学术论文",
+    url: "/papers?searchText="
+  },
+  9: {
+    name: "专题",
+    url: "/subjects?searchText="
+  }
+};
 class Search extends Component {
   constructor(props) {
     super(props);
@@ -123,7 +162,8 @@ class Search extends Component {
           <thead>
             <tr>
               <th width="60">序号</th>
-              <th width="600">检索条件</th>
+              <th width="500">检索条件</th>
+              <th width="100">检索类型</th>
               <th>时间</th>
             </tr>
           </thead>
@@ -133,8 +173,9 @@ class Search extends Component {
                 <tr key={`tr-${index}`}>
                   <td>{index + 1}</td>
                   <td>
-                    <div className="title">{item.searchtext || "-"}</div>
+                    <Link to={`${vier_type[item.type].url}${item.searchtext.trim()}`} className="title">{item.searchtext ? item.searchtext.trim() : "-"}</Link>
                   </td>
+                  <td>{vier_type[item.type].name}</td>
                   <td>{item.date}</td>
                 </tr>
               );

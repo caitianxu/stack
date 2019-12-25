@@ -24,11 +24,16 @@ class Pay extends Component {
     );
   };
   hideModal = () => {
+    clearTimeout(this.timeout);
     this.setState({
       visible: false
     });
   };
   getPayState = () => {
+    clearTimeout(this.timeout);
+    if (!this.state.visible) {
+      return;
+    }
     HTTP._pay_order_state({
       order_no: this.state.pay_order_no
     }).then(res => {
@@ -38,7 +43,7 @@ class Pay extends Component {
         this.hideModal();
         this.props.paySuccess();
       } else {
-        setTimeout(this.getPayState, 2000);
+        this.timeout = setTimeout(this.getPayState, 2000);
       }
     });
   };
@@ -68,9 +73,15 @@ class Pay extends Component {
             <div className="modal-parent-content">
               <div className="modal-content-header">
                 <div className="header-title">
-                  <h3>
-                    微信支付 <label>WechatPay</label>
-                  </h3>
+                  {this.props.payType == 1 ? (
+                    <h3>
+                      阿里支付 <label>AliPay</label>
+                    </h3>
+                  ) : (
+                    <h3>
+                      微信支付 <label>WechatPay</label>
+                    </h3>
+                  )}
                   <span className="close" onClick={this.hideModal}>
                     <Icon type="close" />
                   </span>
@@ -78,11 +89,7 @@ class Pay extends Component {
               </div>
               <div className="weixin-pay-con">
                 <div className="qcode">
-                  <QRCode
-                    value={qr_code}
-                    size={268}
-                    fgColor={"#7e332e"}
-                  />
+                  <QRCode value={qr_code} size={268} fgColor={"#7e332e"} />
                 </div>
               </div>
             </div>

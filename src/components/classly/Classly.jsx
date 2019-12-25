@@ -40,13 +40,15 @@ class Classly extends Component {
     });
   };
   shoeChildModal = cat => {
-    HTTP._get_web_cat({
-      cat_pid: cat.cat_id
+    HTTP._get_paper_cat_list({
+      cat_pid: cat.id,
+      pageSize: 100,
+      pageNum: 1
     }).then(res => {
       if (res.code == 0) {
         this.setState({
           childVisible: true,
-          childData: { ...cat, child: [...res.data] }
+          childData: { ...cat, child: [...res.data.rows] }
         });
       } else {
         message.error(res.message);
@@ -59,13 +61,15 @@ class Classly extends Component {
     });
   };
   componentDidMount() {
-    HTTP._get_web_cat({
-      cat_pid: 0
+    HTTP._get_paper_cat_list({
+      cat_pid: 0,
+      pageSize: 100,
+      pageNum: 1
     }).then(res => {
       if (res.code == 0) {
         let { data } = this.state;
         let oneErray = [];
-        res.data.forEach((one, i) => {
+        res.data.rows.forEach((one, i) => {
           if (oneErray.length == 8) {
             data.push({
               index: data.length,
@@ -91,7 +95,7 @@ class Classly extends Component {
       },
       () => {
         _set_classly_visible(false);
-        this.props.history.push(`/papers?cat=${item.cat_name}&cat_id=${item.cat_id}`);
+        this.props.history.push(`/papers?cat=${item.name}&cat_id=${item.id}`);
       }
     );
   };
@@ -119,17 +123,11 @@ class Classly extends Component {
                               return (
                                 <div
                                   key={`col-${col}`}
-                                  className={`view view-${view.cat_id}`}
+                                  className={`view view-${view.id}`}
                                   onClick={this.shoeChildModal.bind(this, view)}
                                 >
-                                  {/* <div className="style-border">
-                                    <i className="style-1"></i>
-                                    <i className="style-2"></i>
-                                    <i className="style-3"></i>
-                                    <i className="style-4"></i>
-                                  </div> */}
-                                  <div className={`view-content view-type-${view.cat_id}`}>
-                                    <div className="num">{view.res_count || 0}</div>
+                                  <div className={`view-content view-type-${view.id}`}>
+                                    <div className="num">{view.count || 0}</div>
                                   </div>
                                 </div>
                               );
@@ -185,8 +183,8 @@ class Classly extends Component {
                 <div className="modal-content-header">
                   <div className="header-title">
                     <h3>
-                      {childData.cat_name}
-                      <label>{dataEnglish[childData.cat_id]}</label>
+                      {childData.name}
+                      <label>{dataEnglish[childData.id]}</label>
                     </h3>
                     <span className="close" onClick={this.hideChildModal}>
                       <Icon type="close" />
@@ -204,8 +202,8 @@ class Classly extends Component {
                               key={`child-${index}`}
                               onClick={this.toDetail.bind(this, item)}
                             >
-                              <label>{item.cat_name}</label>
-                              {item.res_count || 0}
+                              <label>{item.name}</label>
+                              {item.count || 0}
                             </div>
                           );
                         })}

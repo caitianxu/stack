@@ -516,6 +516,7 @@ class Papers extends Component {
           searchArray={searchArray}
           searchReset={this.searchReset}
           setSearchParam={this.setSearchParam}
+          searchParam={searchParam}
         />
         <div className="second-content">
           <div className="second-left">

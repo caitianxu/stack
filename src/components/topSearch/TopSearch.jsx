@@ -31,13 +31,14 @@ class TopSearch extends Component {
     this.props.setSearchParam(key, null);
   };
   render() {
-    const { tabIndex, searchArray } = this.props;
+    const { tabIndex, searchArray, searchParam } = this.props;
     return (
       <div className="top-search-com">
         <div className="search-header">
           <div className="search-input">
             <input
               type="search"
+              defaultValue={searchParam ? searchParam.searchText : ""}
               ref={el => (this.searchElement = el)}
               placeholder="请输入您要搜索的关键词 Please enter the search content"
               onKeyPress={this.keywordSearch}

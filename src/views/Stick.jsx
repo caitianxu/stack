@@ -175,10 +175,7 @@ class Stick extends Component {
     } else {
       left += 10;
     }
-    console.log(left)
     this.scrollMove = e.pageX;
-    // this.footerScrollElement.style.left = left + "px";
-    // console.log("onMouseMove", e.pageX, e.pageY, left);
   };
   render() {
     const { data, sjIndex, hsScroll } = this.state;

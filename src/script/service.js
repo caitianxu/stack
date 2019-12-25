@@ -174,14 +174,6 @@ const HTTP = {
   _ip_login: param => {
     return service.post("/api/web/ip/login", param);
   },
-  //支付
-  _pay_order: param => {
-    return service.post("/api/web/wechat/pay/order", param);
-  },
-  //支付状态
-  _pay_order_state: param => {
-    return service.post("/api/web/order/status", param);
-  },
   //文件上传
   _file_upload: param => {
     return service.post("/api/system/file/upload", param);
@@ -262,7 +254,30 @@ const HTTP = {
   _web_sinology: param => {
     return service.post("/api/web/sinology", param);
   },
-  
+  //充值项
+  _pay_list: param => {
+    return service.post("/api/web/pay/list", param);
+  },
+  //微信支付
+  _wechat_pay_order: param => {
+    return service.post("/api/web/wechat/pay/order", param);
+  },
+  //支付宝支付
+  _ali_pay_order: param => {
+    return service.post("/api/web/alipay/pay/order", param);
+  },
+  //支付状态
+  _pay_order_state: param => {
+    return service.post("/api/web/order/status", param);
+  },
+  //消息列表
+  _message_list: param => {
+    return service.post("/api/web/message/list", param);
+  },
+  //图书阅读
+  _book_read: param => {
+    return service.post("/api/web/book/read", param);
+  },
 
   //获取经纬度
   _get_point_data: () => {

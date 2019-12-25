@@ -254,7 +254,7 @@ function getPageData(type) {
           ).appendTo(century);
           let conData = jQuery(`<div class="f-f-content"></div>`).appendTo(conPar);
           yearitem.list.forEach((dataItem, dataIndex) => {
-            jQuery(
+            let itemDom = jQuery(
               `<div class="data-item type-${dataItem.place}" 
               style="z-index:${yearitem.year + "0" + dataIndex};bottom:${dataIndex * 270 + 20}px">
               <div class="item-plan">
@@ -269,11 +269,13 @@ function getPageData(type) {
               </div>
               </div></div></div>`
             ).appendTo(conData);
+            jQuery('.more', itemDom).click(function(){
+              console.log(dataItem)
+            })
           });
           jQuery(
             `<div class="f-f-line"><p class="origin"></p><p class="txt">${
-              //   yearitem.list.length ? yearitem.year : ""
-              yearitem.year
+              yearitem.list.length ? yearitem.year : ""
             }</p></div>`
           ).appendTo(conPar);
         });

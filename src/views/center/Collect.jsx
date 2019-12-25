@@ -1,7 +1,47 @@
 import React, { Component } from "react";
 import { Icon, Checkbox, Select, Pagination } from "antd";
 import HTTP from "../../script/service";
+import { Link } from "react-router-dom";
 const { Option } = Select;
+
+const vier_type = {
+  1: {
+    name: "机构",
+    url: "/mechanism?id="
+  },
+  2: {
+    name: "专家",
+    url: "/expert?id="
+  },
+  3: {
+    name: "图书",
+    url: "/book?id="
+  },
+  4: {
+    name: "政策法规",
+    url: "/policy?id="
+  },
+  5: {
+    name: "政策解读",
+    url: "/policy?id="
+  },
+  6: {
+    name: "期刊论文",
+    url: "/paper?id="
+  },
+  7: {
+    name: "会议论文",
+    url: "/paper?id="
+  },
+  8: {
+    name: "学术论文",
+    url: "/paper?id="
+  },
+  9: {
+    name: "专题",
+    url: "/subjects?id="
+  }
+};
 
 class Collect extends Component {
   constructor(props) {
@@ -11,6 +51,7 @@ class Collect extends Component {
       pageData: [],
       searchParam: {
         searchText: null,
+        type: null,
         start_time: null,
         end_time: null
       },
@@ -92,8 +133,31 @@ class Collect extends Component {
   delItem = item => {
     console.log(item);
   };
+  //类型
+  onChangePayType = item => {
+    let { searchParam, pageParam } = this.state;
+    searchParam.type = item;
+    pageParam.pageNum = 1;
+    this.setState(
+      {
+        searchParam: { ...searchParam },
+        pageParam: { ...pageParam }
+      },
+      () => {
+        this.getPageData();
+      }
+    );
+  };
   render() {
     const { checkall, pageData, pageParam } = this.state;
+    let new_vier_type = [];
+    for (let i in vier_type) {
+      new_vier_type.push({
+        type: i,
+        ...vier_type[i]
+      });
+    }
+    console.log("xxx", new_vier_type);
     return (
       <div className="center-collect-detail">
         <div className="center-page-title">我的收藏 My collection</div>
@@ -122,13 +186,29 @@ class Collect extends Component {
               defaultValue=""
               style={{ width: 120 }}
               // value={searchParam.pay_bank || ""}
-              // onChange={this.onChangePayType}
+              onChange={this.onChangePayType}
             >
               <Option value="">全部</Option>
+              {new_vier_type.map((item, index) => {
+                return (
+                  <Option value={item.type} key={`item-${index}`}>
+                    {item.name}
+                  </Option>
+                );
+              })}
             </Select>
           </span>
         </div>
         <table className="center-table-data">
+        <thead>
+            <tr>
+              <th width="60">序号</th>
+              <th width="400">标题</th>
+              <th width="100">资源类型</th>
+              <th>时间</th>
+              <th>操作</th>
+            </tr>
+          </thead>
           <tbody>
             {pageData.map((item, index) => {
               return (
@@ -136,7 +216,10 @@ class Collect extends Component {
                   <td>
                     <Checkbox checked={checkall} onClick={this.setCheckAll} />
                   </td>
-                  <td width="600"><div className="title">{item.res_title || "-"}</div></td>
+                  <td>
+                    <Link to={`${vier_type[item.type].url}${item.res_id}`} className="title">{item.res_title ? item.res_title.trim() : "-"}</Link>
+                  </td>
+                  <td>{vier_type[item.type].name}</td>
                   <td>{item.create_time}</td>
                   <td>
                     <span className="link" onClick={this.delItem.bind(this, item)}>

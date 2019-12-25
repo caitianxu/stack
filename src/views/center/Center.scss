@@ -221,6 +221,12 @@
       }
     }
     .message-rows {
+      .message-row-notdata{
+        text-align: center;
+        padding: 50px 0;
+        color: #999;
+        border: 1px #ccc dashed;
+      }
       .message-row {
         display: flex;
         line-height: 22px;
@@ -763,7 +769,7 @@
           cursor: pointer;
           background: #fff;
           border-radius: 3px;
-          padding-right: 10px;
+          padding: 0 15px;
           display: flex;
           overflow: hidden;
           label {
@@ -1032,7 +1038,7 @@
         white-space: nowrap;
       }
       td {
-        border-bottom: 1px #ccc dashed;
+        border: 1px #ccc dashed;
         text-align: center;
         padding: 10px 10px;
         line-height: 30px;
@@ -1043,6 +1049,10 @@
           white-space: nowrap;
           overflow: hidden;
           text-overflow: ellipsis;
+          color: #803228;
+          &:hover{
+            text-decoration: underline;
+          }
         }
         .link {
           cursor: pointer;
@@ -1115,10 +1125,14 @@
         line-height: 30px;
         font-size: 14px;
         color: #666;
-        .link {
+        .link,
+        .title {
           color: #803228;
           cursor: pointer;
           text-decoration: underline;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
         }
       }
     }
@@ -1184,10 +1198,14 @@
         line-height: 30px;
         font-size: 14px;
         color: #666;
-        .link {
+        .link,
+        .title {
           color: #803228;
           cursor: pointer;
           text-decoration: underline;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
         }
       }
     }
@@ -1308,13 +1326,13 @@
       display: flex;
       justify-content: center;
       padding-top: 30px;
-      span{
+      span {
         margin: 0 20px;
       }
     }
   }
   /*用户管理*/
-  .center-userManage-detail{
+  .center-userManage-detail {
     .center-userManage-header {
       border-bottom: 1px #ddd dashed;
       .meinfo-row-1 {
@@ -1380,7 +1398,7 @@
             width: 250px;
             font-size: 14px;
           }
-          .cs-btn{
+          .cs-btn {
             background: #803228;
             color: #fff;
             margin-left: 10px;
@@ -1395,7 +1413,7 @@
     }
   }
   /*关联通知*/
-  .center-relationmsg-detail{
+  .center-relationmsg-detail {
     .table-title {
       margin-bottom: 20px;
       display: flex;
@@ -1420,24 +1438,24 @@
           background: #8b4238;
         }
       }
-    }  
-    .table-data{
-      .data-row{
+    }
+    .table-data {
+      .data-row {
         display: flex;
         justify-content: space-between;
         border-bottom: 1px #ddd dashed;
         padding-top: 15px;
-        .box{
+        .box {
           width: 25px;
         }
-        .col-action{
+        .col-action {
           width: 200px;
           text-align: right;
-          .time{
+          .time {
             margin-bottom: 10px;
           }
-          .accs{
-            button{
+          .accs {
+            button {
               color: #fff;
               background: #803228;
               border: none;
@@ -1449,29 +1467,29 @@
               width: 85px;
               text-align: center;
               white-space: nowrap;
-              &.cancel{
+              &.cancel {
                 background: transparent;
                 color: #803228;
               }
             }
-            label{
+            label {
               color: #803228;
             }
           }
         }
-        .col-detail{
+        .col-detail {
           flex: 1;
-          .p1{
+          .p1 {
             color: #1a1a1a;
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
             margin-bottom: 10px;
-            label{
+            label {
               padding: 0 5px;
             }
           }
-          .p2{
+          .p2 {
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
@@ -1482,7 +1500,7 @@
       }
     }
   }
-  /*管理用户管理*/  
+  /*管理用户管理*/
   .center-relationuser-detail {
     .center-collect-search {
       margin-bottom: 30px;
@@ -1511,13 +1529,13 @@
           color: #803228;
         }
       }
-      .select{
+      .select {
         width: 110px;
         text-align: right;
-        .ant-select-selection{
+        .ant-select-selection {
           background: transparent;
           height: 42px;
-          .ant-select-selection__rendered{
+          .ant-select-selection__rendered {
             line-height: 40px;
           }
         }

@@ -105,12 +105,19 @@ class Search extends Component {
   };
   //时间
   onChangeTime = (date, dateString) => {
-    let { searchParam } = this.state;
+    let { searchParam, pageParam } = this.state;
     searchParam.start_time = dateString[0];
     searchParam.end_time = dateString[1];
-    this.setState({
-      searchParam: { ...searchParam }
-    });
+    pageParam.pageNum = 1;
+    this.setState(
+      {
+        pageParam: { ...pageParam },
+        searchParam: { ...searchParam }
+      },
+      () => {
+        this.getPageData();
+      }
+    );
   };
   //分页回调
   onPagChange = page => {
@@ -155,7 +162,7 @@ class Search extends Component {
               separator="-"
               style={{ width: 320 }}
             />
-            <button className="search-btn">确认 Sure</button>
+            {/* <button className="search-btn">确认 Sure</button> */}
           </div>
         </div>
         <table className="center-table-data">
@@ -173,7 +180,12 @@ class Search extends Component {
                 <tr key={`tr-${index}`}>
                   <td>{index + 1}</td>
                   <td>
-                    <Link to={`${vier_type[item.type].url}${item.searchtext.trim()}`} className="title">{item.searchtext ? item.searchtext.trim() : "-"}</Link>
+                    <Link
+                      to={`${vier_type[item.type].url}${item.searchtext.trim()}`}
+                      className="title"
+                    >
+                      {item.searchtext ? item.searchtext.trim() : "-"}
+                    </Link>
                   </td>
                   <td>{vier_type[item.type].name}</td>
                   <td>{item.date}</td>

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Icon, Checkbox, Select, Pagination } from "antd";
+import { Icon, Checkbox, Select, Pagination, message, Modal } from "antd";
 import HTTP from "../../script/service";
 import { Link } from "react-router-dom";
 const { Option } = Select;
@@ -106,6 +106,24 @@ class Collect extends Component {
       pageData: [...this.state.pageData]
     });
   };
+  //单选
+  setCheck = item => {
+    let { checkall } = this.state;
+    item.checked = item.checked ? false : true;
+    let chackNum = 0;
+    this.state.pageData.forEach((a, b) => {
+      if (a.checked) chackNum += 1;
+    });
+    if (chackNum == this.state.pageData.length && chackNum > 0) {
+      checkall = true;
+    } else {
+      checkall = false;
+    }
+    this.setState({
+      checkall: checkall,
+      pageData: [...this.state.pageData]
+    });
+  };
   //分页回调
   onPagChange = page => {
     let { pageParam } = this.state;
@@ -131,7 +149,36 @@ class Collect extends Component {
   };
   //单项删除
   delItem = item => {
-    console.log(item);
+    let ids = [];
+    if (item) {
+      ids = [item.collect_id];
+    } else {
+      this.state.pageData.forEach((item, index) => {
+        if (item.checked) {
+          ids.push(item.collect_id);
+        }
+      });
+    }
+    if (ids.length == 0) {
+      message.warn("请选中需要删除的收藏内容");
+      return;
+    }
+    Modal.confirm({
+      title: "你确定删除收藏记录吗?",
+      content: "收藏记录删除后将无法还原.",
+      onOk: () => {
+        HTTP._collect_del({
+          ids: ids.toString()
+        }).then(res => {
+          if (res.code == 0) {
+            message.success("删除成功!");
+            this.getPageData();
+          } else {
+            message.error(res.message);
+          }
+        });
+      }
+    });
   };
   //类型
   onChangePayType = item => {
@@ -148,8 +195,30 @@ class Collect extends Component {
       }
     );
   };
+  //搜索
+  toSearch = e => {
+    let { searchParam, searchText, pageParam } = this.state;
+    searchParam.searchText = searchText;
+    pageParam.pageNum = 1;
+    this.setState(
+      {
+        searchParam: { ...searchParam },
+        pageParam: { ...pageParam }
+      },
+      () => {
+        this.getPageData();
+      }
+    );
+    e.preventDefault();
+    e.stopPropagation();
+  };
+  searchChange = e => {
+    this.setState({
+      searchText: e.target.value
+    });
+  };
   render() {
-    const { checkall, pageData, pageParam } = this.state;
+    const { checkall, pageData, pageParam, searchParam } = this.state;
     let new_vier_type = [];
     for (let i in vier_type) {
       new_vier_type.push({
@@ -157,37 +226,33 @@ class Collect extends Component {
         ...vier_type[i]
       });
     }
-    console.log("xxx", new_vier_type);
     return (
       <div className="center-collect-detail">
         <div className="center-page-title">我的收藏 My collection</div>
         <div className="center-collect-search">
-          <div className="search-control">
+          <form className="search-control" onSubmit={this.toSearch}>
             <input
               type="text"
               placeholder="请输入检索内容"
-              name="search_text"
+              name="searchText"
+              autoComplete="off"
+              defaultValue={searchParam.searchText || undefined}
               onChange={this.searchChange}
             />
-            <span className="s-icon">
+            <span className="s-icon" onClick={this.toSearch}>
               <Icon type="search" />
             </span>
-          </div>
+          </form>
         </div>
         <div className="table-title">
           <span className="t-left">
             <Checkbox checked={checkall} onClick={this.setCheckAll}>
               全选
             </Checkbox>
-            <button className="delete-all">批量删除 Batch deletion</button>
+            <button className="delete-all" onClick={this.delItem.bind(this, null)}>批量删除 Batch deletion</button>
           </span>
           <span className="t-right">
-            <Select
-              defaultValue=""
-              style={{ width: 120 }}
-              // value={searchParam.pay_bank || ""}
-              onChange={this.onChangePayType}
-            >
+            <Select defaultValue="" style={{ width: 120 }} onChange={this.onChangePayType}>
               <Option value="">全部</Option>
               {new_vier_type.map((item, index) => {
                 return (
@@ -200,7 +265,7 @@ class Collect extends Component {
           </span>
         </div>
         <table className="center-table-data">
-        <thead>
+          <thead>
             <tr>
               <th width="60">序号</th>
               <th width="400">标题</th>
@@ -214,10 +279,12 @@ class Collect extends Component {
               return (
                 <tr key={`tr-${index}`}>
                   <td>
-                    <Checkbox checked={checkall} onClick={this.setCheckAll} />
+                    <Checkbox checked={item.checked} onClick={this.setCheck.bind(this, item)} />
                   </td>
                   <td>
-                    <Link to={`${vier_type[item.type].url}${item.res_id}`} className="title">{item.res_title ? item.res_title.trim() : "-"}</Link>
+                    <Link to={`${vier_type[item.type].url}${item.res_id}`} className="title">
+                      {item.res_title ? item.res_title.trim() : "-"}
+                    </Link>
                   </td>
                   <td>{vier_type[item.type].name}</td>
                   <td>{item.create_time}</td>

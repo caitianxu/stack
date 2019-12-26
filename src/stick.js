@@ -188,6 +188,10 @@ function bindEvent() {
     jQuery(`.page-fix .citem[type="${type}"]`).addClass("active");
     getPageData(type);
   });
+  //关闭详情
+  jQuery("#detailClose").click(function() {
+    jQuery(".page-detail").fadeOut();
+  });
 }
 //获取数据
 function getPageData(type) {
@@ -210,6 +214,20 @@ function getPageData(type) {
         item.dataArray = [];
         for (let i = item.start; i <= item.end; i++) {
           let list = beanList.filter(beanItem => beanItem.year == i);
+          if (list.length > 0) {
+            list[0].list.forEach((fa, fi) => {
+              if (fa.covers) {
+                fa.covers = fa.covers.split(",");
+              } else {
+                fa.covers = [""];
+              }
+              if (fa.names) {
+                fa.names = fa.names.split(",");
+              } else {
+                fa.names = [""];
+              }
+            });
+          }
           let obj = {
             year: i,
             list: list.length > 0 ? [...list[0].list] : []
@@ -242,7 +260,6 @@ function getPageData(type) {
       let footer = jQuery(".footer-scroll").empty();
       //数据循环
       data.forEach((sjitem, sjindex) => {
-        console.log(sjitem);
         let century = jQuery(
           `<span class="sj-plan" century="${sjitem.century}" index="${sjindex}"></span>`
         ).appendTo(footer);
@@ -260,8 +277,8 @@ function getPageData(type) {
               <div class="item-plan">
               <div class="item-border">
               <div class="row-1">
-                <div class="cover"><img src="${Util.transImgUrl(dataItem.covers)}"/></div>
-                <div class="nick">${dataItem.names}</div>
+                <div class="cover"><img src="${Util.transImgUrl(dataItem.covers[0])}"/></div>
+                <div class="nick">${dataItem.names[0]}</div>
               </div>
               <div class="row-2">
                 <div class="content">${dataItem.content}</div>
@@ -269,9 +286,35 @@ function getPageData(type) {
               </div>
               </div></div></div>`
             ).appendTo(conData);
-            jQuery('.more', itemDom).click(function(){
-              console.log(dataItem)
-            })
+            jQuery(".more", itemDom).click(function() {
+              jQuery(".page-detail").fadeIn();
+              jQuery(".cover-right").html(
+                `<h1>${dataItem.names.toString()}</h1><p>${dataItem.content}</p>`
+              );
+              jQuery(".detail-title .name").html(
+                `${dataItem.year}年<label> &gt; ${dataItem.century}</label>`
+              );
+              let left = jQuery(".cover-left").empty();
+              if (dataItem.covers && dataItem.covers.toString() != "") {
+                left.show();
+                let cover = jQuery(
+                  `<div class="cover"><img src="${Util.transImgUrl(dataItem.covers[0])}"/></div>`
+                ).appendTo(left);
+                let cms = jQuery(`<div class="cover-mins"></div>`).appendTo(left);
+                if (dataItem.covers.length > 1) {
+                  dataItem.covers.forEach((cci, ccm) => {
+                    let cmsitem = jQuery(
+                      `<span><img src="${Util.transImgUrl(cci)}"/></span>`
+                    ).appendTo(cms);
+                    cmsitem.mouseover(function() {
+                      cover.html(this.innerHTML);
+                    });
+                  });
+                }
+              } else {
+                left.hide();
+              }
+            });
           });
           jQuery(
             `<div class="f-f-line"><p class="origin"></p><p class="txt">${

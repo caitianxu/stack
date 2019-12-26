@@ -278,6 +278,14 @@ const HTTP = {
   _book_read: param => {
     return service.post("/api/web/book/read", param);
   },
+  //订单删除
+  _order_del: param => {
+    return service.post("/api/web/member/order/del", param);
+  },
+  //收藏删除
+  _collect_del: param => {
+    return service.post("/api/web/member/collect/del", param);
+  },
 
   //获取经纬度
   _get_point_data: () => {

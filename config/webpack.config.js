@@ -164,6 +164,11 @@ module.exports = function (webpackEnv) {
         isEnvDevelopment &&
         require.resolve('react-dev-utils/webpackHotDevClient'),
         paths.stickJs,
+      ].filter(Boolean),
+      reader: [
+        isEnvDevelopment &&
+        require.resolve('react-dev-utils/webpackHotDevClient'),
+        paths.readerJs,
       ].filter(Boolean)
     },
     output: {
@@ -524,6 +529,34 @@ module.exports = function (webpackEnv) {
             inject: true,
             chunks: ["index"],
             template: paths.appHtml
+          },
+          isEnvProduction
+            ? {
+              minify: {
+                removeComments: true,
+                collapseWhitespace: true,
+                removeRedundantAttributes: true,
+                useShortDoctype: true,
+                removeEmptyAttributes: true,
+                removeStyleLinkTypeAttributes: true,
+                keepClosingSlash: true,
+                minifyJS: true,
+                minifyCSS: true,
+                minifyURLs: true,
+              },
+            }
+            : undefined
+        )
+      ),
+
+      new HtmlWebpackPlugin(
+        Object.assign(
+          {},
+          {
+            inject: true,
+            chunks: ["reader"],
+            template: paths.readerHtml,
+            filename: 'reader.html'
           },
           isEnvProduction
             ? {

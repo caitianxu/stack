@@ -280,6 +280,7 @@ class Mechanisms extends Component {
               <span className="label">共{pageParam.total}个结果</span>
               <span className="pagination">
                 <Pagination
+                  pageSize={parseInt(pageParam.pageSize)}
                   hideOnSinglePage={true}
                   current={pageParam.pageNum}
                   total={pageParam.total}

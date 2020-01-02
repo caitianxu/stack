@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { DatePicker, Select, Checkbox, Pagination } from "antd";
+import { DatePicker, Select, Checkbox, Pagination, Modal, message } from "antd";
 import moment from "moment";
 import HTTP from "../../script/service";
 const { RangePicker } = DatePicker;
@@ -42,12 +42,19 @@ class Orders extends Component {
   };
   //时间
   onChangeTime = (date, dateString) => {
-    let { searchParam } = this.state;
+    let { searchParam, pageParam } = this.state;
     searchParam.start_time = dateString[0];
     searchParam.end_time = dateString[1];
-    this.setState({
-      searchParam: { ...searchParam }
-    });
+    pageParam.pageNum = 1;
+    this.setState(
+      {
+        pageParam: { ...pageParam },
+        searchParam: { ...searchParam }
+      },
+      () => {
+        this.getPageData();
+      }
+    );
   };
   //获取数据
   getPageData = () => {
@@ -89,6 +96,24 @@ class Orders extends Component {
       pageData: [...this.state.pageData]
     });
   };
+  //单选
+  setCheck = item => {
+    let { checkall } = this.state;
+    item.checked = item.checked ? false : true;
+    let chackNum = 0;
+    this.state.pageData.forEach((a, b) => {
+      if (a.checked) chackNum += 1;
+    });
+    if (chackNum == this.state.pageData.length && chackNum > 0) {
+      checkall = true;
+    } else {
+      checkall = false;
+    }
+    this.setState({
+      checkall: checkall,
+      pageData: [...this.state.pageData]
+    });
+  };
   //分页回调
   onPagChange = page => {
     let { pageParam } = this.state;
@@ -114,8 +139,37 @@ class Orders extends Component {
   };
   //单项删除
   delItem = item => {
-    console.log(item)
-  }
+    let ids = [];
+    if (item) {
+      ids = [item.order_id];
+    } else {
+      this.state.pageData.forEach((item, index) => {
+        if (item.checked) {
+          ids.push(item.order_id);
+        }
+      });
+    }
+    if (ids.length == 0) {
+      message.warn("请选中需要删除的订单");
+      return;
+    }
+    Modal.confirm({
+      title: "你确定删除订单记录吗?",
+      content: "订单记录删除后将无法还原.",
+      onOk: () => {
+        HTTP._order_del({
+          ids: ids.toString()
+        }).then(res => {
+          if (res.code == 0) {
+            message.success("删除成功!");
+            this.getPageData();
+          } else {
+            message.error(res.message);
+          }
+        });
+      }
+    });
+  };
   render() {
     const { checkall, pageParam, searchParam, pageData } = this.state;
     const getTime = () => {
@@ -145,7 +199,6 @@ class Orders extends Component {
               onChange={this.onChangePayType}
             >
               <Option value="">全部</Option>
-              <Option value="0">线下支付</Option>
               <Option value="1">微信</Option>
               <Option value="2">支付宝</Option>
             </Select>
@@ -156,7 +209,9 @@ class Orders extends Component {
             <Checkbox checked={checkall} onClick={this.setCheckAll}>
               全选
             </Checkbox>
-            <button className="delete-all">批量删除 Batch deletion</button>
+            <button className="delete-all" onClick={this.delItem.bind(this, null)}>
+              批量删除 Batch deletion
+            </button>
           </span>
         </div>
         <table className="center-table-data">
@@ -177,7 +232,7 @@ class Orders extends Component {
               return (
                 <tr key={`tr-${index}`}>
                   <td>
-                    <Checkbox checked={checkall} onClick={this.setCheckAll} />
+                    <Checkbox checked={item.checked} onClick={this.setCheck.bind(this, item)} />
                   </td>
                   <td>{item.title || "-"}</td>
                   <td>{item.create_time}</td>
@@ -190,7 +245,9 @@ class Orders extends Component {
                   <td>{item.pay_fee || 0}</td>
                   <td>{item.pay_status == 1 ? "待支付" : "已完成"}</td>
                   <td>
-                    <span className="link" onClick={this.delItem.bind(this, item)}>删除</span>
+                    <span className="link" onClick={this.delItem.bind(this, item)}>
+                      删除
+                    </span>
                   </td>
                 </tr>
               );

@@ -18,6 +18,35 @@ const KeyValue = {
   country: "所在国家",
   position: "职位"
 };
+const all_chart = [
+  "A",
+  "B",
+  "C",
+  "D",
+  "E",
+  "F",
+  "G",
+  "H",
+  "I",
+  "J",
+  "K",
+  "L",
+  "M",
+  "N",
+  "O",
+  "P",
+  "Q",
+  "R",
+  "S",
+  "T",
+  "U",
+  "V",
+  "W",
+  "X",
+  "Y",
+  "Z"
+];
+
 class Experts extends Component {
   constructor(props) {
     super(props);
@@ -48,6 +77,7 @@ class Experts extends Component {
         position: null,
         research: null,
         area: null,
+        first_char: null,
         country: null
       },
       pageParam: {
@@ -258,6 +288,25 @@ class Experts extends Component {
   openDetail = item => {
     this.props.history.push("/expert?id=" + item.expert_id);
   };
+  //设置字母索引
+  setChartKey = key => {
+    let { searchParam, pageParam } = this.state;
+    if (searchParam.first_char == key) {
+      searchParam.first_char = null;
+    } else {
+      searchParam.first_char = key;
+    }
+    pageParam.pageNum = 1;
+    this.setState(
+      {
+        pageParam: { ...pageParam },
+        searchParam: { ...searchParam }
+      },
+      () => {
+        this.getPageData();
+      }
+    );
+  };
   render() {
     const {
       base,
@@ -273,7 +322,9 @@ class Experts extends Component {
     } = this.state;
     let searchArray = [];
     for (let i in searchParam) {
-      if (searchParam[i]) {
+      if (i == "first_char") {
+        continue;
+      } else if (searchParam[i]) {
         searchArray.push({
           key: i,
           name: KeyValue[i],
@@ -408,32 +459,17 @@ class Experts extends Component {
           <div className="second-right">
             <div className="expert-top">
               <label>字母索引：</label>
-              <span>A</span>
-              <span>B</span>
-              <span>C</span>
-              <span>D</span>
-              <span>E</span>
-              <span>F</span>
-              <span>G</span>
-              <span>H</span>
-              <span>I</span>
-              <span>J</span>
-              <span>K</span>
-              <span>L</span>
-              <span>M</span>
-              <span>N</span>
-              <span>O</span>
-              <span>P</span>
-              <span>Q</span>
-              <span>R</span>
-              <span>S</span>
-              <span>T</span>
-              <span>U</span>
-              <span>V</span>
-              <span>W</span>
-              <span>X</span>
-              <span>Y</span>
-              <span>Z</span>
+              {all_chart.map((a, b) => {
+                return (
+                  <span
+                    key={`b-${b}`}
+                    className={searchParam.first_char == a ? "active" : ""}
+                    onClick={this.setChartKey.bind(this, a)}
+                  >
+                    {a}
+                  </span>
+                );
+              })}
             </div>
             <div className="expert-items">
               {pageData.length > 0 ? (

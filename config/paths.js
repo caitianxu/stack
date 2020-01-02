@@ -76,6 +76,8 @@ module.exports = {
   appIndexJs: resolveModule(resolveApp, 'src/index'),
   stickHtml: resolveApp('public/stick.html'),
   stickJs: resolveModule(resolveApp, 'src/stick'),
+  readerHtml: resolveApp('public/reader.html'),
+  readerJs: resolveModule(resolveApp, 'src/reader'),
 
   appPackageJson: resolveApp('package.json'),
   appSrc: resolveApp('src'),

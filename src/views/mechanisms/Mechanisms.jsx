@@ -262,10 +262,10 @@ class Mechanisms extends Component {
                       <div className="detail">
                         <h3>{item.org_name}</h3>
                         <dl>
-                          <dt>简介</dt>
+                          {item.en_name || item.field ? <dt>简介</dt> : ''}
                           <dd>
-                            <p>英文名称：{item.en_name} </p>
-                            <p>研究领域：{item.field}</p>
+                            {item.en_name ? <p>英文名称：{item.en_name} </p> : ''}
+                            {item.field ? <p>研究领域：{item.field}</p> : ''}
                           </dd>
                         </dl>
                       </div>

@@ -65,6 +65,77 @@
           background: #fff;
           border-radius: 5px;
           padding: 20px;
+          .paper-item{
+            padding: 10px 0;
+            cursor: pointer;
+            .row-detail{
+              display: none;
+            }
+            &.active{
+              border-bottom: 1px #ddd dashed;
+              .row-title{
+                display: none;
+              }
+              .row-detail{
+                display: flex;
+                .cover{
+                  width: 110px;
+                  img{
+                    width: 100%;
+                  }
+                }
+                .p-detail{
+                  padding-left: 15px;
+                  flex: 1;
+                  overflow: hidden;
+                  p{
+                    margin-bottom: 10px;
+                    white-space: nowrap;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  .child-plan {
+    margin-bottom: 50px;
+    .child-title {
+      display: flex;
+      border-bottom: 2px #803228 solid;
+      label {
+        height: 30px;
+        line-height: 30px;
+        background-color: #803228;
+        padding: 0 0 0 10px;
+        color: #fff;
+        font-size: 16px;
+        border-radius: 5px 0 0 0;
+        position: relative;
+        &::after {
+          content: " ";
+          position: absolute;
+          width: 30px;
+          height: 30px;
+          background: url("../../style/img/title-bg.png") no-repeat center center;
+          right: -30px;
+          top: 0;
+        }
+      }
+    }
+    .plan-relevant{
+      padding-top: 20px;
+      .link-rel{
+        display: block;
+        margin-bottom: 10px;
+        color: #333;
+        &:hover{
+          text-decoration: underline;
+          color: #803228;
         }
       }
     }

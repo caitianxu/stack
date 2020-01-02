@@ -62,6 +62,11 @@ class Book extends Component {
       data: { ...data }
     });
   };
+  //阅读
+  toReader = () => {
+    const {data} = this.state;
+    window.open(`/reader.html?id=${data.book.book_id}&pages=${data.book.pages}`);
+  }
   render() {
     const { base, data } = this.state;
     return (
@@ -141,7 +146,7 @@ class Book extends Component {
                       </div>
                       <div className="b-action">
                         <button className="b1">立即购买 Buy immediately</button>
-                        <button className="b2">在线阅读 Online Trial Reading</button>
+                        <button className="b2" onClick={this.toReader}>在线阅读 Online Trial Reading</button>
                       </div>
                     </div>
                   </div>
@@ -171,27 +176,66 @@ class Book extends Component {
               ) : null}
             </Skeleton>
           </div>
+          {/* 内容简介 */}
+          <div className="child-plan">
+            <div className="child-title">
+              <label>内容简介 Abstract</label>
+            </div>
+            <div className="child-content">
+              {data && data.abstracts ? (
+                <div
+                  dangerouslySetInnerHTML={{
+                    __html: data.book.abstracts.replace(/[↵,\n,' ']/g, "<span class='br'></span>")
+                  }}
+                ></div>
+              ) : null}
+            </div>
+          </div>
+          {/* 作者简介 */}
+          <div className="child-plan">
+            <div className="child-title">
+              <label>作者简介 Author Introduction</label>
+            </div>
+            <div className="child-content">
+              {data && data.abstracts ? (
+                <div
+                  dangerouslySetInnerHTML={{
+                    __html: data.book.abstracts.replace(/[↵,\n,' ']/g, "<span class='br'></span>")
+                  }}
+                ></div>
+              ) : null}
+            </div>
+          </div>
           {/* 目录 */}
-          {data && data.book.menus ? (
-            <div className="child-plan">
-              <div className="child-title">
-                <label>目录 Catalogue</label>
-              </div>
-              <div
-                className="child-worklist"
-                ref={el => (this.workListContentEl = el)}
-                style={{
-                  overflow: data.worklistMore ? "auto" : "hidden",
-                  maxHeight: data.worklistMore ? "inherit" : "250px"
-                }}
-              >
+          <div className="child-plan">
+            <div className="child-title">
+              <label>目录 Catalogue</label>
+            </div>
+            <div
+              className="child-content child-worklist"
+              ref={el => (this.workListContentEl = el)}
+              style={{
+                overflow: data && data.worklistMore ? "auto" : "hidden",
+                maxHeight: data && data.worklistMore ? "inherit" : "250px"
+              }}
+            >
+              {data && data.book.menus ? (
                 <div
                   className="worklist-p"
-                  dangerouslySetInnerHTML={{ __html: data.book.menus }}
+                  dangerouslySetInnerHTML={{
+                    __html: data.book.menus.replace(/[↵,\n,' ']/g, "<span class='br'></span>")
+                  }}
                 ></div>
-              </div>
+              ) : null}
             </div>
-          ) : null}
+          </div>
+          {/* 作者简介 */}
+          <div className="child-plan">
+            <div className="child-title">
+              <label>相关推荐 Relevant Recommendations</label>
+            </div>
+            <div className="child-content"></div>
+          </div>
         </div>
         <Footer />
       </div>

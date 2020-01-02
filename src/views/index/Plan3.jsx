@@ -113,10 +113,10 @@ class Plan3 extends Component {
                             <img alt="" src={Util.transImgUrl(item.cover)}/>
                             <div className="detail">
                               <h3>书名：{item.title}</h3>
-                              <p>作者：{item.author}</p>
-                              <p>ISBN：{item.isbn}</p>
-                              <p>出版日期：{item.pubdate}</p>
-                              <p>分类号：{item.bookcat}</p>
+                              {item.author ? <p>作者：{item.author}</p> : ''}
+                              {item.isbn ? <p>ISBN：{item.isbn}</p> : ''}
+                              {item.pubdate ? <p>出版日期：{item.pubdate}</p> : ''}
+                              {item.bookcat ? <p>分类号：{item.bookcat}</p> : ''}
                             </div>
                           </div>
                         </div>

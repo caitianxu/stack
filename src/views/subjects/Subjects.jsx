@@ -115,20 +115,6 @@ class Subjects extends Component {
       searchText: e.target.value
     });
   };
-  toSearch = () => {
-    let { searchParam, searchText, pageParam } = this.state;
-    searchParam.searchText = searchText;
-    pageParam.pageNum = 1;
-    this.setState(
-      {
-        searchParam: { ...searchParam },
-        pageParam: { ...pageParam }
-      },
-      () => {
-        this.getPageData();
-      }
-    );
-  };
   changeOrderBy = name => {
     let { searchParam, pageParam } = this.state;
     if (searchParam.sort_name != name) {
@@ -147,6 +133,23 @@ class Subjects extends Component {
         this.getPageData();
       }
     );
+  };
+  //搜索
+  toSearch = e => {
+    let { searchParam, searchText, pageParam } = this.state;
+    searchParam.searchText = searchText;
+    pageParam.pageNum = 1;
+    this.setState(
+      {
+        searchParam: { ...searchParam },
+        pageParam: { ...pageParam }
+      },
+      () => {
+        this.getPageData();
+      }
+    );
+    e.preventDefault();
+    e.stopPropagation();
   };
   render() {
     const { base, cats, searchParam, pageData, pageParam } = this.state;
@@ -183,12 +186,12 @@ class Subjects extends Component {
             <dl className="border">
               <dt style={{ lineHeight: "40px" }}>检索：</dt>
               <dd>
-                <div className="search-control">
+                <form className="search-control" onSubmit={this.toSearch}>
                   <input type="text" placeholder="在结果中搜索" onChange={this.onChangeForm} />
                   <span className="icon" onClick={this.toSearch}>
                     <Icon type="search" />
                   </span>
-                </div>
+                </form>
               </dd>
             </dl>
           </div>

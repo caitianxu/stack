@@ -697,12 +697,12 @@ class Papers extends Component {
                       全选
                     </Checkbox>
                   </span>
-                  <span className="ac">
+                  {/* <span className="ac">
                     <Icon type="export" /> 导出
                   </span>
                   <span className="ac">
                     <Icon type="star" /> 收藏
-                  </span>
+                  </span> */}
                 </div>
                 <div className="action-right">
                   <label className="l-text">

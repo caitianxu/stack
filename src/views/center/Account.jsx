@@ -121,14 +121,20 @@ class Account extends Component {
     if (pageData && pageData.length) {
       bindOrg = { ...pageData[0] };
     }
-    HTTP._memberorg_relieve({
-      org_id: bindOrg.org_id,
-      member_id: member_id
-    }).then(res => {
-      if (res.code == 0) {
-        this.getPageData();
-      } else {
-        message.warn(res.message);
+    Modal.confirm({
+      title: "你确定解除关联吗?",
+      content: "解除关联后将无法继续使用机构相关数据权限",
+      onOk: () => {
+        HTTP._memberorg_relieve({
+          org_id: bindOrg.org_id,
+          member_id: member_id
+        }).then(res => {
+          if (res.code == 0) {
+            this.getPageData();
+          } else {
+            message.warn(res.message);
+          }
+        });
       }
     });
   };
@@ -157,16 +163,7 @@ class Account extends Component {
     return originalElement;
   };
   render() {
-    const {
-      pageParam,
-      pageData,
-      selectOrg,
-      fetching,
-      orgs,
-      childVisible,
-      bindType,
-      bindParam
-    } = this.state;
+    const { pageParam, pageData, selectOrg, fetching, orgs, childVisible, bindType, bindParam } = this.state;
     const { userInfo } = this.props.base;
     let bindOrg = null;
     if (pageData && pageData.length) {
@@ -192,8 +189,7 @@ class Account extends Component {
             <p className="p1">关联的账户为已购买审判案例数据库使用权限的机构账户</p>
             {bindOrg.status == 1 ? (
               <div className="p4">
-                您已向机构<label>{bindOrg.org_name}</label>发生关联申请，
-                管理员通过后您可以任意浏览数据库!
+                您已向机构<label>{bindOrg.org_name}</label>发生关联申请， 管理员通过后您可以任意浏览数据库!
               </div>
             ) : null}
             {bindOrg.status == 2 ? (
@@ -247,8 +243,8 @@ class Account extends Component {
             <tr>
               <td width="60">序号</td>
               <td>关联机构</td>
-              <td >操作</td>
-              <td >时间</td>
+              <td>操作</td>
+              <td>时间</td>
               <td width="80">状态</td>
             </tr>
           </thead>
@@ -304,16 +300,10 @@ class Account extends Component {
               <div className="modal-content-header">
                 <div className="header-title">
                   <h3>
-                    <span
-                      className={bindType == "pwd" ? "active" : ""}
-                      onClick={this.changeBindType.bind(this, "pwd")}
-                    >
+                    <span className={bindType == "pwd" ? "active" : ""} onClick={this.changeBindType.bind(this, "pwd")}>
                       密码关联
                     </span>
-                    <span
-                      className={bindType == "org" ? "active" : ""}
-                      onClick={this.changeBindType.bind(this, "org")}
-                    >
+                    <span className={bindType == "org" ? "active" : ""} onClick={this.changeBindType.bind(this, "org")}>
                       申请机构关联
                     </span>
                   </h3>
@@ -326,8 +316,9 @@ class Account extends Component {
                 {bindType == "pwd" ? (
                   <div className="bind-pwd-plan">
                     <input
-                      type="text"
+                      type="password"
                       name="pwd"
+                      autoComplete="off"
                       placeholder="请输入机构密码"
                       value={bindParam.pwd || ""}
                       onChange={this.changeBindForm}

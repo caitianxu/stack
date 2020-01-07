@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Icon, Checkbox, Select, Pagination, message } from "antd";
+import { Icon, Checkbox, Select, Pagination, message, Modal } from "antd";
 import HTTP from "../../script/service";
 const { Option } = Select;
 
@@ -95,14 +95,20 @@ class RelationUser extends Component {
   };
   //解除关联
   memberreLieve = item => {
-    HTTP._memberorg_relieve({
-      org_id: item.org_id,
-      member_id: item.member_id
-    }).then(res => {
-      if (res.code == 0) {
-        this.getPageData();
-      } else {
-        message.warn(res.message);
+    Modal.confirm({
+      title: "你确定解除关联吗?",
+      content: "解除关联后该用户将无法继续使用机构相关数据权限",
+      onOk: () => {
+        HTTP._memberorg_relieve({
+          org_id: item.org_id,
+          member_id: item.member_id
+        }).then(res => {
+          if (res.code == 0) {
+            this.getPageData();
+          } else {
+            message.warn(res.message);
+          }
+        });
       }
     });
   };
@@ -155,11 +161,7 @@ class RelationUser extends Component {
             </span>
           </div>
           <span className="select">
-            <Select
-              value={searchParam.bind_type || ''}
-              onChange={this.changeType}
-              style={{ width: 100 }}
-            >
+            <Select value={searchParam.bind_type || ""} onChange={this.changeType} style={{ width: 100 }}>
               <Option value="">全部</Option>
               <Option value="1">审核关联</Option>
               <Option value="2">密码关联</Option>

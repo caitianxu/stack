@@ -53,7 +53,7 @@ class App extends Component {
       _set_token(token).then(res => {
         _get_userInfo(res)
           .then(res => {
-            console.log("用户登录", res);
+            //用户登录
           })
           .catch(res => {
             _get_orgInfo();

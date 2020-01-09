@@ -127,7 +127,6 @@ class Stick extends Component {
           item.dataArray.push(obj);
         }
       });
-      console.log("事故", res.data);
       this.setState({
         data: [...res.data]
       });
@@ -161,7 +160,6 @@ class Stick extends Component {
     });
   }
   mouseDown = e => {
-    console.log("mouseDown", e.pageX, e.pageY);
     this.scrollMove = e.pageX;
   };
   onMouseUp = e => {

@@ -17,7 +17,6 @@ class Plan2 extends Component {
   componentDidMount() {
     this.scrollLeft = 0;
     HTTP._web_index_2().then(res => {
-      console.log("plan2", res.data);
       this.setState({
         titleIndex: 0,
         bookIndex: 0,

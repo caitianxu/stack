@@ -22,11 +22,9 @@ class Message extends Component {
   }
   componentDidMount() {
     this.getPageData();
-    console.log("xxxx");
   }
   //获取数据
   getPageData = () => {
-    console.log("1222");
     let { searchParam, pageParam } = this.state;
     const { orgInfo, token } = this.props.base;
     if (token) {

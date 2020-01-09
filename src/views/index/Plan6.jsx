@@ -13,7 +13,6 @@ class Plan6 extends Component {
   }
   componentDidMount() {
     HTTP._web_index_6().then(res => {
-      console.log("plan6", res.data);
       this.setState({
         data: [...res.data]
       });

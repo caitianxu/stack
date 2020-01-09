@@ -16,7 +16,6 @@ class Plan4 extends Component {
   }
   componentDidMount() {
     HTTP._web_index_4().then(res => {
-      console.log("plan4", res.data);
       let { leftContent, rightContent } = res.data;
       this.setState({
         leftContent: leftContent,

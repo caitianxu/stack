@@ -71,7 +71,6 @@ class Purchase extends Component {
   };
   paySuccess = () => {
     _get_userInfo();
-    console.log("支付成功======================================>回调主页面");
   };
   render() {
     const { userInfo } = this.props.base;

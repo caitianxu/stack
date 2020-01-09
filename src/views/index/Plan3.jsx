@@ -54,7 +54,6 @@ class Plan3 extends Component {
       if (topContent.length > 3) {
         topContent = topContent.slice(-3);
       }
-      console.log("plan3", topContent, bottomContent);
       this.setState({
         topContent: topContent,
         bottomContent: bottomContent

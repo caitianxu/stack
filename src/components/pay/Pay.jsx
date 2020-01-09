@@ -37,7 +37,6 @@ class Pay extends Component {
     HTTP._pay_order_state({
       order_no: this.state.pay_order_no
     }).then(res => {
-      console.log("支付状态", res);
       if (res.code == 0) {
         message.success("支付成功");
         this.hideModal();

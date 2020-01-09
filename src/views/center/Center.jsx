@@ -46,11 +46,9 @@ class Center extends Component {
   //初始化
   componentDidMount() {
     const { member_id, token, orgInfo } = this.state.base;
-    console.log("机构登录", orgInfo);
     if (!member_id && !token && !orgInfo) {
       _get_orgInfo()
         .then(res => {
-          console.log("机构登录", res);
           _get_url_search(param => {
             this.setState({
               type: param.type || "message"

@@ -43,7 +43,6 @@ class Book extends Component {
             data: res.data
           });
         }
-        console.log(res.data);
       });
 
       HTTP._book_read({

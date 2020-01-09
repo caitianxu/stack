@@ -75,7 +75,6 @@ class Plan1 extends Component {
         data[index].count = Util.numberFormat(item.count);
         data[index].contentList = item.contentList;
       });
-      console.log("plan1", data);
       this.setState({
         data: [...data]
       });

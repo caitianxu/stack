@@ -14,7 +14,6 @@ class Plan5 extends Component {
   }
   componentDidMount() {
     HTTP._web_index_5().then(res => {
-      console.log("plan5", res.data);
       this.setState({
         data: [...res.data]
       });
